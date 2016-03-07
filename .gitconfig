@@ -1,0 +1,110 @@
+[user]
+	name = Nikodim Lazarov
+	email = nlazarov@gmail.com
+[core]
+	autocrlf = true
+    whitespace = cr-at-eol
+    excludesfile=~/.gitignore
+
+[color]
+    ui = true
+
+[format]
+  pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
+
+[diff]
+    tool = meld
+
+[difftool]
+    prompt = false
+
+[difftool "meld"]
+	cmd = '/c/Program Files (x86)/Meld/Meld.exe' $LOCAL $REMOTE
+
+[difftool "kdiff3"]
+	path = /c/Program files/kdiff3/kdiff3.exe
+
+[difftool "p4merge"]
+	cmd = '/c/Program files/perforce/p4merge.exe' $LOCAL $REMOTE
+	
+[difftool "webstorm"]
+	cmd = '/c/Program files (x86)/jetbrains/webstorm 7.0.1/bin/WebStorm.exe' diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+	
+[difftool "vsdiffmerge"]
+    cmd = vsdiffmerge "$LOCAL $REMOTE" //t
+
+[merge]
+    tool = meld
+	
+[mergetool "meld"]
+    cmd = "'/c/Program Files (x86)/Meld/Meld.exe' $PWD/$REMOTE $PWD/$BASE $PWD/$LOCAL --output=$PWD/$MERGED"
+	keepBackup = false
+	trustExitCode = false
+
+[mergetool "kdiff3"]
+	path = /c/Program files/kdiff3/kdiff3.exe
+	keepBackup = false
+	trustExitCode = false
+
+[mergetool "p4merge"]
+	cmd = '/c/Program files/perforce/p4merge.exe' $PWD/$BASE $PWD/$LOCAL $PWD/$REMOTE $PWD/$MERGED
+	trustExitCode = false
+	keepBackup = false
+	
+[mergetool "webstorm"]
+    cmd = '/c/Program files (x86)/jetbrains/webstorm 7.0.1/bin/WebStorm.exe' merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+    trustExitCode = true
+	
+[mergetool "vsdiffmerge"]
+    cmd = vsdiffmerge "$REMOTE $LOCAL $BASE $MERGED" //m
+	keepBackup = false
+	trustExitCode = true
+
+[github]
+    user = nlazarov
+    token = [SECRET]
+
+[alias]
+    a = add
+    c = commit -m
+    ca = commit --amend
+    co = checkout
+    cp = cherry-pick
+
+    # cherry-pick from ... to ...
+    cpf2 = "!f() { git checkout $2 && git pull --rebase && git cherry-pick $1 && git push && git checkout $1 ; }; f"
+
+    # cherry-pick from current to ....
+    cp2 = "!f() { git cpf2 `git current` $1 ; }; f"
+
+    # cherry-pick from master to production
+    cpp = "!f() { git cpf2 master production ; }; f"
+
+    current = rev-parse --abbrev-ref HEAD
+    d = diff
+    dc = diff --cached
+    dt = difftool
+    dtc = difftool --cached
+    l = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%an%Creset (%cr)' --abbrev-commit --date=relative
+    out = log origin..HEAD
+
+    # pull --rebase, and preserve merge commits
+    pl = "!f() { git fetch --prune; git rebase --preserve-merges `git tracked` ; }; f"
+    pr = pull --rebase
+
+    sync = "!f() { git pl && git push ; }; f"
+    stash-sync = "!f() { git stash && git sync && git stash pop ; }; f"
+
+    qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
+    s = status
+    subu = submodule update
+    meld = !'/c/program files (x86)/meld/meld.exe' "$(git rev-parse --show-toplevel)"
+    tracked = rev-parse --abbrev-ref --symbolic-full-name @{u}
+
+[branch]
+    autosetuprebase = always
+
+[push]
+    default = tracking
+[mergetool]
+	keepBackup = false
