@@ -4,8 +4,6 @@ set autoindent
 set ts=4
 filetype on
 
-set mouse=a
-
 syntax on
 set ignorecase
 set smartcase
