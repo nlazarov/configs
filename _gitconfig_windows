@@ -19,7 +19,7 @@
     prompt = false
 
 [difftool "meld"]
-	cmd = '/c/Program Files (x86)/Meld/Meld.exe' $LOCAL $REMOTE
+	cmd = meld $LOCAL $REMOTE
 
 [difftool "kdiff3"]
 	path = /c/Program files/kdiff3/kdiff3.exe
@@ -28,36 +28,35 @@
 	cmd = '/c/Program files/perforce/p4merge.exe' $LOCAL $REMOTE
 	
 [difftool "webstorm"]
-	cmd = '/c/Program files (x86)/jetbrains/webstorm 7.0.1/bin/WebStorm.exe' diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+	cmd = ws diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
 	
 [difftool "vsdiffmerge"]
     cmd = vsdiffmerge "$LOCAL $REMOTE" //t
 
 [merge]
     tool = meld
+
+[mergetool]
+	keepBackup = false
 	
 [mergetool "meld"]
-    cmd = "'/c/Program Files (x86)/Meld/Meld.exe' $PWD/$REMOTE $PWD/$BASE $PWD/$LOCAL --output=$PWD/$MERGED"
-	keepBackup = false
+    cmd = "meld $PWD/$REMOTE $PWD/$BASE $PWD/$LOCAL --output=$PWD/$MERGED"
 	trustExitCode = false
 
 [mergetool "kdiff3"]
 	path = /c/Program files/kdiff3/kdiff3.exe
-	keepBackup = false
 	trustExitCode = false
 
 [mergetool "p4merge"]
 	cmd = '/c/Program files/perforce/p4merge.exe' $PWD/$BASE $PWD/$LOCAL $PWD/$REMOTE $PWD/$MERGED
 	trustExitCode = false
-	keepBackup = false
 	
 [mergetool "webstorm"]
-    cmd = '/c/Program files (x86)/jetbrains/webstorm 7.0.1/bin/WebStorm.exe' merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
+    cmd = ws merge $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE") $(cd $(dirname "$BASE") && pwd)/$(basename "$BASE") $(cd $(dirname "$MERGED") && pwd)/$(basename "$MERGED")
     trustExitCode = true
 	
 [mergetool "vsdiffmerge"]
     cmd = vsdiffmerge "$REMOTE $LOCAL $BASE $MERGED" //m
-	keepBackup = false
 	trustExitCode = true
 
 [github]
@@ -83,14 +82,14 @@
     current = rev-parse --abbrev-ref HEAD
     d = diff
     dc = diff --cached
-    dt = difftool
-    dtc = difftool --cached
+    dt = difftool -d
+    dtc = difftool -d --cached
     l = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%an%Creset (%cr)' --abbrev-commit --date=relative
     out = log origin..HEAD
 
     # pull --rebase, and preserve merge commits
     pl = "!f() { git fetch --prune; git rebase --preserve-merges `git tracked` ; }; f"
-    pr = pull --rebase
+    pr = pull --rebase=preserve
 
     sync = "!f() { git pl && git push ; }; f"
     stash-sync = "!f() { git stash && git sync && git stash pop ; }; f"
@@ -98,7 +97,7 @@
     qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
     s = status
     subu = submodule update
-    meld = !'/c/program files (x86)/meld/meld.exe' "$(git rev-parse --show-toplevel)"
+    meld = "!meld $(git rev-parse --show-toplevel)"
     tracked = rev-parse --abbrev-ref --symbolic-full-name @{u}
 
 [branch]
@@ -106,5 +105,3 @@
 
 [push]
     default = tracking
-[mergetool]
-	keepBackup = false
