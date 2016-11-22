@@ -1,0 +1,183 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/bundle/')
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'valloric/youcompleteme'
+Plugin 'int3/vim-extradite'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+"Plugin 'ascenator/L9', {'name': 'newL9'}
+
+Plugin 'mhinz/vim-startify'
+Plugin 'rizzatti/dash.vim'
+Plugin 'bling/vim-airline'
+Plugin 'christoomey/vim-tmux-navigator'
+
+Plugin 'leafgarland/typescript-vim'
+Plugin 'herringtondarkholme/yats.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+colorscheme torte
+set guifont=Source_Code_Pro:h11:cANSI
+
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf8,prc
+set autoindent
+set ts=4
+filetype on
+
+set mouse=a
+
+syntax on
+set ignorecase
+set smartcase
+set hlsearch
+set modelines=0
+set wildmenu
+set wildmode=longest:full
+set nu "line numbers
+
+"for indenting
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set smarttab
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+inoremap <S-Tab> <C-D>
+
+set lbr "word wrap
+set tw=500
+
+set wrap "Wrap lines
+set scrolloff=3
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = " " " Leader is the space key
+let g:mapleader = " "
+"auto indent for brackets
+inoremap {<CR> {<CR>}<Esc>O
+" easier write
+nmap <leader>w :w!<cr>
+" easier quit
+nmap <leader>q :q<cr>
+nmap <leader>Q :q!<cr>
+" silence search highlighting
+nnoremap <leader>h :nohlsearch<CR>
+
+"paste from outside buffer
+nnoremap <leader>p :set paste<CR>"+p:set nopaste<CR>
+vnoremap <leader>p <Esc>:set paste<CR>gv"+p:set nopaste<CR>
+
+"copy to outside buffer
+nnoremap <leader>y "+yy
+vnoremap <leader>y "+y
+
+"select all
+nnoremap <leader>a ggVG
+"paste from 0 register
+"Useful because `d` overwrites the <quote> register
+nnoremap <leader>P "0p
+vnoremap <leader>P "0p
+
+" Navigation in splits
+""""""""""""""""""""""""""""""
+map <C-h> :call WinMove('h')<cr>
+map <C-j> :call WinMove('j')<cr>
+map <C-k> :call WinMove('k')<cr>
+map <C-l> :call WinMove('l')<cr>
+
+" Window movement shortcuts
+" move to the window in the direction shown, or create a new window
+function! WinMove(key)
+    let t:curwin = winnr()
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
+endfunction
+
+" move in long lines
+nnoremap k gk
+nnoremap j gj
+
+" runners
+" Run ruby when typing <leader>r
+noremap <buffer> <leader>r :w<cr> :exec '!ruby' shellescape(@%, 1)<cr>
+noremap <buffer> <leader>e :w<cr> :exec '!node' shellescape(@%, 1)<cr>
+noremap <buffer> <leader>m :w<cr> :make<cr><cr>
+
+nmap <leader>t :NERDTreeToggle<cr>
+
+"automatically change the PWD to the current file direction
+set autochdir
+
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+" if has("autocmd")
+"   au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+"   au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+"   au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+" endif
+
+
+"recommended syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
