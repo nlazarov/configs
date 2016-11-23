@@ -61,7 +61,6 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 colorscheme torte
-set guifont=Source_Code_Pro:h11:cANSI
 
 set encoding=utf-8
 set fileencoding=utf-8
