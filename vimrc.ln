@@ -41,6 +41,7 @@ Plugin 'mhinz/vim-startify'
 Plugin 'rizzatti/dash.vim'
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'mileszs/ack.vim'
 
 Plugin 'leafgarland/typescript-vim'
 Plugin 'herringtondarkholme/yats.vim'
@@ -150,13 +151,17 @@ endfunction
 nnoremap k gk
 nnoremap j gj
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 " runners
 " Run ruby when typing <leader>r
 noremap <buffer> <leader>r :w<cr> :exec '!ruby' shellescape(@%, 1)<cr>
 noremap <buffer> <leader>e :w<cr> :exec '!node' shellescape(@%, 1)<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
-nmap <leader>t :NERDTreeToggle<cr>
+nmap <leader>t :NERDTreeFocus<cr>
 
 "automatically change the PWD to the current file direction
 " set autochdir
