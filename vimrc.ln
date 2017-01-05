@@ -16,7 +16,9 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
+Plugin 'xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
 Plugin 'valloric/youcompleteme'
 Plugin 'int3/vim-extradite'
 Plugin 'airblade/vim-gitgutter'
@@ -156,6 +158,10 @@ nmap <leader>t :NERDTreeFocus<cr>
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
+" find files in project
+set path+=**
+" still exclude node_modules from the search; could use the ctrlp for this one
+set wildignore+=**/node_modules/**
 
 "recommended syntastic settings
 set statusline+=%#warningmsg#
