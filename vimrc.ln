@@ -28,7 +28,16 @@ Plugin 'tpope/vim-unimpaired'
 
 Plugin 'mhinz/vim-startify'
 Plugin 'rizzatti/dash.vim'
+
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'rakr/vim-one'
+Plugin 'YorickPeterse/happy_hacking.vim'
+Plugin 'jansenfuller/crayon'
+Plugin 'vim-scripts/wombat256.vim'
+Plugin 'dikiaap/minimalist'
+Plugin 'w0ng/vim-hybrid'
+
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mileszs/ack.vim'
 
@@ -50,7 +59,9 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-colorscheme torte
+colorscheme happy_hacking
+let g:airline_theme='badwolf'
+set background=dark
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -172,3 +183,15 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+nnoremap <leader>so :source %<CR>
+"vim-airline"
+set laststatus=2 " statusbar in single file open
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols={}
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
