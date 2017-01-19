@@ -161,13 +161,15 @@ noremap <buffer> <leader>r :w<cr> :exec '!ruby' shellescape(@%, 1)<cr>
 noremap <buffer> <leader>e :w<cr> :exec '!node' shellescape(@%, 1)<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
-nmap <leader>t :NERDTreeFocus<cr>
+nmap <leader>f :NERDTreeFind<cr>
+nmap <leader>t :NERDTreeToggle<cr>
 
 "automatically change the PWD to the current file direction
 " set autochdir
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
+autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
 
 " find files in project
 set path+=**
@@ -191,7 +193,8 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-let g:airline_symbols={}
+let g:airline_symbols = get(g:, 'airline_symbols', {})
+let g:airline_symbols.space = "\ua0"
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
