@@ -1,0 +1,77 @@
+[user]
+    name = Nikodim Lazarov
+    email = nlazarov@gmail.com
+
+[core]
+    excludesfile = ~/.gitignore_global
+
+[format]
+    pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
+
+[difftool]
+    prompt = false
+
+[difftool "meld"]
+    cmd = meld '$LOCAL $REMOTE'
+
+[merge]
+    tool = meld
+
+[mergetool]
+    prompt = false
+
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "sourcetree"]
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
+
+[ff]
+    tool = meld
+
+[github]
+    user = nlazarov
+    token = [SECRET]
+
+[alias]
+    a = add
+    c = commit -m
+    ca = commit --amend
+    co = checkout
+    pick = cherry-pick
+
+    # cherry-pick from ... to ...
+    cpf2 = "!f() { git checkout $2 && git pull --rebase && git cherry-pick $1 && git push && git checkout $1 ; }; f"
+
+    # cherry-pick from current to ....
+    cp2 = "!f() { git cpf2 `git current` $1 ; }; f"
+
+    # cherry-pick from master to production
+    cpp = "!f() { git cpf2 master production ; }; f"
+
+    current = rev-parse --abbrev-ref HEAD
+    d = diff
+    dc = diff --cached
+    dt = difftool
+    dtc = difftool --cached
+    l = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%an%Creset (%cr)' --abbrev-commit --date=relative
+    out = log origin..HEAD
+
+    # pull --rebase, and preserve merge commits
+    pl = "!f() { git fetch --prune; git rebase --preserve-merges `git tracked` ; }; f"
+    pr = pull --rebase
+
+    sync = "!f() { git pl && git push ; }; f"
+    stash-sync = "!f() { git stash && git sync && git stash pop ; }; f"
+
+    qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
+    s = status
+    subu = submodule update
+    meld = !'/c/program files (x86)/meld/meld.exe' "$(git rev-parse --show-toplevel)"
+    tracked = rev-parse --abbrev-ref --symbolic-full-name @{u}
+
+    ctags = "!.git/hooks/ctags"
+
+[init]
+    templatedir = ~/.git_template
