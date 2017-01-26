@@ -17,7 +17,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'xuyuanp/nerdtree-git-plugin'
-Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'valloric/youcompleteme'
 Plugin 'int3/vim-extradite'
@@ -25,6 +24,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
+
+Plugin 'scrooloose/syntastic'
+Plugin 'gcorne/vim-sass-lint'
 
 Plugin 'mhinz/vim-startify'
 Plugin 'rizzatti/dash.vim'
@@ -176,15 +178,17 @@ set path+=**
 " still exclude node_modules from the search; could use the ctrlp for this one
 set wildignore+=**/node_modules/**
 
-"recommended syntastic settings
+" syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
+
+let g:syntastic_typescript_checkers = ['tslint']
 
 nnoremap <leader>so :source %<CR>
 "vim-airline"
@@ -198,3 +202,7 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+"sass-lint"
+let g:syntastic_sass_checkers=["sasslint"]
+let g:syntastic_scss_checkers=["sasslint"]
