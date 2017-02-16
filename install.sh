@@ -7,11 +7,12 @@ fi
 
 # creating symlinks
 echo "Setting up config symlinks"
-linkables=$( find -H ~/.dotfiles -type f -name "*.ln" )
+linkables=$( find -H ~/.dotfiles -name "*.ln" )
 for file in $linkables ; do
-    target="$HOME/.$( basename $file ".ln" )"
-    if [ -e $target ]; then
-        echo "~${$target#$HOME} already exists... Skipping."
+    bsname=$(basename $file ".ln")
+    target="$HOME/.$bsname"
+    if [ -e "$target" ]; then
+        echo "~${target#$HOME} already exists... Skipping."
     else
         echo "Symlink for $file"
         ln -s $file $target

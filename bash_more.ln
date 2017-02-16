@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -o vi
+
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+PS1=${PS1/@\\h/}
+PS1="${PS1%\\$ }\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
+
+function diffuse-rev() {
+    diffuse -s -D -r $1 -r $2 `git diff --name-only $1 $2`
+}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+export NVM_DIR="/home/virtualubuntu/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[ -f ~/.alias_completion.sh ] && . ~/.alias_completion.sh
