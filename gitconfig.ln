@@ -3,7 +3,12 @@
     email = nlazarov@gmail.com
 
 [core]
-    excludesfile = ~/.gitignore_global
+    autocrlf = false
+    whitespace = cr-at-eol
+    excludesfile = ~/.gitignore
+
+[color]
+    ui = true
 
 [format]
     pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
@@ -13,12 +18,18 @@
 
 [difftool "meld"]
     cmd = meld '$LOCAL $REMOTE'
+[difftool "vim"]
+    tool = vimdiff
 
 [merge]
     tool = meld
 
 [mergetool]
     prompt = false
+
+[mergetool "meld"]
+    cmd = meld '$BASE $LOCAL $REMOTE $MERGED'
+    trustExitCode = false
 
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -58,20 +69,48 @@
     l = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%an%Creset (%cr)' --abbrev-commit --date=relative
     out = log origin..HEAD
 
+    pf = push -f
+    pu = "!git push -u origin `git current`"
+
     # pull --rebase, and preserve merge commits
     pl = "!f() { git fetch --prune; git rebase --preserve-merges `git tracked` ; }; f"
-    pr = pull --rebase
+    pr = pull --rebase=preserve
 
     sync = "!f() { git pl && git push ; }; f"
     stash-sync = "!f() { git stash && git sync && git stash pop ; }; f"
 
     qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
     s = status
+    squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
     subu = submodule update
-    meld = !'/c/program files (x86)/meld/meld.exe' "$(git rev-parse --show-toplevel)"
+    meld = "!meld $(git rev-parse --show-toplevel)"
     tracked = rev-parse --abbrev-ref --symbolic-full-name @{u}
 
     ctags = "!.git/hooks/ctags"
+
+    jshint = "!gulp jshint --files=\"{`git diff --name-only | grep '\\.js$' | tr '\n' ','`}\""
+    root = "!cd $(git rev-parse --show-toplevel)"
+
+    #############################
+    # public/private mirrors aliases
+    #############################
+    pl = "!git fetch --prune && git rebase --preserve-merges `git rev-parse --abbrev-ref --symbolic-full-name @{u}`"
+    
+    # Bring alias from public repo to private
+    put-in-master = "!git checkout master && git pl && git cherry-pick core/master && git push && git checkout core-master"
+
+    # use this when cherry picking from private to public
+    drop-deleted-by-us = "!git rm `git status --porcelain | grep ^DU | cut -d' ' -f2`"
+
+    # skip a cherry-pick when in progress
+    skip-cherry = "!git reset; git clean -df; git cherry-pick --continue"
+    root = !pwd
+
+[branch]
+    autosetuprebase = always
+
+[push]
+    default = tracking
 
 [init]
     templatedir = ~/.git_template
