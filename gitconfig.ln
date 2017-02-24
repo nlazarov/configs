@@ -13,13 +13,20 @@
 [format]
     pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
 
+[diff]
+    tool = meld
+
 [difftool]
     prompt = false
 
 [difftool "meld"]
-    cmd = meld '$LOCAL $REMOTE'
+    cmd = meld \"$LOCAL\" \"$REMOTE\"
+
 [difftool "vim"]
     tool = vimdiff
+
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 
 [merge]
     tool = meld
@@ -30,9 +37,6 @@
 [mergetool "meld"]
     cmd = meld '$BASE $LOCAL $REMOTE $MERGED'
     trustExitCode = false
-
-[difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 
 [mergetool "sourcetree"]
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
@@ -95,7 +99,7 @@
     # public/private mirrors aliases
     #############################
     pl = "!git fetch --prune && git rebase --preserve-merges `git rev-parse --abbrev-ref --symbolic-full-name @{u}`"
-    
+
     # Bring alias from public repo to private
     put-in-master = "!git checkout master && git pl && git cherry-pick core/master && git push && git checkout core-master"
 
