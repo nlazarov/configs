@@ -1,2 +1,3 @@
 alias g=git
 alias live-kendo='live-server --port=25546 --host=0.0.0.0 --no-browser --watch="src/,dist/,playground/local/"'
+alias x=exit
