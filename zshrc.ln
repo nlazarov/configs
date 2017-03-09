@@ -89,3 +89,4 @@ source $ZSH/oh-my-zsh.sh
 set -o vi
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.extrarc ] && source ~/.extrarc
