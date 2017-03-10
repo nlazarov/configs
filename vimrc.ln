@@ -47,6 +47,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'herringtondarkholme/yats.vim'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -106,8 +107,7 @@ set hid "only hide opened files for faster switching
 " like <leader>w saves the current file
 let mapleader = " " " Leader is the space key
 let g:mapleader = " "
-"auto indent for brackets
-inoremap {<CR> {<CR>}<Esc>O
+
 " easier write
 nmap <leader>w :w!<cr>
 " easier quit
