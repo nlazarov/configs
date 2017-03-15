@@ -1,11 +1,12 @@
 set -o vi
+stty -ixon
 
 parse_git_branch() {
      git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 function diffuse-rev() {
-    diffuse -s -D -r $1 -r $2 `git diff --name-only $1 $2`
+    diffuse -s -D -r $1 -r $2 `git diff --name-only $1...$2`
 }
 
 function test-widget() {
