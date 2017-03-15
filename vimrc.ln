@@ -49,6 +49,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'herringtondarkholme/yats.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -233,3 +234,8 @@ let g:airline_symbols.linenr = ''
 "sass-lint"
 let g:syntastic_sass_checkers=["sasslint"]
 let g:syntastic_scss_checkers=["sasslint"]
+
+"emmet settings"
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
