@@ -2,6 +2,9 @@
 unbind-key C-b
 set-option -g prefix C-a
 
+run-shell "powerline-daemon -q"
+source "$PIP_PACK_DIR/powerline/bindings/tmux/powerline.conf"
+
 # 0 is too far from ` ;)
 set -g base-index 1
 
