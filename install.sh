@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #remap CAPS LOCK to Ctrl key
 if test $(which setxkbmap); then
@@ -18,4 +18,10 @@ for file in $linkables ; do
         ln -s $file $target
     fi
 done
+
+function link-ultisnips {
+    ln -s ~/.dotfiles/UltiSnips/ ~/.vim/UltiSnips
+}
+
+[ ! -L ~/.vim/UltiSnips ] && link-ultisnips
 
