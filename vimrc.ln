@@ -44,6 +44,8 @@ Plugin 'vim-scripts/wombat256.vim'
 Plugin 'dikiaap/minimalist'
 Plugin 'w0ng/vim-hybrid'
 
+Plugin 'chiel92/vim-autoformat'
+
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mileszs/ack.vim'
 
