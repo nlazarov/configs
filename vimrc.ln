@@ -21,6 +21,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'valloric/youcompleteme'
 Plugin 'int3/vim-extradite'
+Plugin 'gregsexton/gitv'
+Plugin 'junegunn/gv.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'chrisbra/vim-diff-enhanced'
 Plugin 'tpope/vim-repeat'
@@ -248,7 +250,7 @@ autocmd FileType html,css EmmetInstall
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.UltiSnips"
+let g:UltiSnipsSnippetsDir="~/.dotfiles/UltiSnips"
 
 imap <c-tab> *<Esc>:call UtliSnips#ListSnippets()<CR>
 
@@ -284,3 +286,12 @@ let g:UltiSnipsListSnippets="<c-e>"
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" enable patience diff
+" started In Diff-Mode set diffexpr (plugin not loaded yet)
+if &diff
+    let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
+endif
+
+" prefer vertical diff
+set diffopt+=vertical
