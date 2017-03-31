@@ -4,6 +4,10 @@
         "jquery"
     ],
     "plugins": {
-        "node": {}
+        "node": {},
+        "requirejs": {
+            "baseURL": "./",
+            "paths": {}
+        }
     }
 }

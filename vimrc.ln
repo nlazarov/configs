@@ -118,6 +118,9 @@ set hid "only hide opened files for faster switching
 let mapleader = " " " Leader is the space key
 let g:mapleader = " "
 
+let maplocalleader = "\\"
+let g:maplocalleader = "\\"
+
 " easier write
 nmap <leader>w :w!<cr>
 " easier quit
@@ -210,7 +213,7 @@ command! Srcvim :source ~/.vimrc
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
+autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
 
 " find files in project
 set path+=**
@@ -297,3 +300,6 @@ endif
 
 " prefer vertical diff
 set diffopt+=vertical
+
+" tern.js settings
+let tern_map_keys=1
