@@ -10,7 +10,7 @@ function diffuse-rev() {
 }
 
 function test-widget() {
-    xvfb-run gulp tests --tests="tests/$1/**"
+    xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
 export NVM_DIR="/home/virtualubuntu/.nvm"
