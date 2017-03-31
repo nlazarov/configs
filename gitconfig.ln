@@ -108,7 +108,6 @@
 
     # skip a cherry-pick when in progress
     skip-cherry = "!git reset; git clean -df; git cherry-pick --continue"
-    root = !pwd
 
 [branch]
     autosetuprebase = always
