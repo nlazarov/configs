@@ -1,3 +1,6 @@
+babel-eslint
+eslint
+eslint-plugin-react
 gitopen
 gulp
 js-beautify
