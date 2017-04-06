@@ -11,6 +11,9 @@ set -g base-index 1
 # toggle last window like screen
 bind-key C-a last-window
 
+bind-key -r < swap-window -t -
+bind-key -r > swap-window -t +
+
 setw -g mode-keys vi
 
 # smart pane switching with awareness of vim splits
