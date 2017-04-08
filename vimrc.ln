@@ -56,7 +56,7 @@ Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'mattn/emmet-vim'
 
-Plugin 'ervandew/supertab'
+" Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
@@ -80,7 +80,6 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-colorscheme happy_hacking
 let g:airline_theme='badwolf'
 set background=dark
 
@@ -256,8 +255,8 @@ let g:syntastic_sass_checkers=["sasslint"]
 let g:syntastic_scss_checkers=["sasslint"]
 
 "emmet settings"
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+let g:user_emmet_install_global = 1
+autocmd FileType html,css,javascript EmmetInstall
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -312,3 +311,5 @@ let tern_map_keys=1
 
 " reactjs
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+colorscheme wombat256mod
