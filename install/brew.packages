@@ -1,0 +1,7 @@
+git
+vim --with-python3
+tmux
+diffuse
+meld
+the_silver_searcher
+reattach-to-user-namespace
