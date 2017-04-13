@@ -218,7 +218,7 @@ command! Srcvim :source ~/.vimrc
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
+" autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
 
 " find files in project
 set path+=**
@@ -292,7 +292,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "     endif
 "     return ""
 " endfunction
-" 
+"
 " au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 " let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-e>"
