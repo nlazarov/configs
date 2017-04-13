@@ -224,6 +224,8 @@ autocmd QuickFixCmdPost    l* nested lwindow
 set path+=**
 " still exclude node_modules from the search; could use the ctrlp for this one
 set wildignore+=**/node_modules/**
+set wildignore+=**/bower_components/**
+set wildignore+=**/site-packages/**
 
 " syntastic settings
 set statusline+=%#warningmsg#
