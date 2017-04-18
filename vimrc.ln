@@ -210,6 +210,9 @@ nnoremap <leader>f :NERDTreeFind<cr>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>s :Gstatus<cr>
 
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+
 command! Vimrc :tabe ~/.vimrc
 command! Srcvim :source ~/.vimrc
 
@@ -218,7 +221,7 @@ command! Srcvim :source ~/.vimrc
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-" autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
+autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
 
 " find files in project
 set path+=**
@@ -268,6 +271,8 @@ imap <c-tab> *<Esc>:call UtliSnips#ListSnippets()<CR>
 
 " auto close preview window
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_python_binary_path = 'python'
+let g:ycm_min_num_of_chars_for_completion = 1
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
