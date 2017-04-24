@@ -26,3 +26,5 @@ export PIP_PACK_DIR="$HOME/.local/lib/python2.7/site-packages"
 if [[ $(uname) == "Darwin" ]]; then
     export PIP_PACK_DIR="/usr/local/lib/python3.6/site-packages"
 fi
+
+export EDITOR=`which vim`
