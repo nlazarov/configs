@@ -5,6 +5,8 @@ if test $(which setxkbmap); then
 	setxkbmap -option caps:ctrl_modifier
 fi
 
+[ ! -e ~/.dotfiles/vim.ln/backup ] && mkdir -p ~/.dotfiles/vim.ln/backup
+
 # creating symlinks
 echo "Setting up config symlinks"
 linkables=$( find -H ~/.dotfiles -name "*.ln" )
@@ -18,10 +20,4 @@ for file in $linkables ; do
         ln -s $file $target
     fi
 done
-
-function link-ultisnips {
-    ln -s ~/.dotfiles/UltiSnips/ ~/.vim/UltiSnips
-}
-
-[ ! -L ~/.vim/UltiSnips ] && link-ultisnips
 

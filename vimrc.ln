@@ -118,6 +118,13 @@ set scrolloff=3
 
 set hid "only hide opened files for faster switching
 
+" prefer vertical diff
+set diffopt+=vertical
+
+" all backup moved at one place
+set backupdir=~/.vim/backup,.
+set directory=~/.vim/backup,.
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = " " " Leader is the space key
@@ -313,9 +320,6 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 endif
-
-" prefer vertical diff
-set diffopt+=vertical
 
 " tern.js settings
 let tern_map_keys=1
