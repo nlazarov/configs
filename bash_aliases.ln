@@ -1,4 +1,5 @@
 alias g=git
+alias go=gitopen
 alias live-kendo='live-server --port=25546 --host=0.0.0.0 --no-browser --watch="src/,dist/,playground/local/"'
 alias live-home='live-server --port=4033 --host=0.0.0.0 --no-browser'
 alias x=exit
