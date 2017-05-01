@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 set -o vi
+setopt extendedglob
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.extrarc ] && source ~/.extrarc
