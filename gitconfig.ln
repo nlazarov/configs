@@ -73,6 +73,7 @@
     l = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%an%Creset (%cr)' --abbrev-commit --date=relative
     out = log origin..HEAD
 
+    p = push
     pf = push -f
     pu = "!git push -u origin `git current`"
 
