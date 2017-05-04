@@ -3,3 +3,14 @@ test("$1", function() {
 	$0
 });
 endsnippet
+
+snippet reactclass "Create a React class"
+export class ${1:ComponentName} extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		$0
+	}
+}
+endsnippet
