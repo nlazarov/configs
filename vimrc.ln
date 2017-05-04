@@ -25,16 +25,19 @@ Plugin 'gregsexton/gitv'
 Plugin 'junegunn/gv.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'chrisbra/vim-diff-enhanced'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'embear/vim-localvimrc'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'gcorne/vim-sass-lint'
 
 Plugin 'mhinz/vim-startify'
 Plugin 'rizzatti/dash.vim'
+Plugin 'sunaku/vim-dasht'
 
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -228,7 +231,7 @@ command! Srcvim :source ~/.vimrc
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
+" autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
 
 " find files in project
 set path+=**
@@ -326,5 +329,29 @@ let tern_map_keys=1
 
 " reactjs
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+""" dasht
+" search related docsets
+nnoremap <Leader>K :Dasht<Space>
+
+" search ALL the docsets
+nnoremap <Leader><Leader>K :Dasht!<Space>
+
+" word expand search related docsets
+nnoremap <silent> <Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+
+" word expand search ALL the docsets
+nnoremap <silent> <Leader><Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
+
+" search selection in related docsets
+vnoremap <silent> <Leader>k y:<C-U>call Dasht(getreg(0))<Return>
+
+" search selection in ALL the docsets
+vnoremap <silent> <Leader><Leader>k y:<C-U>call Dasht(getreg(0), '!')<Return>
+
+let g:dasht_filetype_docsets = {}
+let g:dasht_filetype_docsets['less'] = ['css']
+let g:dasht_filetype_docsets['javascript'] = ['js', 'jquery', 'lodash', 'react']
+let g:dasht_filetype_docsets['python'] = ['django']
 
 colorscheme wombat256mod
