@@ -13,6 +13,10 @@ function test-widget() {
     xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
+function venv() {
+    source "$HOME/work/env_$1/bin/activate"
+}
+
 export NVM_DIR="/home/virtualubuntu/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
