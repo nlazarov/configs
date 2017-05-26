@@ -8,3 +8,5 @@ jshint
 live-server
 sass-lint
 tern
+tern-jsx
+vimdebug
