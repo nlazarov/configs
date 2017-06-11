@@ -1,86 +1,73 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin('~/.vim/bundle/')
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'kien/ctrlp.vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
+Plug 'valloric/youcompleteme', { 'do': './install.py' }
+Plug 'int3/vim-extradite'
+Plug 'gregsexton/gitv'
+Plug 'junegunn/gv.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/vim-diff-enhanced'
+Plug 'tpope/vim-rhubarb'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tomtom/tcomment_vim'
+Plug 'embear/vim-localvimrc'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
+Plug 'scrooloose/syntastic'
+Plug 'gcorne/vim-sass-lint'
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'xuyuanp/nerdtree-git-plugin'
-Plugin 'kien/ctrlp.vim'
-Plugin 'ternjs/tern_for_vim'
-Plugin 'valloric/youcompleteme'
-Plugin 'int3/vim-extradite'
-Plugin 'gregsexton/gitv'
-Plugin 'junegunn/gv.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'chrisbra/vim-diff-enhanced'
-Plugin 'tpope/vim-rhubarb'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'embear/vim-localvimrc'
+Plug 'mhinz/vim-startify'
+Plug 'rizzatti/dash.vim'
+Plug 'sunaku/vim-dasht'
 
-Plugin 'scrooloose/syntastic'
-Plugin 'gcorne/vim-sass-lint'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'rakr/vim-one'
+Plug 'YorickPeterse/happy_hacking.vim'
+Plug 'jansenfuller/crayon'
+Plug 'vim-scripts/wombat256.vim'
+Plug 'dikiaap/minimalist'
+Plug 'w0ng/vim-hybrid'
 
-Plugin 'mhinz/vim-startify'
-Plugin 'rizzatti/dash.vim'
-Plugin 'sunaku/vim-dasht'
+Plug 'chiel92/vim-autoformat'
 
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'rakr/vim-one'
-Plugin 'YorickPeterse/happy_hacking.vim'
-Plugin 'jansenfuller/crayon'
-Plugin 'vim-scripts/wombat256.vim'
-Plugin 'dikiaap/minimalist'
-Plugin 'w0ng/vim-hybrid'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'mileszs/ack.vim'
 
-Plugin 'chiel92/vim-autoformat'
+Plug 'leafgarland/typescript-vim'
+Plug 'herringtondarkholme/yats.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
 
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'mileszs/ack.vim'
-
-Plugin 'leafgarland/typescript-vim'
-Plugin 'herringtondarkholme/yats.vim'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'mattn/emmet-vim'
-
-Plugin 'ervandew/supertab'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 "ReactJS
-Plugin 'pangloss/vim-javascript'
-Plugin 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+" All plugin must be added in the plug scope (before next line)
+call plug#end()
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 "
 " Brief help
-" :PluginList       - lists configured plugins
+" :PluginStatus     - check status of plugins
 " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginUpgrade    - upgrade vim-plug
+" :PlugDiff         - examine changes from the previous update and the pending changes
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-" see :h vundle for more details or wiki for FAQ
+" see :h vim-plug for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
 let g:airline_theme='badwolf'
