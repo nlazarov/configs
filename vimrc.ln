@@ -221,6 +221,8 @@ nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>s :Gstatus<cr>
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>jh :YcmCompleter GetDoc<CR>
+nnoremap <leader>jf :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 
 command! Vimrc :tabe ~/.vimrc
