@@ -87,6 +87,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 set -o vi
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 setopt extendedglob
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
