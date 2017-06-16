@@ -22,6 +22,9 @@
 [difftool "meld"]
     cmd = meld \"$LOCAL\" \"$REMOTE\"
 
+[difftool "kdiff"]
+    cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
+
 [difftool "vim"]
     tool = vimdiff
 
