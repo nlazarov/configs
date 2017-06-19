@@ -96,6 +96,7 @@ filetype on
 set mouse=a
 
 syntax on
+set spell
 set ignorecase
 set smartcase
 set hlsearch
