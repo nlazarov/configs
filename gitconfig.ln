@@ -79,6 +79,7 @@
     p = push
     pf = push -f
     pu = "!git push -u origin `git current`"
+    po = push origin
 
     # pull --rebase, and preserve merge commits
     pl = "!f() { git fetch --prune; git rebase --preserve-merges `git tracked` ; }; f"
