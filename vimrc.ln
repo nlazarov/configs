@@ -47,6 +47,7 @@ Plug 'herringtondarkholme/yats.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
+Plug 'stephenway/postcss.vim'
 
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
