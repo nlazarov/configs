@@ -336,3 +336,12 @@ let g:dasht_filetype_docsets['javascript'] = ['js', 'jquery', 'lodash', 'react']
 let g:dasht_filetype_docsets['python'] = ['django']
 
 colorscheme wombat256mod
+
+"fugitive
+autocmd User fugitive
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \   nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
+
+autocmd BufReadPost fugitive://* set bufhidden=delete
+"end fugitive
