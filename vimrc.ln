@@ -226,14 +226,13 @@ autocmd FocusGained * checktime
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-" autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags &"
 autocmd FileType javascript setlocal suffixesadd+=.es6
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 
 
 " find files in project
 set path+=**
-" still exclude node_modules from the search; could use the ctrlp for this one
+" still exclude node_modules from the search; could use the CtrlP for this one
 set wildignore+=**/node_modules/**
 set wildignore+=**/bower_components/**
 set wildignore+=**/site-packages/**
@@ -291,25 +290,6 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" alternative solution to working tabs for YCM and UltiSnips
-" function! g:UltiSnips_Complete()
-"     call UltiSnips#ExpandSnippet()
-"     if g:ulti_expand_res == 0
-"         if pumvisible()
-"             return "\<C-n>"
-"         else
-"             call UltiSnips#JumpForwards()
-"             if g:ulti_jump_forwards_res == 0
-"                return "\<TAB>"
-"             endif
-"         endif
-"     endif
-"     return ""
-" endfunction
-"
-" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item
 " and close the selection list, same as other IDEs.
