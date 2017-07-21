@@ -84,7 +84,6 @@ filetype on
 set mouse=a
 
 syntax on
-set spell
 set ignorecase
 set smartcase
 set hlsearch
@@ -107,8 +106,10 @@ set tw=500
 
 set wrap "Wrap lines
 set scrolloff=3
-
 set hid "only hide opened files for faster switching
+
+set spell
+autocmd FileType git,gitv setlocal nospell
 
 " prefer vertical diff
 set diffopt+=vertical
@@ -208,6 +209,7 @@ noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 nnoremap <leader>f :NERDTreeFind<cr>
 nnoremap <leader>t :NERDTreeToggle<cr>
 nnoremap <leader>s :Gstatus<cr>
+nnoremap <leader>o :only<cr>
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <leader>jh :YcmCompleter GetDoc<CR>
