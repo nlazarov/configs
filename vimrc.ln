@@ -201,9 +201,8 @@ if executable('ag')
 endif
 
 " runners
-" Run ruby when typing <leader>r
 noremap <buffer> <leader>r :w<cr> :exec '!ruby' shellescape(@%, 1)<cr>
-noremap <buffer> <leader>e :w<cr> :exec '!node' shellescape(@%, 1)<cr>
+noremap <buffer> <leader>e :w<cr> :!%:p<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
 nnoremap <leader>f :NERDTreeFind<cr>

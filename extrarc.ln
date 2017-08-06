@@ -14,7 +14,7 @@ function test-widget() {
 }
 
 function venv() {
-    source "$HOME/work/env_$1/bin/activate"
+    source "$HOME/py.envs/$1_env/bin/activate"
 }
 
 export NVM_DIR="$HOME/.nvm"
