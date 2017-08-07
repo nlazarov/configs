@@ -227,7 +227,7 @@ autocmd FocusGained * checktime
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-autocmd FileType javascript setlocal suffixesadd+=.es6
+autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 
 
