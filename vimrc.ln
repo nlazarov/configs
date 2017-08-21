@@ -180,7 +180,7 @@ endfunction
 nnoremap k gk
 nnoremap j gj
 
-nnoremap <F5> :e%<CR>
+nnoremap <Leader>e :e%<CR>
 
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
@@ -206,8 +206,7 @@ if executable('ag')
 endif
 
 " runners
-noremap <buffer> <leader>r :w<cr> :exec '!ruby' shellescape(@%, 1)<cr>
-noremap <buffer> <leader>e :w<cr> :!%:p<cr>
+noremap <buffer> <leader>r :w<cr> :!%:p<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
 nnoremap <leader>f :NERDTreeFind<cr>
@@ -219,6 +218,9 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <leader>jh :YcmCompleter GetDoc<CR>
 nnoremap <leader>jf :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>jR :YcmCompleter RefactorRename<CR>
+
+nnoremap <leader>u :GitGutterUndoHunk
 
 command! Vimrc :tabe ~/.vimrc
 command! Srcvim :source ~/.vimrc
@@ -249,12 +251,18 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 
 let g:syntastic_typescript_checkers = ['tslint']
 let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_css_checkers = ['stylelint']
+
+"sass-lint"
+let g:syntastic_sass_checkers=["sasslint"]
+let g:syntastic_scss_checkers=["sasslint"]
 
 "vim-airline"
 set laststatus=2 " statusbar in single file open
@@ -267,10 +275,6 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
-"sass-lint"
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
 
 "emmet settings"
 let g:user_emmet_install_global = 1
@@ -285,7 +289,7 @@ imap <c-tab> *<Esc>:call UtliSnips#ListSnippets()<CR>
 " auto close preview window
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_python_binary_path = 'python'
-let g:ycm_min_num_of_chars_for_completion = 1
+" let g:ycm_min_num_of_chars_for_completion = 1
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -309,7 +313,7 @@ if &diff
 endif
 
 " tern.js settings
-let tern_map_keys=1
+autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 " reactjs
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -338,7 +342,7 @@ vnoremap <silent> <Leader><Leader>k y:<C-U>call Dasht(getreg(0), '!')<Return>
 
 let g:dasht_filetype_docsets = {}
 let g:dasht_filetype_docsets['less'] = ['css']
-let g:dasht_filetype_docsets['javascript'] = ['js', 'jquery', 'lodash', 'react']
+let g:dasht_filetype_docsets['javascript.jsx'] = ['js', 'jquery', 'lodash', 'react']
 let g:dasht_filetype_docsets['python'] = ['django']
 
 colorscheme wombat256mod
@@ -351,3 +355,9 @@ autocmd User fugitive
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "end fugitive
+
+"python-mode
+let g:pymode_python = 'python3'
+let g:pymode_rope = 0
+let g:pymode_options_colorcolumn = 0
+
