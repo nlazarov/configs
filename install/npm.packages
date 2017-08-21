@@ -1,8 +1,11 @@
 babel-eslint
 eslint
+eslint-plugin-import
+eslint-plugin-jsx-a11y
 eslint-plugin-react
+eslint-plugin-prettier
+eslint-config-prettier
 gitopen
-gulp
 js-beautify
 jshint
 live-server
