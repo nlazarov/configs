@@ -55,7 +55,12 @@ Plug 'honza/vim-snippets'
 
 "ReactJS
 Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+Plug 'mxw/vim-jsx'
+"Plug 'maxmellon/vim-jsx-pretty'
+
+" Python
+Plug 'klen/python-mode'
+Plug 'joonty/vdebug'
 
 " All plugin must be added in the plug scope (before next line)
 call plug#end()
