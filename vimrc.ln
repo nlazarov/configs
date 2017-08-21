@@ -21,7 +21,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tomtom/tcomment_vim'
 Plug 'embear/vim-localvimrc'
 
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 Plug 'gcorne/vim-sass-lint'
 
 Plug 'mhinz/vim-startify'
@@ -245,24 +245,19 @@ set wildignore+=**/node_modules/**
 set wildignore+=**/bower_components/**
 set wildignore+=**/site-packages/**
 
-" syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ALE settings
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {
+\    'css': ['stylelint'],
+\    'javascript': ['eslint', 'prettier'],
+\    'jsx': [],
+\}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:ale_fixers = {
+\    'javascript': ['prettier'],
+\}
 
-let g:syntastic_typescript_checkers = ['tslint']
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_css_checkers = ['stylelint']
-
-"sass-lint"
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
+nmap <F12> <Plug>(ale_fix)
 
 "vim-airline"
 set laststatus=2 " statusbar in single file open
