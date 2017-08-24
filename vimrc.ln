@@ -56,7 +56,6 @@ Plug 'honza/vim-snippets'
 "ReactJS
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-"Plug 'maxmellon/vim-jsx-pretty'
 
 " Python
 Plug 'klen/python-mode'
@@ -112,6 +111,7 @@ set tw=500
 set wrap "Wrap lines
 set scrolloff=3
 set hid "only hide opened files for faster switching
+set backspace=indent,eol,start
 
 set spell
 autocmd FileType git,gitv setlocal nospell
@@ -220,7 +220,7 @@ nnoremap <leader>jf :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>jR :YcmCompleter RefactorRename<CR>
 
-nnoremap <leader>u :GitGutterUndoHunk
+nnoremap <leader>u :GitGutterUndoHunk<CR>
 
 command! Vimrc :tabe ~/.vimrc
 command! Srcvim :source ~/.vimrc
@@ -276,6 +276,8 @@ let g:airline_symbols.linenr = ''
 "emmet settings"
 let g:user_emmet_install_global = 1
 autocmd FileType html,css,javascript EmmetInstall
+
+let g:javascript_plugin_flow=1
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"

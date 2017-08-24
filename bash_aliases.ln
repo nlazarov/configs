@@ -6,3 +6,4 @@ alias live-home='live-server --port=4033 --host=0.0.0.0 --no-browser'
 alias x=exit
 alias back='cd "$OLDPWD"'
 alias dm='diffuse -m'
+alias v='vim -O'
