@@ -26,6 +26,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.local/bin"
 
 export PIP_PACK_DIR="$HOME/.local/lib/python2.7/site-packages"
+export POWERLINE_CONFIG_COMMAND=powerline-config
 
 if [[ $(uname) == "Darwin" ]]; then
     export PIP_PACK_DIR="/usr/local/lib/python3.6/site-packages"
