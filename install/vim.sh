@@ -11,12 +11,14 @@ cd vim
 ./configure --with-features=huge \
             --enable-multibyte \
             --enable-rubyinterp \
-            --enable-pythoninterp \
-            --enable-python3interp \
+            --enable-pythoninterp=dynamic \
+            --enable-python3interp=dynamic \
             --enable-perlinterp \
             --enable-gui=gtk2 \
             --enable-cscope \
-            --prefix=/usr
+            --prefix=/usr \
+            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu/ \
+            --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu/ \
 
 make VIMRUNTIMEDIR=/usr/share/vim/vim80
 sudo make install

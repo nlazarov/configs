@@ -21,3 +21,5 @@ for file in $linkables ; do
     fi
 done
 
+[ ! -e ~/.fonts ] && git clone git@github.com:powerline/fonts ~/.fonts
+cd ~/.fonts && ./install.sh
