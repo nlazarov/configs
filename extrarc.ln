@@ -24,7 +24,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.yarn/bin"
 
 export PIP_PACK_DIR="$HOME/.local/lib/python2.7/site-packages"
 export POWERLINE_CONFIG_COMMAND=powerline-config
@@ -33,4 +33,7 @@ if [[ $(uname) == "Darwin" ]]; then
     export PIP_PACK_DIR="/usr/local/lib/python3.6/site-packages"
 fi
 
+[[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
+
 export EDITOR=`which vim`
+export APP=forms
