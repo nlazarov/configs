@@ -66,13 +66,14 @@
     cp2 = "!f() { git cpf2 `git current` $1 ; }; f"
 
     # cherry-pick from master to production
-    cpp = "!f() { git cpf2 master production ; }; f"
+    cpp = cpf2 master production
 
     current = rev-parse --abbrev-ref HEAD
     d = diff
     dc = diff --cached
     dt = difftool
     dtc = difftool --cached
+
     l = log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen%an%Creset (%cr)' --abbrev-commit --date=relative
     out = log origin..HEAD
 
@@ -88,6 +89,11 @@
     sync = "!f() { git pl && git push ; }; f"
     stash-sync = "!f() { git stash && git sync && git stash pop ; }; f"
 
+    reset-origin = "!git reset --hard origin/`git current`"
+    rbonto = "!f() { local rbb=`git current`; git rebase --onto \"origin/$rbb\" \"$rbb~${1-0}\" $rbb ; }; f"
+
+    product = "!f() { local cb=`git current`; git checkout product-niko; git reset --hard $cb; git push --force; git checkout $cb; }; f"
+
     qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
     s = status
     squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
@@ -97,7 +103,7 @@
 
     ctags = "!.git/hooks/ctags"
 
-    jshint = "!gulp jshint --files=\"{`git diff --name-only | grep '\\.js$' | tr '\n' ','`}\""
+    jshint = "!eslint `git diff --name-only | grep '\\.js$' | tr '\n' ' '`"
     root = rev-parse --show-toplevel
 
     #############################
