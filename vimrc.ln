@@ -209,8 +209,8 @@ endif
 noremap <buffer> <leader>r :w<cr> :!%:p<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
-nnoremap <leader>f :NERDTreeFind<cr>
-nnoremap <leader>t :NERDTreeToggle<cr>
+nnoremap <leader>f :NERDTreeFind<cr><C-w>=
+nnoremap <leader>t :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Gstatus<cr>
 nnoremap <leader>o :only<cr>
 
@@ -218,7 +218,7 @@ nnoremap <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <leader>jh :YcmCompleter GetDoc<CR>
 nnoremap <leader>jf :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
-nnoremap <leader>jR :YcmCompleter RefactorRename<CR>
+nnoremap <leader>jR :YcmCompleter RefactorRename<space>
 
 nnoremap <leader>u :GitGutterUndoHunk<CR>
 
