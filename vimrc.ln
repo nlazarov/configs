@@ -249,7 +249,7 @@ set wildignore+=**/site-packages/**
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \    'css': ['stylelint'],
-\    'javascript': ['eslint', 'prettier'],
+\    'javascript': ['eslint', 'prettier', 'flow'],
 \    'jsx': [],
 \}
 
