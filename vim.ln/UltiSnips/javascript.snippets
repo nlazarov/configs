@@ -5,7 +5,10 @@ test("$1", function() {
 endsnippet
 
 snippet reactclass "Create a React class" b
-export class ${1:ComponentName} extends React.Component {
+import { Component } from 'react';
+
+export class ${1:ComponentName} extends Component {
+	props: PropTypes;
 
 	constructor(props) {
 		super(props);
@@ -36,3 +39,32 @@ export function create`!p snip.rv = ('').join(map(str.capitalize, t[1].split('_'
 $0
 endsnippet
 
+snippet lint "disable eslint check"
+/* eslint-disable ${1:eslint-check} */
+${VISUAL}
+/* eslint-enable $1 */
+endsnippet
+
+snippet lintnext "disable eslint check for next line"
+// eslint-disable-next-line ${1:eslint-check}
+endsnippet
+
+snippet lintline "disable eslint check for current line"
+// eslint-disable-line ${1:eslint-check}
+endsnippet
+
+snippet istyle
+import style from '${1:.}/${2:main}.css';
+endsnippet
+
+snippet iatomic
+import atomicStyle from 'atomic.css';
+endsnippet
+
+snippet iconnect
+import { connect } from 'react-redux';
+endsnippet
+
+snippet iclassnames
+import classNames from 'classnames';
+endsnippet
