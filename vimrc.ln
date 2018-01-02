@@ -341,7 +341,7 @@ vnoremap <silent> <Leader><Leader>k y:<C-U>call Dasht(getreg(0), '!')<Return>
 
 let g:dasht_filetype_docsets = {}
 let g:dasht_filetype_docsets['less'] = ['css']
-let g:dasht_filetype_docsets['javascript.jsx'] = ['js', 'jquery', 'lodash', 'react']
+let g:dasht_filetype_docsets['javascript'] = ['js', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['python'] = ['django']
 
 colorscheme wombat256mod
