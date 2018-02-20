@@ -26,7 +26,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/.yarn/bin"
 
-export PIP_PACK_DIR="$HOME/.local/lib/python2.7/site-packages"
+export PIP_PACK_DIR="$HOME/anaconda3/lib/python3.6/site-packages"
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 if [[ $(uname) == "Darwin" ]]; then
@@ -37,3 +37,6 @@ fi
 
 export EDITOR=`which vim`
 export APP=forms
+
+# added by Anaconda3 installer
+export PATH="$HOME/anaconda3/bin:$PATH"
