@@ -1,2 +1,7 @@
 *.swp
 .idea/
+
+.lvimrc
+.tern-project
+
+**/api/**/mocks/
