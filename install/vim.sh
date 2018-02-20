@@ -21,8 +21,8 @@ cd vim
             --enable-gui=auto \
             --enable-cscope \
             --prefix=/usr \
-            --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
-            --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
+            --with-python-config-dir=$(python-config --configdir) \
+            --with-python3-config-dir=$(python3-config --configdir) \
 
 make VIMRUNTIMEDIR=/usr/share/vim/vim80
 sudo make install
