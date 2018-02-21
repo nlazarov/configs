@@ -31,9 +31,7 @@ export const $1 = '${2:forms/}`!p snip.rv = t[1].lower()`';
 export function create`!p snip.rv = ('').join(map(str.capitalize, t[1].split('_')))`($4) {
 	return {
 		type: $1,
-		payload: {
-			$4,
-		},
+		payload: { $4 },
 	};
 }
 $0
@@ -62,7 +60,11 @@ import style from '${1:.}/${2:main}.css';
 endsnippet
 
 snippet iatomic
-import atomicStyle from 'atomic.css';
+import atomic from 'common/assets/atomic.css';
+endsnippet
+
+snippet ireact
+import React from 'react';
 endsnippet
 
 snippet iconnect
