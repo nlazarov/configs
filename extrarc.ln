@@ -17,6 +17,15 @@ function venv() {
     source "$HOME/py.envs/$1_env/bin/activate"
 }
 
+function dlogs() {
+    APP=${1:-app}
+
+    docker-compose  -p $APP \
+                    -f ~/hs/dev/docker-compose.infra.dev.yml \
+                    -f ~/hs/dev/docker-compose.forms.dev.yml \
+                    logs -f
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
