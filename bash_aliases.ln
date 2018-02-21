@@ -7,3 +7,10 @@ alias x=exit
 alias back='cd "$OLDPWD"'
 alias dm='diffuse -m'
 alias v='vim -O'
+
+#docker
+alias ds='docker stop'
+alias dsta='docker ps -aq | xargs docker stop'
+alias dps='docker ps'
+alias drm='docker rm'
+alias drma='dps -aq | xargs docker rm'
