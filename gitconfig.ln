@@ -92,8 +92,9 @@
 
     reset-origin = "!git reset --hard origin/`git current`"
     rbonto = "!f() { local rbb=`git current`; git rebase --onto \"origin/$rbb\" \"$rbb~${1-0}\" $rbb ; }; f"
+    rbontom = "!f() { local rbb=`git current`; git rebase --onto master \"HEAD~${1-0}\" $rbb; }; f"
 
-    product = "!f() { local cb=`git current`; git checkout product-niko; git reset --hard $cb; git push --force; git checkout $cb; }; f"
+    product = "!f() { local cb=`git current`; git checkout product-niko; git reset --hard $cb; git push --force; git checkout $cb; git prune; }; f"
 
     qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
     s = status
