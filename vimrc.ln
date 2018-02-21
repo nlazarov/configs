@@ -154,6 +154,16 @@ nnoremap <leader>a ggVG
 nnoremap <leader>P "0p
 vnoremap <leader>P "0p
 
+" surround shortcuts
+nmap <leader>) ysiw)
+nmap <leader>( ysiw(
+nmap <leader>] ysiw]
+nmap <leader>[ ysiw[
+nmap <leader>} ysiw}
+nmap <leader>{ ysiw{
+nmap <leader>' ysiw'
+nmap <leader>" ysiw"
+
 " Navigation in splits
 """"""""""""""""""""""""""""""
 map <C-h> :call WinMove('h')<cr>
