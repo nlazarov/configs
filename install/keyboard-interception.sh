@@ -18,6 +18,8 @@ cmake ..
 make
 sudo make install
 
+rm -rf tools/ caps2esc/
+
 
 sudo cp "$(dirname $0)/keyboard/udevmon.yaml" /etc
 sudo cp "$(dirname $0)/keyboard/udevmon.service" /etc/systemd/system
