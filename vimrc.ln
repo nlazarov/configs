@@ -61,6 +61,10 @@ Plug 'mxw/vim-jsx'
 Plug 'klen/python-mode'
 Plug 'joonty/vdebug'
 
+" diff
+Plug 'lambdalisue/vim-unified-diff'
+Plug 'lambdalisue/vim-improve-diff'
+
 " All plugin must be added in the plug scope (before next line)
 call plug#end()
 filetype plugin indent on    " required
@@ -116,8 +120,8 @@ set backspace=indent,eol,start
 set spell
 autocmd FileType git,gitv setlocal nospell
 
-" prefer vertical diff
-set diffopt+=vertical
+" prefer vertical diff and ignore whitespace
+set diffopt+=vertical,iwhite
 
 " all backup moved at one place
 set backupdir=~/.vim/backup,.
@@ -163,6 +167,10 @@ nmap <leader>} ysiw}
 nmap <leader>{ ysiw{
 nmap <leader>' ysiw'
 nmap <leader>" ysiw"
+
+" diff merging
+nnoremap dgl :diffget //2<cr>
+nnoremap dgr :diffget //3<cr>
 
 " Navigation in splits
 """"""""""""""""""""""""""""""
@@ -222,6 +230,7 @@ noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 nnoremap <leader>f :NERDTreeFind<cr><C-w>=
 nnoremap <leader>t :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Gstatus<cr>
+nnoremap <leader>d :Gdiff<cr>
 nnoremap <leader>o :only<cr>
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
@@ -369,4 +378,3 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 let g:pymode_python = 'python3'
 let g:pymode_rope = 0
 let g:pymode_options_colorcolumn = 0
-
