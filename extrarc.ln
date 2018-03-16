@@ -13,6 +13,10 @@ function test-widget() {
     xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
+function dyarn() {
+    docker exec -it forms_yarn_1 bash -c "cd  /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
+}
+
 function venv() {
     source "$HOME/py.envs/$1_env/bin/activate"
 }
