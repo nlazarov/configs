@@ -92,8 +92,10 @@
     stash-sync = "!f() { git stash && git sync && git stash pop ; }; f"
 
     reset-origin = "!git reset --hard origin/`git current`"
-    rbonto = "!f() { local rbb=`git current`; git rebase --onto \"origin/$rbb\" \"$rbb~${1-0}\" $rbb ; }; f"
-    rbontom = "!f() { local rbb=`git current`; git rebase --onto master \"HEAD~${1-0}\" $rbb; }; f"
+    rbb = "!f() { local rbb=`git current`; git rebase --onto $1 \"$rbb~${2-0}\" $rbb ; }; f"
+    rborig = "!f() { local rbb=`git current`; git rbb \"origin/$rbb\" $1 ; }; f"
+    rbm = "!f() { git rbb master $1 ; }; f"
+    rbom = "!f() { git rbb origin/master $1 ; }; f"
 
     product = "!f() { local cb=`git current`; git checkout product-niko; git reset --hard $cb; git push --force; git checkout $cb; git prune; }; f"
 
