@@ -265,6 +265,7 @@ set wildignore+=**/bower_components/**
 set wildignore+=**/site-packages/**
 
 " ALE settings
+let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \    'css': ['stylelint'],
@@ -306,7 +307,7 @@ imap <c-tab> *<Esc>:call UtliSnips#ListSnippets()<CR>
 
 " auto close preview window
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_python_binary_path = 'python'
+let g:ycm_python_binary_path = 'python3'
 " let g:ycm_min_num_of_chars_for_completion = 1
 
 " make YCM compatible with UltiSnips (using supertab)
