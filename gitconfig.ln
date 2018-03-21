@@ -133,5 +133,3 @@
 
 [init]
     templatedir = ~/.git_template
-[commit]
-	gpgsign = true
