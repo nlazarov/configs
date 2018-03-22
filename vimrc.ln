@@ -8,7 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
-Plug 'valloric/youcompleteme', { 'do': './install.py --tern-completer' }
+Plug 'valloric/youcompleteme', { 'do': './install.py --js-completer' }
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
