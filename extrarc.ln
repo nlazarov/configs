@@ -14,11 +14,15 @@ function test-widget() {
 }
 
 function dyarn() {
-    docker exec -it forms_yarn_1 bash -c "cd  /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
+    docker exec -it "${APP-forms}_yarn_1" bash -c "cd  /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
+}
+
+function ddjango() {
+    docker exec -it "${APP-forms}_django_1" bash -c "cd  /var/www/forms/forms && $*"
 }
 
 function venv() {
-    source "$HOME/py.envs/$1_env/bin/activate"
+    source activate $1
 }
 
 function dlogs() {
@@ -30,6 +34,24 @@ function dlogs() {
                     logs -f
 }
 
+function hsbackup() {
+    local snapshot=~/hs/snapshots/$1
+
+    mkdir -p "$snapshot"
+    sudo mv ~/hs/dev/postgres/ "$snapshot/postgres"
+}
+
+function hsrestore() {
+    local snapshot=~/hs/snapshots/$1
+
+    sudo cp -rf "$snapshot"/* ~/hs/dev/
+}
+
+function hsswap() {
+    hsbackup $1
+    hsrestore $2
+}
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -38,6 +60,10 @@ export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
+export PATH="$PATH:$HOME/tools/dasht/bin"
+
+export MANPATH="$HOME/tools/dasht/man:$MANPATH"
 
 export PIP_PACK_DIR="$HOME/anaconda3/lib/python3.6/site-packages"
 export POWERLINE_CONFIG_COMMAND=powerline-config
@@ -50,6 +76,3 @@ fi
 
 export EDITOR=`which vim`
 export APP=forms
-
-# added by Anaconda3 installer
-export PATH="$HOME/anaconda3/bin:$PATH"
