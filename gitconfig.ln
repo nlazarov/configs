@@ -111,6 +111,8 @@
     jshint = "!eslint `git diff --name-only | grep '\\.js$' | tr '\n' ' '`"
     root = rev-parse --show-toplevel
 
+    review = "!git dt -d \"origin/master...$1\"  #"
+
     #############################
     # public/private mirrors aliases
     #############################
