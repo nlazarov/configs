@@ -1,6 +1,7 @@
 {
     "libs": [
         "browser",
+        "ecmascript",
         "jquery"
     ],
     "plugins": {
