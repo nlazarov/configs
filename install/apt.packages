@@ -1,5 +1,6 @@
 cmake
 chromium-browser
+gawk
 gnome-tweak-tool
 keepass2
 libncurses5-dev
@@ -16,6 +17,7 @@ meld
 python-dev
 python3-dev
 silversearcher-ag
+socat
 tlp
 tlp-rdw
 tmux
@@ -24,4 +26,5 @@ virtualbox-dkms
 virtualbox-ext-pack
 xcape
 xclip
+w3m
 zsh
