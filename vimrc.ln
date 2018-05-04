@@ -38,6 +38,7 @@ Plug 'dikiaap/minimalist'
 Plug 'w0ng/vim-hybrid'
 
 Plug 'chiel92/vim-autoformat'
+Plug 'terryma/vim-multiple-cursors'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
@@ -169,8 +170,8 @@ nmap <leader>' ysiw'
 nmap <leader>" ysiw"
 
 " diff merging
-nnoremap dgl :diffget //2<cr>
-nnoremap dgr :diffget //3<cr>
+nnoremap dgl :diffget //2<cr>diffupdate<cr>
+nnoremap dgr :diffget //3<cr>diffupdate<cr>
 
 " Navigation in splits
 """"""""""""""""""""""""""""""
@@ -231,6 +232,7 @@ nnoremap <leader>f :NERDTreeFind<cr><C-w>=
 nnoremap <leader>t :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Gstatus<cr>
 nnoremap <leader>d :Gdiff<cr>
+nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>o :only<cr>
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
