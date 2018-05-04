@@ -1,4 +1,5 @@
 babel-eslint
+create-react-app
 eslint
 eslint-plugin-import
 eslint-plugin-jsx-a11y
