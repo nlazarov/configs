@@ -274,6 +274,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
+autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
 
 
 " find files in project
@@ -282,6 +283,10 @@ set path+=**
 set wildignore+=**/node_modules/**
 set wildignore+=**/bower_components/**
 set wildignore+=**/site-packages/**
+
+" ctrlp settings
+let g:ctrlp_extensions = ['tag']
+nnoremap <c-t> :CtrlPTag<cr>
 
 " ALE settings
 let g:ale_fix_on_save = 1
