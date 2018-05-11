@@ -121,8 +121,12 @@ set backspace=indent,eol,start
 set spell
 autocmd FileType git,gitv setlocal nospell
 
+set lazyredraw
+
 " prefer vertical diff and ignore whitespace
 set diffopt+=vertical,iwhite
+
+set includeexpr=**/
 
 " all backup moved at one place
 set backupdir=~/.vim/backup,.
@@ -201,6 +205,10 @@ nnoremap j gj
 
 nnoremap <Leader>e :e%<CR>
 
+command! -nargs=1 Silent
+\ | execute ':silent '.<q-args>
+\ | execute ':redraw!'
+
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
 " \l       : list buffers
@@ -222,6 +230,9 @@ nnoremap <Leader>0 :10b<CR>
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
+  set grepprg=ag\ --hidden\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+  command! -nargs=+ Grep :Silent grep <args>
 endif
 
 " runners
