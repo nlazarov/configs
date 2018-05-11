@@ -254,6 +254,12 @@ nnoremap <leader>jR :YcmCompleter RefactorRename<space>
 
 nnoremap <leader>u :GitGutterUndoHunk<CR>
 
+nmap <leader>gv :Gitv --all<cr>
+nmap <leader>gV :Gitv! --all<cr>
+vmap <leader>gV :Gitv! --all<cr>
+
+
+
 command! Vimrc :tabe ~/.vimrc
 command! Srcvim :source ~/.vimrc
 
