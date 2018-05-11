@@ -14,6 +14,7 @@ libxt-dev
 libxtst-dev
 libyaml-cpp-dev
 meld
+pkgconf
 python-dev
 python3-dev
 silversearcher-ag
@@ -21,6 +22,7 @@ socat
 tlp
 tlp-rdw
 tmux
+ui-auto
 virtualbox
 virtualbox-dkms
 virtualbox-ext-pack
