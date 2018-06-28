@@ -5,7 +5,7 @@ sudo apt-get build-dep vim
 sudo apt-get install libncurses5-dev libncursesw5-dev python-dev python3-dev cmake
 sudo apt-get install libx11-dev libxtst-dev
 
-sudo apt-get remove -y vim vim-runtime gvim
+sudo apt-get remove -y vim vim-runtime gvim vim-gnome
 
 cd ~
 git clone git@github.com:vim/vim.git
@@ -13,18 +13,14 @@ cd vim
 ./configure --with-features=huge \
             --enable-multibyte \
             --enable-rubyinterp \
-            --enable-pythoninterp=dynamic \
-            --enable-python3interp=dynamic \
+            --enable-python3interp=yes \
             --enable-perlinterp \
-            --enable-gtk2-check \
             --enable-gnome-check \
             --enable-gui=auto \
             --enable-cscope \
             --prefix=/usr \
-            --with-python-config-dir=$(python-config --configdir) \
-            --with-python3-config-dir=$(python3-config --configdir) \
 
-make VIMRUNTIMEDIR=/usr/share/vim/vim80
+make VIMRUNTIMEDIR=/usr/share/vim/vim81
 sudo make install
 
 #make default editor
