@@ -3,5 +3,3 @@
 
 .lvimrc
 .tern-project
-
-**/api/**/mocks/
