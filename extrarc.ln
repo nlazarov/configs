@@ -14,7 +14,7 @@ function test-widget() {
 }
 
 function dyarn() {
-    docker exec -it "${APP-forms}_yarn_1" bash -c "cd  /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
+    docker exec -u formuser -it "${APP-forms}_yarn_1" bash -c "cd  /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
 }
 
 function ddjango() {
