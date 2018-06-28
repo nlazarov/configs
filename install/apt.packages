@@ -2,6 +2,7 @@ cmake
 chromium-browser
 gawk
 gnome-tweak-tool
+intel-microcode
 keepass2
 libncurses5-dev
 libncursesw5-dev
@@ -14,6 +15,10 @@ libxt-dev
 libxtst-dev
 libyaml-cpp-dev
 meld
+microcode.ctl
+network-manager-openvpn
+network-manager-openvpn-gnome
+openvpn
 pkgconf
 python-dev
 python3-dev
