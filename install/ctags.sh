@@ -1,7 +1,8 @@
 git clone git@github.com:universal-ctags/ctags.git
 cd ctags
 ./autogen.sh
-.configure
+./configure
 make
-make install
+sudo make install
+cd ..
 rm -rf ctags
