@@ -89,6 +89,7 @@ source $ZSH/oh-my-zsh.sh
 set -o vi
 bindkey -v
 bindkey '^R' history-incremental-search-backward
+bindkey -M vicmd e edit-command-line
 setopt extendedglob
 
 fpath+="$HOME/tools/dasht/etc/zsh/completions"
