@@ -60,7 +60,7 @@ Plug 'mxw/vim-jsx'
 
 " Python
 Plug 'klen/python-mode'
-Plug 'joonty/vdebug'
+Plug 'vim-vdebug/vdebug'
 
 " diff
 Plug 'lambdalisue/vim-unified-diff'
