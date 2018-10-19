@@ -13,12 +13,20 @@ function test-widget() {
     xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
+function dbash() {
+    docker exec -it "${APP-forms}_${1?define_container}_1" bash -c "stty cols 200 && bash"
+}
+
 function dyarn() {
-    docker exec -u formuser -it "${APP-forms}_yarn_1" bash -c "cd  /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
+    docker exec -u formuser -it "${APP-forms}_yarn_1" bash -c "cd /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
 }
 
 function ddjango() {
-    docker exec -it "${APP-forms}_django_1" bash -c "cd  /var/www/forms/forms && $*"
+    docker exec -it "${APP-forms}_django_1" bash -c "stty cols 200 && ./entrypoint.sh bash -c 'cd  /var/www/forms/forms && $*'"
+}
+
+function dshell() {
+    ddjango ./manage.py shell_plus
 }
 
 function venv() {
@@ -38,7 +46,7 @@ function hsbackup() {
     local snapshot=~/hs/snapshots/$1
 
     mkdir -p "$snapshot"
-    sudo mv ~/hs/dev/postgres/ "$snapshot/postgres"
+    sudo mv ~/hs/dev/postgres_forms/ "$snapshot/postgres_forms"
 }
 
 function hsrestore() {
@@ -52,7 +60,13 @@ function hsswap() {
     hsrestore $2
 }
 
-function circle () { xdg-open https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
+function url () { xdg-open $1 1>/dev/null 2>&1 }
+function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
+function jira () {
+    local url='secure/RapidBoard.jspa?rapidView=19&projectKey=FORM&quickFilter=160'
+    [ ! -z "$1" ] && local url="browse/FORM-${1}"
+    url "https://hyperscience.atlassian.net/${url}"
+}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
