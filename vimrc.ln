@@ -42,6 +42,7 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
+Plug 'brooth/far.vim'
 
 Plug 'leafgarland/typescript-vim'
 Plug 'herringtondarkholme/yats.vim'
@@ -174,6 +175,7 @@ nmap <leader>' ysiw'
 nmap <leader>" ysiw"
 
 " diff merging
+nmap du :diffupdate<cr>
 nnoremap dgl :diffget //2<cr>diffupdate<cr>
 nnoremap dgr :diffget //3<cr>diffupdate<cr>
 
@@ -235,6 +237,9 @@ if executable('ag')
   command! -nargs=+ Grep :Silent grep <args>
 endif
 
+" far
+let g:far#source='ag'
+
 " runners
 noremap <buffer> <leader>r :w<cr> :!%:p<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
@@ -274,7 +279,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
-autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
+" autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
 
 
 " find files in project
@@ -355,6 +360,10 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 if &diff
     let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
 endif
+
+
+highlight diffAdded guifg=#00bf00
+highlight diffRemoved guifg=#bf0000
 
 " tern.js settings
 autocmd FileType javascript setlocal omnifunc=tern#Complete
