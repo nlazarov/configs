@@ -7,8 +7,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install'}
-Plug 'valloric/youcompleteme', { 'do': './install.py --js-completer' }
+Plug 'valloric/youcompleteme', { 'do': './install.py --ts-completer' }
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
@@ -44,8 +43,11 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 
+" TypeScirpt "
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'herringtondarkholme/yats.vim'
+
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
@@ -175,9 +177,9 @@ nmap <leader>' ysiw'
 nmap <leader>" ysiw"
 
 " diff merging
-nmap du :diffupdate<cr>
-nnoremap dgl :diffget //2<cr>diffupdate<cr>
-nnoremap dgr :diffget //3<cr>diffupdate<cr>
+nmap <leader>du :diffupdate<cr>
+nnoremap <leader>dgl :diffget //2<cr>diffupdate<cr>
+nnoremap <leader>dgr :diffget //3<cr>diffupdate<cr>
 
 " Navigation in splits
 """"""""""""""""""""""""""""""
@@ -251,9 +253,10 @@ nnoremap <leader>d :Gdiff<cr>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>o :only<cr>
 
+nnoremap <leader>je :YcmDiags<CR>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>jD :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jh :YcmCompleter GetDoc<CR>
-nnoremap <leader>jf :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>jR :YcmCompleter RefactorRename<space>
 
@@ -279,8 +282,10 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
-" autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
+autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
 
+autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
+autocmd BufRead,BufNewFile *.tsx set filetype=typescript
 
 " find files in project
 set path+=**
@@ -300,14 +305,18 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters = {
 \    'css': ['stylelint'],
 \    'javascript': ['eslint', 'prettier', 'flow'],
+\    'typescript': ['tslint', 'prettier'],
 \    'jsx': [],
+\    'python': ['pylint'],
 \}
 
 let g:ale_fixers = {
 \    'javascript': ['prettier'],
+\    'typescript': ['prettier'],
 \}
 
 let g:ale_javascript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
+let g:ale_typescript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
 
 nmap <F12> <Plug>(ale_fix)
 
@@ -337,6 +346,8 @@ imap <c-tab> *<Esc>:call UtliSnips#ListSnippets()<CR>
 
 " auto close preview window
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_always_populate_location_list = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_python_binary_path = 'python3'
 " let g:ycm_min_num_of_chars_for_completion = 1
 
@@ -364,9 +375,6 @@ endif
 
 highlight diffAdded guifg=#00bf00
 highlight diffRemoved guifg=#bf0000
-
-" tern.js settings
-autocmd FileType javascript setlocal omnifunc=tern#Complete
 
 " reactjs
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -396,7 +404,8 @@ vnoremap <silent> <Leader><Leader>k y:<C-U>call Dasht(getreg(0), '!')<Return>
 let g:dasht_filetype_docsets = {}
 let g:dasht_filetype_docsets['less'] = ['css']
 let g:dasht_filetype_docsets['javascript'] = ['js', 'React', 'chai', 'sinon']
-let g:dasht_filetype_docsets['python'] = ['django']
+let g:dasht_filetype_docsets['typescript'] = ['TypeScript', 'JavaScript', 'React', 'chai', 'sinon']
+let g:dasht_filetype_docsets['python'] = ['python', 'django']
 
 colorscheme wombat256mod
 
@@ -412,4 +421,5 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "python-mode
 let g:pymode_python = 'python3'
 let g:pymode_rope = 0
+let g:pymode_lint_checkers = ['pylint']
 let g:pymode_options_colorcolumn = 0
