@@ -82,6 +82,7 @@
     p = push
     pf = push -f
     pu = "!git push -u origin `git current`"
+    pd = "!git push -u origin :`git current`"
     po = push origin
 
     # pull --rebase, and preserve merge commits
