@@ -76,6 +76,10 @@ function jira () {
     url "https://hyperscience.atlassian.net/${url}"
 }
 
+export PATH="/home/pi/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -90,7 +94,7 @@ export PATH="$PATH:/snap/bin"
 
 export MANPATH="$HOME/tools/dasht/man:$MANPATH"
 
-export PIP_PACK_DIR="$HOME/anaconda3/lib/python3.6/site-packages"
+export PIP_PACK_DIR=`python -c 'import site; print(site.getsitepackages()[0])'`
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 if [[ $(uname) == "Darwin" ]]; then
