@@ -18,15 +18,23 @@ function dbash() {
 }
 
 function dyarn() {
-    docker exec -u formuser -it "${APP-forms}_yarn_1" bash -c "cd /var/www/forms/ui && /home/formuser/.yarn/bin/yarn $*"
+    docker exec -u formuser -it "${APP-forms}_yarn_1" bash -c "cd /var/www/forms/ui && /usr/bin/yarn $*"
 }
 
 function ddjango() {
     docker exec -it "${APP-forms}_django_1" bash -c "stty cols 200 && ./entrypoint.sh bash -c 'cd  /var/www/forms/forms && $*'"
 }
 
+function dmanage() {
+    ddjango ./manage.py $*
+}
+
 function dshell() {
     ddjango ./manage.py shell_plus
+}
+
+function dmigrate() {
+    ddjango ./manage.py migrate
 }
 
 function venv() {
@@ -63,8 +71,8 @@ function hsswap() {
 function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
 function jira () {
-    local url='secure/RapidBoard.jspa?rapidView=19&projectKey=FORM&quickFilter=160'
-    [ ! -z "$1" ] && local url="browse/FORM-${1}"
+    local url='secure/RapidBoard.jspa?rapidView=68&projectKey=TEAMB&view=planning.nodetail&versions=visible'
+    [ ! -z "$1" ] && local url="browse/TEAMB-${1}"
     url "https://hyperscience.atlassian.net/${url}"
 }
 
