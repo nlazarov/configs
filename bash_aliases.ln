@@ -25,3 +25,7 @@ alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
 alias rmfeat='git branch | ag -v "master|product|release" | xargs git branch -D'
+
+#npm
+#run this when npm fails for no apparent reason
+alias npmC=npm cache clean
