@@ -14,15 +14,19 @@ function test-widget() {
 }
 
 function dbash() {
-    docker exec -it "${APP-forms}_${1?define_container}_1" bash -c "stty cols 200 && bash"
+    docker exec -it "${APP-forms}_${1?define_container}_1" bash -c "stty cols 200 && ./entrypoint.sh bash"
 }
 
-function dyarn() {
-    docker exec -u formuser -it "${APP-forms}_yarn_1" bash -c "cd /var/www/forms/ui && /usr/bin/yarn $*"
+function drun() {
+    docker exec -it "${APP-forms}_${1?define_container}_1" bash -c "stty cols 200 && ./entrypoint.sh bash -c '$2'"
+}
+
+function dnpm() {
+    drun frontend "cd /var/www/forms/ui && npm $*"
 }
 
 function ddjango() {
-    docker exec -it "${APP-forms}_django_1" bash -c "stty cols 200 && ./entrypoint.sh bash -c 'cd  /var/www/forms/forms && $*'"
+    drun django "cd /var/www/forms/forms && $*"
 }
 
 function dmanage() {
