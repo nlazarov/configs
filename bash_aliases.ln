@@ -15,6 +15,7 @@ alias drm='docker rm'
 alias drma='dps -aq | xargs docker rm'
 
 alias dyarn-modules='yarn install --modules-folder ../../node_modules'
+alias dtest='ddjango pytest --nomigrations'
 
 alias screen=gnome-screenshot
 alias fixwifi='sudo systemctl restart NetworkManager'
