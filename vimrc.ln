@@ -182,12 +182,6 @@ nnoremap <leader>dgl :diffget //2<cr>diffupdate<cr>
 nnoremap <leader>dgr :diffget //3<cr>diffupdate<cr>
 
 " Navigation in splits
-""""""""""""""""""""""""""""""
-map <C-h> :call WinMove('h')<cr>
-map <C-j> :call WinMove('j')<cr>
-map <C-k> :call WinMove('k')<cr>
-map <C-l> :call WinMove('l')<cr>
-
 " Window movement shortcuts
 " move to the window in the direction shown, or create a new window
 function! WinMove(key)
@@ -202,6 +196,11 @@ function! WinMove(key)
         exec "wincmd ".a:key
     endif
 endfunction
+
+map <C-h> :call WinMove('h')<cr>
+map <C-j> :call WinMove('j')<cr>
+map <C-k> :call WinMove('k')<cr>
+map <C-l> :call WinMove('l')<cr>
 
 " move in long lines
 nnoremap k gk
