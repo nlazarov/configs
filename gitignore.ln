@@ -1,5 +1,6 @@
 *.swp
 .idea/
+__pycache__/
 
 .lvimrc
 jsconfig.json
