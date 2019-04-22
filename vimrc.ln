@@ -306,7 +306,7 @@ let g:ale_linters = {
 \    'javascript': ['eslint', 'prettier', 'flow'],
 \    'typescript': ['tslint', 'prettier'],
 \    'jsx': [],
-\    'python': ['pylint'],
+\    'python': ['pylint', 'pycodestyle'],
 \}
 
 let g:ale_fixers = {
@@ -420,5 +420,6 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 "python-mode
 let g:pymode_python = 'python3'
 let g:pymode_rope = 0
+let g:pymode_lint = 0
 let g:pymode_lint_checkers = ['pylint']
 let g:pymode_options_colorcolumn = 0
