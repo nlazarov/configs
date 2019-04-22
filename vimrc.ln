@@ -7,7 +7,15 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
-Plug 'valloric/youcompleteme', { 'do': './install.py --ts-completer' }
+" Plug 'valloric/youcompleteme', { 'do': './install.py --ts-completer' }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc-tsserver'
+Plug 'neoclide/coc-json'
+Plug 'neoclide/coc-python'
+Plug 'neoclide/coc-css'
+Plug 'neoclide/coc-highlight'
+Plug 'neoclide/coc-snippets'
+
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
@@ -20,7 +28,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tomtom/tcomment_vim'
 Plug 'embear/vim-localvimrc'
 
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'gcorne/vim-sass-lint'
 
 Plug 'mhinz/vim-startify'
@@ -301,24 +309,24 @@ let g:ctrlp_extensions = ['tag']
 nnoremap <c-t> :CtrlPTag<cr>
 
 " ALE settings
-let g:ale_fix_on_save = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_echo_msg_format = '[%linter%] %s'
-let g:ale_linters = {
-\    'css': ['stylelint'],
-\    'javascript': ['eslint', 'prettier', 'flow'],
-\    'typescript': ['tslint', 'prettier'],
-\    'jsx': [],
-\    'python': ['pylint', 'pycodestyle'],
-\}
-
-let g:ale_fixers = {
-\    'javascript': ['prettier'],
-\    'typescript': ['prettier'],
-\}
-
-let g:ale_javascript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
-let g:ale_typescript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
+" let g:ale_fix_on_save = 1
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_echo_msg_format = '[%linter%] %s'
+" let g:ale_linters = {
+" \    'css': ['stylelint'],
+" \    'javascript': ['eslint', 'prettier', 'flow'],
+" \    'typescript': ['tslint', 'prettier'],
+" \    'jsx': [],
+" \    'python': ['pylint', 'pycodestyle'],
+" \}
+"
+" let g:ale_fixers = {
+" \    'javascript': ['prettier'],
+" \    'typescript': ['prettier'],
+" \}
+"
+" let g:ale_javascript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
+" let g:ale_typescript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
 
 nmap <F12> <Plug>(ale_fix)
 
@@ -426,3 +434,25 @@ let g:pymode_rope = 0
 let g:pymode_lint = 0
 let g:pymode_lint_checkers = ['pylint']
 let g:pymode_options_colorcolumn = 0
+
+"coc"
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nmap <silent> <leader>jd <Plug>(coc-definition)
+nmap <silent> <leader>ji <Plug>(coc-implementation)
+nmap <silent> <leader>jr <Plug>(coc-references)
+nmap <silent> <leader>jR <Plug>(coc-rename)
+
+"coc snippets"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
