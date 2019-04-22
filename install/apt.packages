@@ -19,6 +19,7 @@ microcode.ctl
 network-manager-openvpn
 network-manager-openvpn-gnome
 openvpn
+pandoc
 pkgconf
 python-dev
 python3-dev

@@ -80,9 +80,11 @@ function jira () {
     url "https://hyperscience.atlassian.net/${url}"
 }
 
-export PATH="/home/pi/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+function mdown () { pandoc $1 | w3m -T text/html }
+
+[ -d /home/pi ] && export PATH="/home/pi/.pyenv/bin:$PATH"
+which pyenv >/dev/null && eval "$(pyenv init -)"
+which pyenv >/dev/null && eval "$(pyenv virtualenv-init -)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
