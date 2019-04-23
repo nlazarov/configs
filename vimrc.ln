@@ -281,7 +281,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
-autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags"
+autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript
