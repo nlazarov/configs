@@ -23,6 +23,9 @@ bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iq v
 bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-l) || tmux select-pane -R"
 bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys 'C-\\') || tmux select-pane -l"
 
+bind-key @ choose-window 'join-pane -s "%%"'
+
+# copy/paste
 bind -T copy-mode-vi 'v' send -X begin-selection
 bind -T copy-mode-vi 'y' send -X copy-pipe "xclip -i -sel clip"
 
