@@ -59,6 +59,7 @@
     c = commit -m
     ca = commit --amend
     co = checkout
+    cb = checkout -b
     pick = cherry-pick
 
     # cherry-pick from ... to ...
