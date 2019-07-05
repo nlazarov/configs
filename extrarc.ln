@@ -74,7 +74,7 @@ function hsswap() {
 
 function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
-function jira () {
+function jira-url () {
     local url='secure/RapidBoard.jspa?rapidView=68&projectKey=TEAMB&view=planning.nodetail&versions=visible'
     [ ! -z "$1" ] && local url="browse/TEAMB-${1}"
     url "https://hyperscience.atlassian.net/${url}"
@@ -112,3 +112,6 @@ fi
 export EDITOR=`which vim`
 export APP=forms
 export BROWSER=chromium-browser
+
+export JIRA_URL='https://hyperscience.atlassian.net'
+export JIRA_PREFIX='TEAMB-'
