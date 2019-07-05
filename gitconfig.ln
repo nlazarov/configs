@@ -101,7 +101,7 @@
     rbom = "!f() { git rbb origin/master $1 ; }; f"
 
     product = "!f() { local cb=`git current`; git co product-metrics; git rh $cb; git pf; git co $cb; git prune; }; f"
-    engineering = "!f() { local commit=`git rev-parse ${1-HEAD}`; local bhash=`echo $commit | cut -c 1-10`; git push origin $commit:ref/heads/rc-$bhash; }; f"
+    engineering = "!f() { local commit=`git rev-parse ${1-HEAD}`; local bhash=`echo $commit | cut -c 1-10`; git cb rc-$bhash $bhash; git pu; }; f"
 
     qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
     s = status
