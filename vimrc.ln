@@ -255,7 +255,9 @@ nnoremap <leader>o :only<cr>
 
 nnoremap <leader>je :YcmDiags<CR>
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
+nnoremap <leader>nd :vsplit<CR> :YcmCompleter GoTo<CR>
 nnoremap <leader>jD :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>nD :vsplit<CR> :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jh :YcmCompleter GetDoc<CR>
 nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>jR :YcmCompleter RefactorRename<space>
