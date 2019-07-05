@@ -178,8 +178,9 @@ nmap <leader>" ysiw"
 
 " diff merging
 nmap <leader>du :diffupdate<cr>
-nnoremap <leader>dgl :diffget //2<cr>diffupdate<cr>
-nnoremap <leader>dgr :diffget //3<cr>diffupdate<cr>
+nnoremap <leader>dg :diffget<cr>
+nnoremap <leader>dl :diffget //2<cr>diffupdate<cr>
+nnoremap <leader>dr :diffget //3<cr>diffupdate<cr>
 
 " Navigation in splits
 " Window movement shortcuts
