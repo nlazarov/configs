@@ -8,17 +8,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
 " Plug 'valloric/youcompleteme', { 'do': './install.py --ts-completer' }
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-tsserver'
-Plug 'neoclide/coc-eslint'
-Plug 'neoclide/coc-tslint'
-Plug 'neoclide/coc-prettier'
-Plug 'neoclide/coc-json'
-Plug 'neoclide/coc-python'
-Plug 'neoclide/coc-css'
-Plug 'neoclide/coc-html'
-Plug 'neoclide/coc-highlight'
-Plug 'neoclide/coc-snippets'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
@@ -65,16 +55,15 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'stephenway/postcss.vim'
 
-Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'ervandew/supertab'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 "ReactJS
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Python
-Plug 'klen/python-mode'
 Plug 'vim-vdebug/vdebug'
 
 " diff
@@ -106,6 +95,9 @@ set ts=4
 filetype on
 
 set mouse=a
+
+" Better display for messages
+set cmdheight=2
 
 syntax on
 set ignorecase
@@ -265,15 +257,6 @@ nnoremap <leader>d :Gdiff<cr>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>o :only<cr>
 
-nnoremap <leader>je :YcmDiags<CR>
-nnoremap <leader>jd :YcmCompleter GoTo<CR>
-nnoremap <leader>nd :vsplit<CR> :YcmCompleter GoTo<CR>
-nnoremap <leader>jD :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>nD :vsplit<CR> :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>jh :YcmCompleter GetDoc<CR>
-nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
-nnoremap <leader>jR :YcmCompleter RefactorRename<space>
-
 nnoremap <leader>u :GitGutterUndoHunk<CR>
 
 nmap <leader>gv :Gitv --all<cr>
@@ -352,29 +335,6 @@ autocmd FileType html,css,javascript EmmetInstall
 
 let g:javascript_plugin_flow=1
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.dotfiles/UltiSnips"
-
-imap <c-tab> *<Esc>:call UtliSnips#ListSnippets()<CR>
-
-" auto close preview window
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_python_binary_path = 'python3'
-" let g:ycm_min_num_of_chars_for_completion = 1
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-let g:UltiSnipsListSnippets="<c-e>"
 " this mapping Enter key to <C-y> to chose the current highlight item
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
@@ -443,23 +403,84 @@ let g:pymode_options_colorcolumn = 0
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <silent> <leader>jd <Plug>(coc-definition)
+nmap <silent> <leader>jD <Plug>(coc-declaration)
 nmap <silent> <leader>ji <Plug>(coc-implementation)
 nmap <silent> <leader>jr <Plug>(coc-references)
 nmap <silent> <leader>jR <Plug>(coc-rename)
 
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
+
+"coc extensions
+let g:coc_global_extensions=['coc-css', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-sources', 'coc-tsserver', 'coc-tslint']
+
 "coc snippets"
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+      \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+let g:coc_snippet_next = '<C-n>'
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for format selected region
+xmap <F12> <Plug>(coc-format-selected)
+nmap <F12> <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 "coc vim-airline"
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
