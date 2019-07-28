@@ -414,7 +414,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-sources', 'coc-tsserver', 'coc-tslint']
+let g:coc_global_extensions=['coc-css', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-dictionary', 'coc-tag',  'coc-tsserver', 'coc-tslint']
 
 "coc snippets"
 inoremap <silent><expr> <TAB>
