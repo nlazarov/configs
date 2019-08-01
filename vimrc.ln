@@ -37,6 +37,8 @@ Plug 'jansenfuller/crayon'
 Plug 'vim-scripts/wombat256.vim'
 Plug 'dikiaap/minimalist'
 Plug 'w0ng/vim-hybrid'
+Plug 'morhetz/gruvbox'
+
 
 Plug 'chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
@@ -125,8 +127,8 @@ set scrolloff=3
 set hid "only hide opened files for faster switching
 set backspace=indent,eol,start
 
-set spell
-autocmd FileType git,gitv setlocal nospell
+" set spell
+" autocmd FileType git,gitv setlocal nospell
 
 set lazyredraw
 
@@ -277,12 +279,13 @@ autocmd FocusGained * checktime
 
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
-autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2
+autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null"
+autocmd BufWritePost *.py silent execute "! black %:p 1>/dev/null 2>/dev/null"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
-autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
 
 " find files in project
 set path+=**
@@ -294,28 +297,6 @@ set wildignore+=**/site-packages/**
 " ctrlp settings
 let g:ctrlp_extensions = ['tag']
 nnoremap <c-t> :CtrlPTag<cr>
-
-" ALE settings
-" let g:ale_fix_on_save = 1
-" let g:airline#extensions#ale#enabled = 1
-" let g:ale_echo_msg_format = '[%linter%] %s'
-" let g:ale_linters = {
-" \    'css': ['stylelint'],
-" \    'javascript': ['eslint', 'prettier', 'flow'],
-" \    'typescript': ['tslint', 'prettier'],
-" \    'jsx': [],
-" \    'python': ['pylint', 'pycodestyle'],
-" \}
-"
-" let g:ale_fixers = {
-" \    'javascript': ['prettier'],
-" \    'typescript': ['prettier'],
-" \}
-"
-" let g:ale_javascript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
-" let g:ale_typescript_prettier_options='--single-quote --trailing-comma es5 --jsx-bracket-same-line'
-
-nmap <F12> <Plug>(ale_fix)
 
 "vim-airline"
 set laststatus=2 " statusbar in single file open
@@ -381,7 +362,8 @@ let g:dasht_filetype_docsets['javascript'] = ['js', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['typescript'] = ['TypeScript', 'JavaScript', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['python'] = ['python', 'django']
 
-colorscheme wombat256mod
+colorscheme gruvbox
+let g:gruvbox_hls_cursor='green'
 
 "fugitive
 autocmd User fugitive
@@ -392,21 +374,18 @@ autocmd User fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 "end fugitive
 
-"python-mode
-let g:pymode_python = 'python3'
-let g:pymode_rope = 0
-let g:pymode_lint = 0
-let g:pymode_lint_checkers = ['pylint']
-let g:pymode_options_colorcolumn = 0
-
 "coc"
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <silent> <leader>jd <Plug>(coc-definition)
+nmap <silent> <leader>nd :vsplit<CR> <Plug>(coc-definition)
 nmap <silent> <leader>jD <Plug>(coc-declaration)
 nmap <silent> <leader>ji <Plug>(coc-implementation)
+nmap <silent> <leader>ni :vsplit<CR> <Plug>(coc-implementation)
 nmap <silent> <leader>jr <Plug>(coc-references)
 nmap <silent> <leader>jR <Plug>(coc-rename)
+nmap <silent> <leader>.  <Plug>(coc-codeaction)
+vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
@@ -415,6 +394,8 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
 
 "coc extensions
 let g:coc_global_extensions=['coc-css', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-dictionary', 'coc-tag',  'coc-tsserver', 'coc-tslint']
+
+autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
 "coc snippets"
 inoremap <silent><expr> <TAB>
@@ -455,7 +436,7 @@ nmap <F12> <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,typescript.tsx,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
