@@ -16,5 +16,5 @@
   "diagnostic.infoSign": "•",
   "tsserver.log": "verbose",
   "tsserver.trace.server": "verbose",
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
 }
