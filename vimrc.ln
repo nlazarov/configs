@@ -122,6 +122,9 @@ inoremap <S-Tab> <C-D>
 set lbr "word wrap
 set tw=500
 
+set updatetime=300
+set signcolumn=yes
+
 set wrap "Wrap lines
 set scrolloff=3
 set hid "only hide opened files for faster switching
@@ -283,6 +286,8 @@ autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null"
 autocmd BufWritePost *.py silent execute "! black %:p 1>/dev/null 2>/dev/null"
+autocmd BufWritePost *.py silent execute "! isort %:p 1>/dev/null 2>/dev/null"
+autocmd BufWritePost *.py silent execute "edit"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
