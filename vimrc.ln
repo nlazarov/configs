@@ -309,6 +309,10 @@ set wildignore+=**/site-packages/**
 let g:ctrlp_extensions = ['tag']
 nnoremap <c-t> :CtrlPTag<cr>
 
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir="~/.dotfiles/UltiSnips"
+
 "vim-airline"
 set laststatus=2 " statusbar in single file open
 let g:airline_left_sep = ''

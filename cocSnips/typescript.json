@@ -1,0 +1,7 @@
+{
+  "Import style": {
+    "prefix": "istyle",
+    "body": ["import style from '';", "$0"],
+    "description": "Import styles"
+  }
+}

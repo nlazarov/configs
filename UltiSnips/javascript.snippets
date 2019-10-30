@@ -1,0 +1,78 @@
+snippet test "add qUnit test" b
+test("$1", function() {
+	$0
+});
+endsnippet
+
+snippet reactclass "Create a React class" b
+import { Component } from 'react';
+
+export class ${1:ComponentName} extends Component<Props> {
+	constructor(props) {
+		super(props);
+
+		$2
+	}
+
+	render() {
+		return ${0:<div>$1</div>};
+	}
+}
+endsnippet
+
+snippet import "import definition" b
+import $1 from '$2';
+endsnippet
+
+snippet reduxaction "Add new Redux action creator" b
+export const $1 = '${2:forms/}`!p snip.rv = t[1].lower()`';
+export function create`!p snip.rv = ('').join(map(str.capitalize, t[1].split('_')))`($4) {
+	return {
+		type: $1,
+		payload: { $4 },
+	};
+}
+$0
+endsnippet
+
+snippet lint "disable eslint check"
+/* eslint-disable ${1:eslint-check} */
+${VISUAL}
+/* eslint-enable $1 */
+endsnippet
+
+snippet glint "disable eslint check for file" b
+/* eslint-disable ${1:eslint-check} */
+endsnippet
+
+snippet lintnext "disable eslint check for next line"
+// eslint-disable-next-line ${1:eslint-check}
+endsnippet
+
+snippet lintline "disable eslint check for current line"
+// eslint-disable-line ${1:eslint-check}
+endsnippet
+
+snippet istyle
+import style from '${1:.}/${2:`!p snip.rv = snip.fn.replace('.js', '').replace('.tsx', '')`}.css';
+endsnippet
+
+snippet iatomic
+import atomic from 'packages/theme/atomic.css';
+endsnippet
+
+snippet ireact
+import React from 'react';
+endsnippet
+
+snippet iconnect
+import { connect } from 'react-redux';
+endsnippet
+
+snippet iC
+import C from 'classnames';
+endsnippet
+
+snippet iramda
+import * as R from 'ramda';
+endsnippet
