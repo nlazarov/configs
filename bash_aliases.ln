@@ -3,7 +3,7 @@ alias live-home='live-server --port=4033 --host=0.0.0.0 --no-browser'
 alias x=exit
 alias back='cd "$OLDPWD"'
 alias dm='diffuse -m'
-alias v='vim -O'
+alias vo='vim -O'
 alias xclip='xclip -sel clip'
 alias start-ctrl-esc='sudo systemctl enable udevmon.service; sudo systemctl start udevmon.service'
 alias stop-ctrl-esc='sudo systemctl stop udevmon.service; sudo systemctl  disable udevmon.service'
