@@ -13,6 +13,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'int3/vim-extradite'
 Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
+Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'tpope/vim-rhubarb'
@@ -58,7 +59,7 @@ Plug 'mattn/emmet-vim'
 Plug 'stephenway/postcss.vim'
 
 " Plug 'ervandew/supertab'
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 
 "ReactJS
@@ -67,6 +68,9 @@ Plug 'mxw/vim-jsx'
 
 " Python
 Plug 'vim-vdebug/vdebug'
+
+" Ruby
+Plug 'vim-ruby/vim-ruby'
 
 " diff
 Plug 'lambdalisue/vim-unified-diff'
@@ -111,8 +115,8 @@ set wildmode=longest:full
 set nu "line numbers
 
 "for indenting
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set expandtab
 set smarttab
 vmap <Tab> >gv
@@ -184,6 +188,7 @@ nmap <leader>} ysiw}
 nmap <leader>{ ysiw{
 nmap <leader>' ysiw'
 nmap <leader>" ysiw"
+nmap <leader>> ysiw>
 
 " diff merging
 nmap <leader>du :diffupdate<cr>
@@ -285,8 +290,9 @@ autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null"
-autocmd BufWritePost *.py silent execute "! black %:p 1>/dev/null 2>/dev/null"
+autocmd BufWritePost *.scss silent execute "! node_modules/.bin/stylelint --config src/shui/stylelint.config.js %:p --fix 1>/dev/null 2>/dev/null"
 autocmd BufWritePost *.py silent execute "! isort %:p 1>/dev/null 2>/dev/null"
+autocmd BufWritePost *.py silent execute "! black %:p 1>/dev/null 2>/dev/null"
 autocmd BufWritePost *.py silent execute "edit"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
@@ -392,13 +398,14 @@ nmap <silent> <leader>jR <Plug>(coc-rename)
 nmap <silent> <leader>.  <Plug>(coc-codeaction)
 vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 
+nmap <silent> <leader>je <Plug>(coc-diagnostic-info)
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-dictionary', 'coc-tag',  'coc-tsserver', 'coc-tslint']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-stylelint', 'coc-tag',  'coc-tsserver', 'coc-tslint', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
@@ -418,7 +425,11 @@ endfunction
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-let g:coc_snippet_next = '<C-n>'
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -471,3 +482,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "coc vim-airline"
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
+
+" coc hijacks <c-i> for other than forward jump; hence reset
+unmap <c-i>
