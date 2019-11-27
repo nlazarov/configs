@@ -179,6 +179,9 @@ nnoremap <leader>a ggVG
 nnoremap <leader>P "0p
 vnoremap <leader>P "0p
 
+" open file in new split
+nnoremap vf <c-w>v gf
+
 " surround shortcuts
 nmap <leader>) ysiw)
 nmap <leader>( ysiw(
@@ -373,6 +376,7 @@ vnoremap <silent> <Leader><Leader>k y:<C-U>call Dasht(getreg(0), '!')<Return>
 
 let g:dasht_filetype_docsets = {}
 let g:dasht_filetype_docsets['less'] = ['css']
+let g:dasht_filetype_docsets['scss'] = ['css']
 let g:dasht_filetype_docsets['javascript'] = ['js', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['typescript'] = ['TypeScript', 'JavaScript', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['python'] = ['python', 'django']
