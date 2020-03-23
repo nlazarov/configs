@@ -254,10 +254,9 @@ if executable('ag')
   set grepprg=ag\ --hidden\ --vimgrep
   set grepformat=%f:%l:%c:%m
   command! -nargs=+ Grep :Silent grep <args>
-endif
 
-" far
-let g:far#source='ag'
+  let g:far#source='ag'
+endif
 
 " runners
 noremap <buffer> <leader>r :w<cr> :!%:p<cr>
