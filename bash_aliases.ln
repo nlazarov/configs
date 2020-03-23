@@ -7,6 +7,7 @@ alias vo='vim -O'
 alias xclip='xclip -sel clip'
 alias start-ctrl-esc='sudo systemctl enable udevmon.service; sudo systemctl start udevmon.service'
 alias stop-ctrl-esc='sudo systemctl stop udevmon.service; sudo systemctl  disable udevmon.service'
+alias o='xdg-open'
 
 #docker
 alias ds='docker stop'
