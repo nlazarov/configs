@@ -96,3 +96,22 @@ fpath+="$HOME/tools/dasht/etc/zsh/completions"
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.extrarc ] && source ~/.extrarc
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/niko/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/niko/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/niko/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/niko/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
