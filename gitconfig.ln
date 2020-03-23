@@ -87,7 +87,7 @@
     po = push origin
 
     # pull --rebase, and preserve merge commits
-    pl = "!f() { git fetch --prune; git rebase --preserve-merges `git tracked` ; }; f"
+    pl = "!f() { git fetch --prune; git rebase --rebase-merges `git tracked` ; }; f"
     pr = pull --rebase=preserve
     rh = reset --hard
 
@@ -120,7 +120,6 @@
     #############################
     # public/private mirrors aliases
     #############################
-    pl = "!git fetch --prune && git rebase --preserve-merges `git rev-parse --abbrev-ref --symbolic-full-name @{u}`"
 
     # Bring alias from public repo to private
     put-in-master = "!git checkout master && git pl && git cherry-pick core/master && git push && git checkout core-master"
