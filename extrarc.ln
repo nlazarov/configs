@@ -132,7 +132,6 @@ fi
 [[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
 
 export EDITOR=`which vim`
-export APP=forms
 export BROWSER=chromium-browser
 
 export JIRA_URL='https://hyperscience.atlassian.net'
