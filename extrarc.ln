@@ -13,12 +13,21 @@ function test-widget() {
     xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
+function find_docker_container_name() {
+  CONTAINER_NAME=$(docker ps --format '{{.Names}}' | grep $1)
+  echo $CONTAINER_NAME
+}
 function dbash() {
-    docker exec -it "${APP-forms}_${1?define_container}_1" bash -c "stty cols 200 && ./entrypoint.sh bash"
+    docker exec -it `find_docker_container_name $1` bash -c "stty cols 200 && ./entrypoint.sh bash"
 }
 
 function drun() {
-    docker exec -it "${APP-forms}_${1?define_container}_1" bash -c "stty cols 200 && ./entrypoint.sh bash -c '$2'"
+    docker exec -it `find_docker_container_name $1` bash -c "stty cols 200 && ./entrypoint.sh bash -c '$2'"
+}
+
+function dsql() {
+    docker exec -u postgres -it forms_db_1 bash -c 'stty cols 200 && psql'
+
 }
 
 function dnpm() {
