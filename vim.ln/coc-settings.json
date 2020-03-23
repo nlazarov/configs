@@ -1,7 +1,7 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "javascriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "javascriptreact", "python"],
   "eslint.filetypes": ["javascript", "javascriptreact"],
   "tslint.autoFixOnSave": true,
   "snippets.userSnippetsDirectory": "~/.dotfiles/cocSnips",
@@ -17,7 +17,10 @@
   "diagnostic.infoSign": "•",
   "tsserver.log": "verbose",
   "tsserver.trace.server": "verbose",
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "black",
   "python.jediEnabled": false,
   "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true
+  "python.linting.pylintEnabled": true,
+  "python.venvFolders": ["anaconda3/envs"]
 }

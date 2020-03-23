@@ -294,8 +294,7 @@ autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null"
 autocmd BufWritePost *.scss silent execute "! node_modules/.bin/stylelint --config src/shui/stylelint.config.js %:p --fix 1>/dev/null 2>/dev/null"
-autocmd BufWritePost *.py silent execute "! isort %:p 1>/dev/null 2>/dev/null"
-autocmd BufWritePost *.py silent execute "! black %:p 1>/dev/null 2>/dev/null"
+autocmd BufWritePost *.py :CocCommand python.sortImports
 autocmd BufWritePost *.py silent execute "edit"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
