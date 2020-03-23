@@ -180,7 +180,7 @@ nnoremap <leader>P "0p
 vnoremap <leader>P "0p
 
 " open file in new split
-nnoremap vf <c-w>v gf
+nnoremap <leader>nf <c-w>v gf
 
 " surround shortcuts
 nmap <leader>) ysiw)
