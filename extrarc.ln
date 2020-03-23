@@ -67,7 +67,8 @@ function hsbackup() {
     local snapshot=~/hs/snapshots/$1
 
     mkdir -p "$snapshot"
-    sudo mv ~/hs/dev/postgres_forms/ "$snapshot/postgres_forms"
+    sudo mv -i ~/hs/dev/postgres_forms/ "$snapshot/postgres_forms"
+    sudo mv -i ~/hs/dev/venv/ "$snapshot/venv"
 }
 
 function hsrestore() {
@@ -75,6 +76,18 @@ function hsrestore() {
 
     sudo cp -rf "$snapshot"/* ~/hs/dev/
 }
+
+function hsclean() {
+    local snapshot=~/hs/snapshots/${1?'Define snapshot, please!'}
+
+    sudo rm -rf $snapshot
+}
+
+function hsreset() {
+    sudo rm -rf ~/hs/dev/{postgres_forms,venv}
+}
+
+alias hssnapshots='ls ~/hs/snapshots'
 
 function hsswap() {
     hsbackup $1
