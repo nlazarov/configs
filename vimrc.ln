@@ -7,7 +7,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
-" Plug 'valloric/youcompleteme', { 'do': './install.py --ts-completer' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'int3/vim-extradite'
@@ -292,7 +291,6 @@ autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null &"
-autocmd BufWritePost *.scss silent execute "! node_modules/.bin/stylelint --config src/shui/stylelint.config.js %:p --fix 1>/dev/null 2>/dev/null"
 autocmd BufWritePost *.py :CocCommand python.sortImports
 autocmd BufWritePost *.py silent execute "edit"
 
@@ -415,7 +413,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-stylelint', 'coc-tag',  'coc-tsserver', 'coc-tslint', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-stylelint', 'coc-tag',  'coc-tsserver', 'coc-tslint-plugin', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
