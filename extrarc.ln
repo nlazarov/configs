@@ -47,7 +47,7 @@ function dshell() {
 }
 
 function dmigrate() {
-    ddjango ./manage.py migrate
+    ddjango ./manage.py migrate $*
 }
 
 function venv() {
