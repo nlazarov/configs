@@ -27,7 +27,8 @@ alias fixwifi='sudo systemctl restart NetworkManager'
 alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
-alias gbrmfeat='git branch | ag -v "master|product|release" | xargs git branch -D'
+alias gbrmfeat='git branch | ag -v "\smaster$|\srelease-" | xargs git branch -D'
+alias vgit='vim +Gitv'
 
 #npm
 #run this when npm fails for no apparent reason
