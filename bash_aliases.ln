@@ -32,4 +32,7 @@ alias vgit='vim +Gitv'
 
 #npm
 #run this when npm fails for no apparent reason
-alias npmC=npm cache clean
+alias npmC='npm cache clean'
+
+# global npm packages
+alias vtop='vtop --theme acid'
