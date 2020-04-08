@@ -19,8 +19,8 @@ source $ZPLUG_HOME/init.zsh
 
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
-export NVM_LAZY_LOAD=true
 zplug "lukechilds/zsh-nvm"
+zplug "lukechilds/zsh-better-npm-completion", defer:2
 
 zplug "plugins/brew", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "plugins/colored-man-pages", from:oh-my-zsh
