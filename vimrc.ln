@@ -22,7 +22,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tomtom/tcomment_vim'
 Plug 'embear/vim-localvimrc'
 
-" Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'gcorne/vim-sass-lint'
 
 Plug 'mhinz/vim-startify'
@@ -66,6 +66,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Python
+Plug 'cjrh/vim-conda'
 Plug 'vim-vdebug/vdebug'
 
 " Ruby
@@ -291,8 +292,8 @@ autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null &"
-autocmd BufWritePost *.py :CocCommand python.sortImports
-autocmd BufWritePost *.py silent execute "edit"
+" autocmd BufWritePost *.py :CocCommand python.sortImports
+" autocmd BufWritePost *.py silent execute "edit"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
@@ -308,7 +309,7 @@ set wildignore+=**/site-packages/**
 let g:ctrlp_extensions = ['tag']
 " nnoremap <leader> <c-t> :CtrlPTag<cr>
 
-set tags^=**/.git/tags
+set tags^=../.git/tags
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -468,7 +469,7 @@ augroup end
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>c  <Plug>(coc-fix-current)
 
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
 nmap <silent> <TAB> <Plug>(coc-range-select)
@@ -487,9 +488,36 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-"coc vim-airline"
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-
 " coc hijacks <c-i> for other than forward jump; hence reset
 unmap <c-i>
+
+" ALE config
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\ 'python': ['pycodestyle', 'pylint']
+\}
+
+let g:ale_fixers = {
+\ 'python': ['black', 'isort'],
+\}
+let g:ale_fix_on_save = 1
+
+let g:airline#extensions#ale#enabled = 1
+
+function! LintWarnings() abort
+  let l:coc_warnings = airline#extensions#coc#get_warning()
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:total = l:counts.warning + l:counts.style_warning + l:coc_warnings
+  return l:total == 0 ? '' : printf('W:%d', l:total)
+endf
+
+function! LintErrors() abort
+  let l:coc_errors = airline#extensions#coc#get_error()
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:total = l:counts.error + l:counts.style_error + l:coc_errors
+  return l:total == 0 ? '' : printf('E:%d', l:total)
+endf
+
+"coc vim-airline"
+let g:airline_section_error = '%{airline#util#wrap(LintErrors(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(LintWarnings(),0)}'
