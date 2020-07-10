@@ -66,7 +66,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
 " Python
-Plug 'cjrh/vim-conda'
 Plug 'vim-vdebug/vdebug'
 
 " Ruby
@@ -161,8 +160,6 @@ nmap <leader>w :w!<cr>
 " easier quit
 nmap <leader>q :q<cr>
 nmap <leader>Q :q!<cr>
-" silence search highlighting
-nnoremap <leader>h :nohlsearch<CR>
 
 "paste from outside buffer
 nnoremap <leader>p :set paste<CR>"+p:set nopaste<CR>
@@ -292,8 +289,6 @@ autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
 autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/ctags 2>/dev/null &"
-" autocmd BufWritePost *.py :CocCommand python.sortImports
-" autocmd BufWritePost *.py silent execute "edit"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
@@ -307,7 +302,7 @@ set wildignore+=**/site-packages/**
 
 " ctrlp settings
 let g:ctrlp_extensions = ['tag']
-" nnoremap <leader> <c-t> :CtrlPTag<cr>
+nnoremap <F4> :CtrlPTag<cr>
 
 set tags^=../.git/tags
 
@@ -356,22 +351,22 @@ let g:localvimrc_persistent = 1
 
 """ dasht
 " search related docsets
-nnoremap <Leader>K :Dasht<Space>
+nnoremap <Leader>H :Dasht<Space>
 
 " search ALL the docsets
-nnoremap <Leader><Leader>K :Dasht!<Space>
+nnoremap <Leader><Leader>H :Dasht!<Space>
 
 " word expand search related docsets
-nnoremap <silent> <Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
+nnoremap <silent> <Leader>h :call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
 
 " word expand search ALL the docsets
-nnoremap <silent> <Leader><Leader>k :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
+nnoremap <silent> <Leader><Leader>h :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
 
 " search selection in related docsets
-vnoremap <silent> <Leader>k y:<C-U>call Dasht(getreg(0))<Return>
+vnoremap <silent> <Leader>h y:<C-U>call Dasht(getreg(0))<Return>
 
 " search selection in ALL the docsets
-vnoremap <silent> <Leader><Leader>k y:<C-U>call Dasht(getreg(0), '!')<Return>
+vnoremap <silent> <Leader><Leader>h y:<C-U>call Dasht(getreg(0), '!')<Return>
 
 let g:dasht_filetype_docsets = {}
 let g:dasht_filetype_docsets['less'] = ['css']
@@ -484,17 +479,19 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 SI :!$(npm bin)/tslint -c tslint.fix.json --fix %
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " coc hijacks <c-i> for other than forward jump; hence reset
-unmap <c-i>
+silent! unmap <c-i>
 
 " ALE config
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-\ 'python': ['pycodestyle', 'pylint']
+\ 'python': ['pycodestyle', 'pylint'],
+\ 'sh': ['shellcheck']
 \}
 
 let g:ale_fixers = {
@@ -505,16 +502,16 @@ let g:ale_fix_on_save = 1
 let g:airline#extensions#ale#enabled = 1
 
 function! LintWarnings() abort
-  let l:coc_warnings = airline#extensions#coc#get_warning()
+  let l:coc_info = get(b:, 'coc_diagnostic_info', {})
   let l:counts = ale#statusline#Count(bufnr(''))
-  let l:total = l:counts.warning + l:counts.style_warning + l:coc_warnings
+  let l:total = l:counts.warning + l:counts.style_warning + get(l:coc_info, 'warning', 0)
   return l:total == 0 ? '' : printf('W:%d', l:total)
 endf
 
 function! LintErrors() abort
-  let l:coc_errors = airline#extensions#coc#get_error()
+  let l:coc_info = get(b:, 'coc_diagnostic_info', {})
   let l:counts = ale#statusline#Count(bufnr(''))
-  let l:total = l:counts.error + l:counts.style_error + l:coc_errors
+  let l:total = l:counts.error + l:counts.style_error + get(l:coc_info, 'error', 0)
   return l:total == 0 ? '' : printf('E:%d', l:total)
 endf
 

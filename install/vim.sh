@@ -18,7 +18,8 @@ cd vim
             --enable-gnome-check \
             --enable-gui=auto \
             --enable-cscope \
-            --prefix=/usr \
+            --host="$HOST" \
+            --prefix="$CONDA_PREFIX" \
 
 make VIMRUNTIMEDIR=/usr/share/vim/vim81
 sudo make install
