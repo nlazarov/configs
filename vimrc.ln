@@ -225,6 +225,8 @@ nnoremap j gj
 
 nnoremap <Leader>e :e%<CR>
 
+nnoremap <leader>x :nohlsearch<CR>
+
 command! -nargs=1 Silent
 \ | execute ':silent '.<q-args>
 \ | execute ':redraw!'
@@ -263,7 +265,7 @@ noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
 nnoremap <leader>f :NERDTreeFind<cr><C-w>=
 nnoremap <leader>t :NERDTreeToggle<cr><C-w>=
-nnoremap <leader>s :Gstatus<cr>
+nnoremap <leader>s :Git<cr>
 nnoremap <leader>d :Gdiff<cr>
 nnoremap <leader>b :Gblame<cr>
 nnoremap <leader>o :only<cr>
@@ -294,6 +296,9 @@ autocmd BufWritePost * silent execute "! [ -e .git/hooks/ctags ] && .git/hooks/c
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
+
+" supports comments in json files
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " find files in project
 set path+=**
@@ -393,6 +398,7 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nnoremap <c-t> :CocList symbols<cr>
+nnoremap <c-m> :CocFix<cr>
 
 nmap <silent> <leader>jd <Plug>(coc-definition)
 nmap <silent> <leader>nd :vsplit<CR> <Plug>(coc-definition)
@@ -411,7 +417,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-stylelint', 'coc-tag',  'coc-tsserver', 'coc-tslint-plugin', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-tslint-plugin', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
