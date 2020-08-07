@@ -1,3 +1,61 @@
-snippet istyle
-import style from '${1:.}/${2:`!p snip.rv = snip.fn.replace('.js', '').replace('.tsx', '')`}.css';
+snippet cfn "Functional component" b
+export const ${1:ComponentName}: React.FC<${2:Props}> = (${3:props}) => ${4:{
+	${5:return ${6:<div>ComponentContent</div>}}
+}}
+endsnippet
+
+snippet "desc(r)?(i)?(b)?(e)?" "describe test section" br
+describe('$1', () => {
+	$0
+});
+endsnippet
+
+snippet it "jest test" b
+it('$1', () => {
+	$0
+});
+endsnippet
+
+snippet ite "jest test each" b
+it.each([$1])('$2', (${3:expected}) => {
+	$0
+})
+endsnippet
+
+snippet import "import definition" b
+import ${2:{ $3 }} from '$1';
+endsnippet
+
+snippet istyle "import styles" b
+import style from '${1:.}/${2:`!p snip.rv = snip.fn.replace('.tsx', '')`}.scss';
+endsnippet
+
+snippet lint "disable eslint check"
+/* tslint:disable${1::${2:tslint-check}} */
+${VISUAL}
+/* tslint:enable$1 */
+endsnippet
+
+snippet glint "disable eslint check for file" b
+/* eslint-disable ${1::${2:tslint-check}} */
+endsnippet
+
+snippet lintnext "disable eslint check for next line" b
+// eslint-disable-next-line ${1::${2:tslint-check}}
+endsnippet
+
+snippet lintline "disable eslint check for current line"
+// eslint-disable-line ${1::${2:tslint-check}}
+endsnippet
+
+snippet ireact
+import React from 'react';
+endsnippet
+
+snippet iC
+import C from 'classnames';
+endsnippet
+
+snippet iramda
+import * as R from 'ramda';
 endsnippet
