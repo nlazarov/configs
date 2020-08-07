@@ -1,7 +1,13 @@
 {
   "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": ["javascript", "typescript", "typescriptreact", "json", "javascriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact"
+  ],
   "eslint.filetypes": ["javascript", "javascriptreact"],
   "tslint.configFile": "tslint.fix.json",
   "tslint.autoFixOnSave": true,
@@ -15,7 +21,6 @@
   "snippets.ultisnips.enable": true,
   "snippets.ultisnips.directories": ["~/.dotfiles/UltiSnips"],
   "snippets.ultisnips.usePythonx": false,
-  "diagnostic.locationlist": true,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
