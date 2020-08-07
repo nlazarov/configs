@@ -6,3 +6,4 @@ __pycache__/
 .lvimrc
 jsconfig.json
 .tern-project
+.vimspector.json
