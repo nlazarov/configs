@@ -63,35 +63,49 @@ function dlogs() {
                     logs -f
 }
 
+snapshotswd="~/hs/snapshots"
+hsdevwd="~/hs/dev"
+alias hssnapshots='ls $snapshotswd'
+
+function snapshotwd() {
+  echo "$snapshotswd/${1?'Define snapshot, please!'}"
+}
+
+function hsclean() {
+    local snapshot=$(snapshotwd $1)
+
+    sudo rm -rf $snapshot
+}
+
 function hsbackup() {
-    local snapshot=~/hs/snapshots/$1
+    if [[ "$1" == "-f" ]]; then
+      echo clean $2
+      shift
+    fi
+
+    local snapshot=$(snapshotwd $1)
 
     mkdir -p "$snapshot"
     sudo mv -i ~/hs/dev/postgres_forms/ "$snapshot/postgres_forms"
     sudo mv -i ~/hs/dev/venv/ "$snapshot/venv"
+
+    chown -R `whoami`:`groups | cut -d' ' -f1'` "$snapshot/postgres_forms" "$snapshot/venv"
 }
 
 function hsrestore() {
-    local snapshot=~/hs/snapshots/$1
+    local snapshot=$(snapshotwd $1)
 
     sudo cp -rf "$snapshot"/* ~/hs/dev/
-}
-
-function hsclean() {
-    local snapshot=~/hs/snapshots/${1?'Define snapshot, please!'}
-
-    sudo rm -rf $snapshot
 }
 
 function hsreset() {
     sudo rm -rf ~/hs/dev/{postgres_forms,venv}
 }
 
-alias hssnapshots='ls ~/hs/snapshots'
 
 function hsswap() {
-    hsbackup $1
-    hsrestore $2
+    hsbackup $*
+    hsrestore $@[-1]
 }
 
 function url () { xdg-open $1 1>/dev/null 2>&1 }
