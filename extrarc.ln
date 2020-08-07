@@ -110,11 +110,6 @@ function hsswap() {
 
 function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
-function jira-url () {
-    local url='secure/RapidBoard.jspa?rapidView=68&projectKey=TEAMB&view=planning.nodetail&versions=visible'
-    [ ! -z "$1" ] && local url="browse/TEAMB-${1}"
-    url "https://hyperscience.atlassian.net/${url}"
-}
 
 function mdown () { pandoc $1 | w3m -T text/html }
 
