@@ -63,7 +63,7 @@ function dlogs() {
                     logs -f
 }
 
-snapshotswd="~/hs/snapshots"
+snapshotswd="$HOME/hs/snapshots"
 hsdevwd="~/hs/dev"
 alias hssnapshots='ls $snapshotswd'
 
@@ -79,7 +79,7 @@ function hsclean() {
 
 function hsbackup() {
     if [[ "$1" == "-f" ]]; then
-      echo clean $2
+      hsclean $2
       shift
     fi
 
@@ -89,7 +89,7 @@ function hsbackup() {
     sudo mv -i ~/hs/dev/postgres_forms/ "$snapshot/postgres_forms"
     sudo mv -i ~/hs/dev/venv/ "$snapshot/venv"
 
-    chown -R `whoami`:`groups | cut -d' ' -f1'` "$snapshot/postgres_forms" "$snapshot/venv"
+    sudo chown -R `whoami`:`groups | cut -d' ' -f1` "$snapshot/postgres_forms" "$snapshot/venv"
 }
 
 function hsrestore() {
@@ -137,7 +137,7 @@ fi
 [[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
 
 export EDITOR=`which vim.gtk3`
-export BROWSER=chromium-browser
+export BROWSER=vivaldi
 
 export JIRA_URL='https://hyperscience.atlassian.net'
 export JIRA_PREFIX='TEAMB-'

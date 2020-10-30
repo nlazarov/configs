@@ -10,15 +10,15 @@ Plug 'kien/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'int3/vim-extradite'
-Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
-Plug 'rbong/vim-flog'
+Plug 'cohama/agit.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-eunuch'
 Plug 'tomtom/tcomment_vim'
 Plug 'embear/vim-localvimrc'
 
@@ -26,7 +26,6 @@ Plug 'dense-analysis/ale'
 Plug 'gcorne/vim-sass-lint'
 
 Plug 'mhinz/vim-startify'
-Plug 'rizzatti/dash.vim'
 Plug 'sunaku/vim-dasht'
 
 Plug 'bling/vim-airline'
@@ -57,11 +56,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'mattn/emmet-vim'
 Plug 'stephenway/postcss.vim'
 
-" Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
 
-"ReactJS
+" ReactJS
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 
@@ -335,11 +332,6 @@ autocmd FileType html,css,javascript EmmetInstall
 
 let g:javascript_plugin_flow=1
 
-" this mapping Enter key to <C-y> to chose the current highlight item
-" and close the selection list, same as other IDEs.
-" CONFLICT with some plugins like tpope/Endwise
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " enable patience diff
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
 if &diff
@@ -410,7 +402,7 @@ nmap <silent> <leader>jR <Plug>(coc-rename)
 nmap <silent> <leader>.  <Plug>(coc-codeaction)
 vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 
-nmap <silent> <leader>je <Plug>(coc-diagnostic-info)
+nmap <silent> <leader>je :CocDiagnostics<CR>
 nmap <silent> [d <Plug>(coc-diagnostic-prev)
 nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
@@ -433,9 +425,12 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" this mapping Enter key to <C-y> to chose the current highlight item
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -469,8 +464,6 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>c  <Plug>(coc-fix-current)
 
