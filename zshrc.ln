@@ -127,6 +127,7 @@ fpath+="$HOME/tools/dasht/etc/zsh/completions"
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.extrarc ] && source ~/.extrarc
+[ -x "$(command -v gh)" ] && eval "$(gh completion --shell zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -142,7 +143,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
