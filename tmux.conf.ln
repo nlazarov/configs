@@ -2,6 +2,8 @@
 unbind-key C-b
 set-option -g prefix C-a
 
+set-option -sg escape-time 10
+
 run-shell "powerline-daemon -q"
 source "$PIP_PACK_DIR/powerline/bindings/tmux/powerline.conf"
 
