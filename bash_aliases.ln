@@ -36,3 +36,6 @@ alias npmC='npm cache clean'
 
 # global npm packages
 alias vtop='vtop --theme acid'
+
+# youtube-dl
+alias youtube-audio='youtube-dl -x --audio-quality 0'
