@@ -142,3 +142,8 @@ export BROWSER=vivaldi
 
 export JIRA_URL='https://hyperscience.atlassian.net'
 export JIRA_PREFIX='TEAMB-'
+
+# deno
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export AWS_PROFILE=niko

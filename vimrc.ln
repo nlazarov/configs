@@ -11,7 +11,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'int3/vim-extradite'
 Plug 'junegunn/gv.vim'
-Plug 'cohama/agit.vim'
+Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'tpope/vim-rhubarb'
@@ -191,7 +191,9 @@ nmap <leader>> ysiw>
 
 " diff merging
 nmap <leader>du :diffupdate<cr>
+nnoremap <leader>dt :diffthis<cr>
 nnoremap <leader>dg :diffget<cr>
+nnoremap <leader>dp :diffput<cr>
 nnoremap <leader>dl :diffget //2<cr>diffupdate<cr>
 nnoremap <leader>dr :diffget //3<cr>diffupdate<cr>
 
@@ -403,13 +405,15 @@ nmap <silent> <leader>.  <Plug>(coc-codeaction)
 vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 
 nmap <silent> <leader>je :CocDiagnostics<CR>
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
-nmap <silent> [g <Plug>(coc-diagnostic-prev-error)
-nmap <silent> ]g <Plug>(coc-diagnostic-next-error)
+nmap <silent> [D <Plug>(ale_first)
+nmap <silent> [d <Plug>(coc-diagnostic-prev) <Plug>(ale_previous)
+nmap <silent> ]d <Plug>(coc-diagnostic-next) <Plug>(ale_next)
+nmap <silent> ]D <Plug>(ale_last)
+nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
+nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-tslint-plugin', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
@@ -430,7 +434,7 @@ endfunction
 " CONFLICT with some plugins like tpope/Endwise
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -495,12 +499,16 @@ let g:ale_linters = {
 \ 'scss': ['stylelint'],
 \ 'sh': ['shellcheck'],
 \ 'json': ['fixjson'],
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint'],
 \}
 
 let g:ale_fixers = {
 \ 'python': ['black', 'isort'],
 \ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint'],
 \}
 let g:ale_fix_on_save = 1
 
