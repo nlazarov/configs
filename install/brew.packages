@@ -1,9 +1,11 @@
 git
-vim --with-python3
-tmux
-diffuse
+htop
+keepassxc
 meld
-the_silver_searcher
-reattach-to-user-namespace
-libmagic
+neovim
 nvm
+reattach-to-user-namespace
+shellcheck
+tmux
+the_silver_searcher
+vim --with-python3
