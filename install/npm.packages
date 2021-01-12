@@ -1,4 +1,3 @@
-babel-eslint
 create-react-app
 eslint
 eslint-plugin-import
@@ -10,7 +9,5 @@ gitopen
 js-beautify
 jshint
 live-server
-sass-lint
-tern
-tern-jsx
+neovim
 vimdebug
