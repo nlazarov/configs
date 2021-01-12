@@ -5,6 +5,7 @@ meld
 neovim
 nvm
 reattach-to-user-namespace
+rustup-init
 shellcheck
 tmux
 the_silver_searcher
