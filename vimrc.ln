@@ -1,7 +1,11 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-call plug#begin('~/.vim/plugged')
+if has('nvim')
+    call plug#begin(stdpath('data').'/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
 
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
