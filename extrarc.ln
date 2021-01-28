@@ -54,6 +54,8 @@ function venv() {
     source activate $1
 }
 
+alias de_venv="source deactivate"
+
 function dlogs() {
     APP=${1:-app}
 
@@ -117,9 +119,6 @@ function mdown () { pandoc $1 | w3m -T text/html }
 which pyenv >/dev/null && eval "$(pyenv init -)"
 which pyenv >/dev/null && eval "$(pyenv virtualenv-init -)"
 
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:$HOME/tools/dasht/bin"
 export PATH="$PATH:/snap/bin"
@@ -145,4 +144,6 @@ export JIRA_PREFIX='TEAMB-'
 # deno
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+# aws
 export AWS_PROFILE=niko
