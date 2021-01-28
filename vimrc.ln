@@ -42,7 +42,6 @@ Plug 'dikiaap/minimalist'
 Plug 'w0ng/vim-hybrid'
 Plug 'morhetz/gruvbox'
 
-
 Plug 'chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
 
@@ -99,7 +98,6 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
 set autoindent
-set ts=4
 filetype on
 
 set mouse=a
@@ -417,7 +415,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-python', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
@@ -513,6 +511,7 @@ let g:ale_fixers = {
 \ 'json': ['fixjson'],
 \ 'javascript': ['eslint'],
 \ 'typescript': ['eslint'],
+\ 'rust': ['rustfmt'],
 \}
 let g:ale_fix_on_save = 1
 

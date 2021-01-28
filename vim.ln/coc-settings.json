@@ -24,17 +24,11 @@
   "prettier.stylelintIntegration": true,
   "snippets.userSnippetsDirectory": "~/.dotfiles/cocSnips",
   "snippets.ultisnips.enable": true,
-  "snippets.ultisnips.directories": [
-    "~/.dotfiles/UltiSnips"
-  ],
+  "snippets.ultisnips.directories": ["~/.dotfiles/UltiSnips"],
   "snippets.ultisnips.usePythonx": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "tsserver.log": "verbose",
-  "tsserver.trace.server": "verbose",
-  "python.jediEnabled": false,
-  "python.venvFolders": [
-    "anaconda3/envs"
-  ]
+  "tsserver.trace.server": "verbose"
 }
