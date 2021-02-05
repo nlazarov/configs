@@ -110,6 +110,19 @@ function hsswap() {
     hsrestore $@[-1]
 }
 
+# psql backup/restore
+hs_db_snapshots="$HOME/hs/db_backup"
+function hs_db_backup() {
+    pg_dump form > "$hs_db_snapshots/${1?'Define psql dump name'}.backup"
+}
+function hs_db_restore() {
+    local dump_name="$hs_db_snapshots/${1?'Define psql dump name'}.backup"
+    ! [ -f "$dump_name" ] && echo 'Dump does not exist' && return 1
+    dropdb form
+    createdb form
+    psql --single-transaction form < $dump_name
+}
+
 function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
 
@@ -132,6 +145,8 @@ export PATH="$PYTHON_BASE/bin:$PATH"
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 export MANPATH="$HOME/tools/dasht/man:$MANPATH"
+
+export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
 
 [[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
 
