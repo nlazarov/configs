@@ -419,7 +419,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-eslint', 'coc-highlight', 'coc-html', 'coc-json', 'coc-prettier', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
@@ -490,7 +490,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-command! -nargs=0 SI :!$(npm bin)/tslint -c tslint.fix.json --fix %
+command! -nargs=0 LF :!$(npm bin)/eslint --fix %
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -505,16 +505,16 @@ let g:ale_linters = {
 \ 'scss': ['stylelint'],
 \ 'sh': ['shellcheck'],
 \ 'json': ['fixjson'],
-\ 'javascript': ['eslint'],
-\ 'typescript': ['eslint'],
+\ 'javascript': ['eslint', 'prettier'],
+\ 'typescript': ['eslint', 'prettier'],
 \}
 
 let g:ale_fixers = {
 \ 'python': ['black', 'isort'],
 \ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
-\ 'javascript': ['eslint'],
-\ 'typescript': ['eslint'],
+\ 'javascript': ['prettier'],
+\ 'typescript': ['prettier'],
 \ 'rust': ['rustfmt'],
 \}
 let g:ale_fix_on_save = 1
