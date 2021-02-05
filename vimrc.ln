@@ -399,7 +399,6 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nnoremap <c-t> :CocList symbols<cr>
-nnoremap <c-m> :CocFix<cr>
 
 nmap <silent> <leader>jd <Plug>(coc-definition)
 nmap <silent> <leader>nd :vsplit<CR> <Plug>(coc-definition)
