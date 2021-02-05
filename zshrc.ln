@@ -11,6 +11,7 @@ ZSH_THEME="nanotech"
 
 export DEFAULT_USER=`whoami`
 
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
 
 # zplug
 export ZPLUG_HOME=~/.zplug
@@ -21,7 +22,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim', 'nvim', 'n', 'vo')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim' 'nvim' 'n' 'vo')
 zplug "lukechilds/zsh-nvm"
 zplug "lukechilds/zsh-better-npm-completion", defer:2
 
@@ -127,6 +128,5 @@ setopt extendedglob
 
 fpath+="$HOME/tools/dasht/etc/zsh/completions"
 
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.extrarc ] && source ~/.extrarc
 [ -x "$(command -v gh)" ] && eval "$(gh completion --shell zsh)"
