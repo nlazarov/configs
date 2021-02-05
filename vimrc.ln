@@ -199,6 +199,11 @@ nnoremap <leader>dp :diffput<cr>
 nnoremap <leader>dl :diffget //2<cr>diffupdate<cr>
 nnoremap <leader>dr :diffget //3<cr>diffupdate<cr>
 
+
+" recursively vimgrep for word under cursor or selection if you hit leader-star
+nmap <leader>* :execute 'Ack "' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '"'<CR>
+vmap <leader>* :<C-u>call <SID>VSetSearch('/')<CR>:execute 'Ack "' . @/ . '"'<CR>
+
 " Navigation in splits
 " Window movement shortcuts
 " move to the window in the direction shown, or create a new window
