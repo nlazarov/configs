@@ -150,6 +150,8 @@ export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
 
 [[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
 
+[[ -e $(which gh) ]] && eval "$(gh completion --shell ${SHELL##*/})"
+
 export EDITOR=`which nvim`
 export BROWSER=vivaldi
 
