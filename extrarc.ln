@@ -126,6 +126,7 @@ function hs_db_restore() {
 function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
 
+function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
 [ -d /home/pi ] && export PATH="/home/pi/.pyenv/bin:$PATH"
