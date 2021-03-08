@@ -1,0 +1,10 @@
+cmake
+chromium-browser
+gawk
+neovim
+pandoc
+silversearcher-ag
+tmux
+xclip
+w3m
+zsh

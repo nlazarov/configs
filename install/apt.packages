@@ -16,6 +16,7 @@ libxtst-dev
 libyaml-cpp-dev
 meld
 microcode.ctl
+neovim
 network-manager-openvpn
 network-manager-openvpn-gnome
 openvpn
@@ -35,5 +36,4 @@ virtualbox-ext-pack
 xcape
 xclip
 w3m
-yarn
 zsh
