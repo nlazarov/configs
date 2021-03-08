@@ -204,6 +204,18 @@ nnoremap <leader>dr :diffget //3<cr>diffupdate<cr>
 nmap <leader>* :execute 'Ack "' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '"'<CR>
 vmap <leader>* :<C-u>call <SID>VSetSearch('/')<CR>:execute 'Ack "' . @/ . '"'<CR>
 
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+
 " Navigation in splits
 " Window movement shortcuts
 " move to the window in the direction shown, or create a new window
@@ -511,7 +523,6 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \ 'python': ['black', 'isort'],
-\ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
 \ 'javascript': ['prettier'],
 \ 'typescript': ['prettier'],
