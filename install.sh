@@ -21,5 +21,13 @@ for file in $linkables ; do
     fi
 done
 
+# symlinks in $HOME/.config
+DOTS_CONFIG="$HOME/.config"
+[ ! -d "$DOTS_CONFIG" ] && mkdir -p "$DOTS_CONFIG"
+
+for file in "$0"/config.home/*; do
+  [ ! -e "$DOTS_CONFIG/$file" ] && ln -s "$0/config.home/$file" "$DOTS_CONFIG/$file"
+done
+
 [ ! -e ~/.fonts ] && git clone git@github.com:powerline/fonts ~/.fonts
 cd ~/.fonts && ./install.sh
