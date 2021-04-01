@@ -1,0 +1,17 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteCond %{HTTP_USER_AGENT} DavClnt
+  RewriteRule old /index.html [R=301,L]
+  RewriteRule ^$ /remote.php/webdav/ [L,R=302]
+  RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  RewriteRule ^\.well-known/host-meta /nextcloud/public.php?service=host-meta [QSA,L]
+  RewriteRule ^\.well-known/host-meta\.json /nextcloud/public.php?service=host-meta-json [QSA,L]
+  RewriteRule ^\.well-known/carddav /nextcloud/remote.php/dav/ [R=301,L]
+  RewriteRule ^\.well-known/caldav /nextcloud/remote.php/dav/ [R=301,L]
+  RewriteRule ^\.well-known/.* /nextcloud/index.php/$0 [R=301,L]
+  RewriteRule ^remote/(.*) remote.php [QSA,L]
+  RewriteRule ^(?:build|tests|config|lib|3rdparty|templates)/.* - [R=404,L]
+  RewriteCond %{REQUEST_URI} !^/\.well-known/(acme-challenge|pki-validation)/.*
+  RewriteRule ^(?:\.|autotest|occ|issue|indie|db_|console).* - [R=404,L]
+</IfModule>
+
