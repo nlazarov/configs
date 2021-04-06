@@ -480,8 +480,6 @@ nmap <F12> <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,typescript.tsx,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -549,3 +547,6 @@ endf
 "coc vim-airline"
 let g:airline_section_error = '%{airline#util#wrap(LintErrors(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(LintWarnings(),0)}'
+
+" vimspector / debugging
+let g:vimspector_enable_mappings = 'HUMAN'
