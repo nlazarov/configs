@@ -160,7 +160,6 @@ export BROWSER=vivaldi
 [ $(uname) = "Darwin" ] && export BROWSER=/Applications/Vivaldi.app/Contents/MacOS/Vivaldi
 
 export JIRA_URL='https://hyperscience.atlassian.net'
-export JIRA_PREFIX='TEAMB-'
 
 # deno
 export DENO_INSTALL="$HOME/.deno"

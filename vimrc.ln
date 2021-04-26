@@ -419,6 +419,7 @@ nmap <silent> <leader>ji <Plug>(coc-implementation)
 nmap <silent> <leader>ni :vsplit<CR> <Plug>(coc-implementation)
 nmap <silent> <leader>jr <Plug>(coc-references)
 nmap <silent> <leader>jR <Plug>(coc-rename)
+vmap <silent> <leader>jj y:!jira <c-r>0<cr>
 nmap <silent> <leader>.  <Plug>(coc-codeaction)
 vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 
@@ -521,6 +522,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \ 'python': ['black', 'isort'],
+\ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
 \ 'javascript': ['prettier'],
 \ 'typescript': ['prettier'],
