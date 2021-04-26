@@ -129,7 +129,7 @@ function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${
 function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
-[ -d /home/pi ] && export PATH="/home/pi/.pyenv/bin:$PATH"
+export PATH="$HOME/.pyenv/bin:$PATH"
 which pyenv >/dev/null && eval "$(pyenv init -)"
 which pyenv >/dev/null && eval "$(pyenv virtualenv-init -)"
 
