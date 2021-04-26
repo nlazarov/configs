@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #remap CAPS LOCK to Ctrl key
 if test "$(which setxkbmap)"; then
@@ -28,6 +28,10 @@ DOTS_CONFIG="$HOME/.config"
 for file in "$0"/config.home/*; do
   [ ! -e "$DOTS_CONFIG/$file" ] && ln -s "$0/config.home/$file" "$DOTS_CONFIG/$file"
 done
+
+NVIM_SHARE_SITE="$HOME"/.local/share/nvim/site
+mkdir -p $NVIM_SHARE_SITE
+ln -s "$0/vim.ln/autoload" "$NVIM_SHARE_SITE/autoload"
 
 [ ! -e ~/.fonts ] && git clone git@github.com:powerline/fonts ~/.fonts
 cd ~/.fonts && ./install.sh
