@@ -138,6 +138,8 @@ export PATH="$PATH:$HOME/tools/dasht/bin"
 export PATH="$PATH:/snap/bin"
 export PATH="$PATH:$HOME/.bashers"
 
+source $HOME/.bashers/todo.sh
+
 # python executables
 local PYTHON_BASE=`python3 -c 'import site; print(site.USER_BASE)'`
 export PIP_PACK_DIR=`python3 -c 'import site; print(site.USER_SITE)'`
