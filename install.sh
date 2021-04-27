@@ -25,13 +25,16 @@ done
 DOTS_CONFIG="$HOME/.config"
 [ ! -d "$DOTS_CONFIG" ] && mkdir -p "$DOTS_CONFIG"
 
-for file in "$0"/config.home/*; do
-  [ ! -e "$DOTS_CONFIG/$file" ] && ln -s "$0/config.home/$file" "$DOTS_CONFIG/$file"
+DOTFILES="$HOME"/.dotfiles
+pushd "$DOTFILES"/config.home || exit
+for file in *; do
+  [ ! -e "$DOTS_CONFIG/$file" ] && ln -s "$DOTFILES/config.home/$file" "$DOTS_CONFIG/$file"
 done
+popd || exit
 
 NVIM_SHARE_SITE="$HOME"/.local/share/nvim/site
 mkdir -p $NVIM_SHARE_SITE
-ln -s "$0/vim.ln/autoload" "$NVIM_SHARE_SITE/autoload"
+ln -s "$DOTFILES/vim.ln/autoload" "$NVIM_SHARE_SITE/autoload"
 
 [ ! -e ~/.fonts ] && git clone git@github.com:powerline/fonts ~/.fonts
 cd ~/.fonts && ./install.sh
