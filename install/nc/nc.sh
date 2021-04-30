@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
+NC_DOMAIN='lazarov.cloud'
+NC_DATA_ROOT=${1-/var/nextcloud}
+NC_DATA="$NC_DATA_ROOT"/data
+NC_ROOT=/var/www/html
+NC_HOME="$NC_ROOT"/nextcloud
+
 sudo apt full-upgrade
 sudo apt install apache2
 
 sudo a2enmod headers
 
-sudo apt install php7.3 php7.3-gd php7.3-sqlite3 php7.3-curl php7.3-zip php7.3-xml php7.3-mbstring php7.3-bz2 php7.3-intl php7.3-smbclient php7.3-imap php7.3-gmp php7.3-bcmath php-imagick php-apcu
+sudo apt install php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-smbclient php-imap php-gmp php-bcmath php-imagick php-apcu
 
 sudo apt install postgresql php-pgsql
 
 sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' /etc/postgresql/11/main/pg_hba.conf
-sudo -u postgres psql -d template1 -c 'CREATE USER pi CREATEDB;CREATE DATABASE nextcloud OWNER pi;'
-
-NC_DOMAIN='lazarov.cloud'
-NC_DATA_ROOT=/var/nextcloud
-NC_DATA="$NC_DATA_ROOT"/data
-NC_ROOT=/var/www/html
-NC_HOME="$NC_ROOT"/nextcloud
+sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB; CREATE DATABASE nextcloud OWNER $USER;"
 
 pushd "$NC_ROOT" || exit
 sudo wget https://download.nextcloud.com/server/releases/latest.tar.bz2
@@ -27,9 +27,11 @@ sudo chown -R www-data:www-data "$NC_HOME"
 sudo chmod 750 "$NC_HOME"/data
 popd || exit
 
+APACHE_CONFIG_DIR=$(php -i | ag 'php.ini' | awk -F' => ' '{print $2}' | head -n 1 | sed 's/cli/apache2/')
+
 # Configure nextcloud in apache2
 sudo cp ./root_redir_htaccess $NC_ROOT/.htaccess
-sudo cp ./php_apache2_conf-00-nc.ini /etc/php/7.3/apache2/conf.d/00-nc.ini
+sudo cp ./php_apache2_conf-00-nc.ini $APACHE_CONFIG_DIR/conf.d/00-nc.ini
 sudo cp ./apache2_sites_available_nextcloud.conf /etc/apache2/sites-available/nextcloud.conf
 sudo a2ensite nextcloud.conf
 sudo systemctl reload apache2
@@ -45,7 +47,7 @@ sudo chown -R www-data:www-data $NC_DATA
 function php_ini_update() {
   sudo sed -i "/^$1/c\\
     $1 = $2
-    " /etc/php/7.3/apache2/php.ini
+    " $APACHE_CONFIG_DIR/php.ini
 }
 
 php_ini_update 'post_max_size' '1024M'
