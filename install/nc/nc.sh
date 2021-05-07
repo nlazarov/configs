@@ -3,7 +3,8 @@
 NC_DOMAIN='lazarov.cloud'
 NC_DATA_ROOT=${1-/var/nextcloud}
 NC_DATA="$NC_DATA_ROOT"/data
-NC_ROOT=/var/www/html
+NC_ROOT=/var/www
+APACHE_ROOT="$NC_ROOT"/html
 NC_HOME="$NC_ROOT"/nextcloud
 
 sudo apt full-upgrade
@@ -15,7 +16,9 @@ sudo apt install php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring ph
 
 sudo apt install postgresql php-pgsql
 
-sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' /etc/postgresql/11/main/pg_hba.conf
+sudo systemctl start postgresql.service
+
+sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' $(pg_conftool show hba_file --short)
 sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB; CREATE DATABASE nextcloud OWNER $USER;"
 
 pushd "$NC_ROOT" || exit
@@ -25,6 +28,10 @@ sudo tar -xvf latest.tar.bz2
 sudo mkdir -p "$NC_HOME"/data
 sudo chown -R www-data:www-data "$NC_HOME"
 sudo chmod 750 "$NC_HOME"/data
+popd || exit
+
+pushd "$NC_HOME" || exit
+sudo -u www-data php occ maintenance:install --database=pgsql --database-name="nextcloud" --database-port='' --database-user="$USER" --database-pass='' --database-host="/var/run/postgresql" --data-dir="$NC_DATA"
 popd || exit
 
 APACHE_CONFIG_DIR=$(php -i | ag 'php.ini' | awk -F' => ' '{print $2}' | head -n 1 | sed 's/cli/apache2/')
@@ -38,7 +45,7 @@ sudo systemctl reload apache2
 
 # Move data folder
 sudo mkdir -p "$NC_DATA_ROOT"
-sudo mv -v "$NC_HOME"/data "$NC_DATA"
+sudo mv -v "$NC_HOME"/data "$NC_DATA_ROOT"
 sudo sed -i "/datadirectory/c\\
   'datadirectory' => '$NC_DATA',\
     " "$NC_HOME"/config/config.php
@@ -57,11 +64,11 @@ php_ini_update 'memory_limit' '512M'
 sudo systemctl reload apache2
 
 # SSL certification
-sudo apt install python-certbot-apache
+sudo apt install python3-certbot-apache
 sudo certbot --apache
 
 # exclude TLSv1 and TLSv1.1 from supported protocols by Apache
-sed -i '/-TLSv1/!s/^SSLProtocol.\+/\0 -TLSv1/;/-TLSv1.1/!s/^SSLProtocol.\+/\0 -TLSv1.1/;' /etc/letsencrypt/options-ssl-apache.conf
+sudo sed -i '/-TLSv1/!s/^SSLProtocol.\+/\0 -TLSv1/;/-TLSv1.1/!s/^SSLProtocol.\+/\0 -TLSv1.1/;' /etc/letsencrypt/options-ssl-apache.conf
 
 sudo systemctl reload apache2
 
