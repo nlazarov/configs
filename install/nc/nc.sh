@@ -76,7 +76,7 @@ sudo systemctl reload apache2
 
 # install nc apps
 popd $NC_HOME || exit
-$NC_APPS=(news notes carnet bookmarks)
+NC_APPS=(news notes carnet bookmarks)
 for app in $NC_APPS
 do
   sudo -u www-data php occ app:install $app
