@@ -35,6 +35,8 @@ pushd "$NC_HOME" || exit
 sudo -u www-data php occ maintenance:install --database=pgsql --database-name="nextcloud" --database-port='' --database-user="$USER" --database-pass='' --database-host="/var/run/postgresql" --data-dir="$NC_DATA"
 popd || exit
 
+sudo -u www-data php occ config:system:set --value='\\OC\\Memcache\\APCu' memcache.local
+
 APACHE_CONFIG_DIR=$(php -i | ag 'php.ini' | awk -F' => ' '{print $2}' | head -n 1 | sed 's/cli/apache2/')
 
 # Configure nextcloud in apache2
