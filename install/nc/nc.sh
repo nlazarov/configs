@@ -24,11 +24,12 @@ sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB; CREATE DATABA
 pushd "$NC_ROOT" || exit
 sudo wget https://download.nextcloud.com/server/releases/latest.tar.bz2
 sudo tar -xvf latest.tar.bz2
+popd || exit
 
-sudo mkdir -p "$NC_HOME"/data
 sudo chown -R www-data:www-data "$NC_HOME"
 sudo chmod 750 "$NC_HOME"/data
-popd || exit
+
+sudo -u www-data mkdir -p "$NC_DATA"
 
 pushd "$NC_HOME" || exit
 sudo -u www-data php occ maintenance:install --database=pgsql --database-name="nextcloud" --database-port='' --database-user="$USER" --database-pass='' --database-host="/var/run/postgresql" --data-dir="$NC_DATA"
@@ -37,19 +38,11 @@ popd || exit
 APACHE_CONFIG_DIR=$(php -i | ag 'php.ini' | awk -F' => ' '{print $2}' | head -n 1 | sed 's/cli/apache2/')
 
 # Configure nextcloud in apache2
-sudo cp ./root_redir_htaccess $NC_ROOT/.htaccess
+sudo cp ./root_redir_htaccess $APACHE_ROOT/.htaccess
 sudo cp ./php_apache2_conf-00-nc.ini $APACHE_CONFIG_DIR/conf.d/00-nc.ini
 sudo cp ./apache2_sites_available_nextcloud.conf /etc/apache2/sites-available/nextcloud.conf
 sudo a2ensite nextcloud.conf
 sudo systemctl reload apache2
-
-# Move data folder
-sudo mkdir -p "$NC_DATA_ROOT"
-sudo mv -v "$NC_HOME"/data "$NC_DATA_ROOT"
-sudo sed -i "/datadirectory/c\\
-  'datadirectory' => '$NC_DATA',\
-    " "$NC_HOME"/config/config.php
-sudo chown -R www-data:www-data $NC_DATA
 
 function php_ini_update() {
   sudo sed -i "/^$1/c\\
@@ -67,6 +60,14 @@ sudo systemctl reload apache2
 sudo apt install python3-certbot-apache
 sudo certbot --apache
 
+(
+cat <<REDIR
+<Directory /var/www/html>
+  AllowOverride All
+</Directory>
+REDIR
+) >> /etc/apache2/sites-available/000-default-le-ssl.conf
+
 # exclude TLSv1 and TLSv1.1 from supported protocols by Apache
 sudo sed -i '/-TLSv1/!s/^SSLProtocol.\+/\0 -TLSv1/;/-TLSv1.1/!s/^SSLProtocol.\+/\0 -TLSv1.1/;' /etc/letsencrypt/options-ssl-apache.conf
 
@@ -76,7 +77,7 @@ sudo systemctl reload apache2
 
 # install nc apps
 popd $NC_HOME || exit
-NC_APPS=(news notes carnet bookmarks)
+NC_APPS=(bookmarks calendar carnet cookbook contacts news notes tasks)
 for app in $NC_APPS
 do
   sudo -u www-data php occ app:install $app

@@ -7,7 +7,7 @@ Description=Nextcloud cron.php job
 
 [Service]
 User=www-data
-ExecStart=/usr/bin/php -f ${1-/var/www/nextcloud}/cron.php
+ExecStart=/usr/bin/php -f ${1-/var/www/nextcloud}/cron.php --define apc.enable_cli=1
 KillMode=process
 SERVICE
 ) > nextcloudcron.service
