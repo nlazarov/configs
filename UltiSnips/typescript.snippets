@@ -31,21 +31,21 @@ import style from '${1:.}/${2:`!p snip.rv = snip.fn.replace('.tsx', '')`}.scss';
 endsnippet
 
 snippet lint "disable eslint check"
-/* tslint:disable${1::${2:tslint-check}} */
+/* eslint-disable${1: ${2:tslint-check}} */
 ${VISUAL}
-/* tslint:enable$1 */
+/* eslint-enable$1 */
 endsnippet
 
 snippet glint "disable eslint check for file" b
-/* eslint-disable ${1::${2:tslint-check}} */
+/* eslint-disable${1: ${2:tslint-check}} */
 endsnippet
 
 snippet lintnext "disable eslint check for next line" b
-// eslint-disable-next-line ${1::${2:tslint-check}}
+// eslint-disable-next-line${1: ${2:tslint-check}}
 endsnippet
 
 snippet lintline "disable eslint check for current line"
-// eslint-disable-line ${1::${2:tslint-check}}
+// eslint-disable-line${1: ${2:tslint-check}}
 endsnippet
 
 snippet ireact
