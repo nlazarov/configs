@@ -25,6 +25,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
 Plug 'tomtom/tcomment_vim'
 Plug 'embear/vim-localvimrc'
+Plug 'lambdalisue/suda.vim'
 
 Plug 'dense-analysis/ale'
 Plug 'gcorne/vim-sass-lint'
@@ -417,7 +418,7 @@ nmap <silent> <leader>nd :vsplit<CR> <Plug>(coc-definition)
 nmap <silent> <leader>jD <Plug>(coc-declaration)
 nmap <silent> <leader>ji <Plug>(coc-implementation)
 nmap <silent> <leader>ni :vsplit<CR> <Plug>(coc-implementation)
-nmap <silent> <leader>jr <Plug>(coc-references)
+nmap <silent> <leader>jr <Plug>(coc-references-used)
 nmap <silent> <leader>jR <Plug>(coc-rename)
 vmap <silent> <leader>jj y:!jira <c-r>0<cr>
 nmap <silent> <leader>.  <Plug>(coc-codeaction)
