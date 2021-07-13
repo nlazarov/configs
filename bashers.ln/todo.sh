@@ -1,6 +1,6 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env bash
 
-local TODO_PATH=~/notes/todo.md
+TODO_PATH=~/notes/todo.md
 [[ ! -e "$TODO_PATH" ]] && touch "$TODO_PATH"
 function todo() {
   case $1 in
@@ -10,7 +10,8 @@ function todo() {
       ;;
 
     add)
-      echo "* [ ] $2" >> "$TODO_PATH"
+      local new_item="* [ ] $2"
+      sed -i -e "1s;^;$new_item\n;" "$TODO_PATH"
       ;;
 
     *)
