@@ -30,12 +30,14 @@
 [difftool "vim"]
     tool = vimdiff
 
+[difftool "nvim"]
+    cmd = nvim -d -O \"$LOCAL\" \"$REMOTE\"
+
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 
 [merge]
-    tool = meld
-    conflictstyle = diff3
+    tool = nvim
 
 [mergetool]
     prompt = false
@@ -50,6 +52,10 @@
 
 [mergetool "vim"]
     cmd = vimdiff
+    trustExitCode = true
+
+[mergetool "nvim"]
+    cmd = nvim -f -c \"Gdiffsplit!\" \"$MERGED\"
     trustExitCode = true
 
 [ff]
