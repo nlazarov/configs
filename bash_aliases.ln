@@ -22,7 +22,6 @@ alias dyarn-modules='yarn install --modules-folder ../../node_modules'
 alias dtest='ddjango pytest --nomigrations'
 
 alias screen=gnome-screenshot
-alias fixwifi='sudo systemctl restart NetworkManager'
 
 #git
 alias g=git
@@ -40,3 +39,10 @@ alias vtop='vtop --theme acid'
 
 # youtube-dl
 alias youtube-audio='youtube-dl -x --audio-quality 0'
+
+# date
+alias day="date '+%Y-%m-%d'"
+
+# fix
+alias fixwifi='sudo systemctl restart NetworkManager'
+alias fix_pg_lock="rm /usr/local/var/postgresql@10/postmaster.pid"
