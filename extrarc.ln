@@ -130,6 +130,7 @@ function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
 export PATH="$HOME/.pyenv/bin:$PATH"
+which pyenv >/dev/null && eval "$(pyenv init --path)"
 which pyenv >/dev/null && eval "$(pyenv init -)"
 which pyenv >/dev/null && eval "$(pyenv virtualenv-init -)"
 
