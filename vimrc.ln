@@ -143,7 +143,8 @@ set backspace=indent,eol,start
 set lazyredraw
 
 " prefer vertical diff and ignore whitespace
-set diffopt+=vertical,iwhite
+set diffopt+=vertical,iwhite,indent-heuristic,algorithm:histogram
+let g:unified_diff_enabled=0
 
 set includeexpr=**/
 
