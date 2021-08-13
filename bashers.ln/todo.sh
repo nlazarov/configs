@@ -14,8 +14,11 @@ function todo() {
       sed -i -e "1s;^;$new_item\n;" "$TODO_PATH"
       ;;
 
-    *)
+    all)
       mdown "$TODO_PATH"
       ;;
+
+    *)
+      sed -ne '/^\* \[ \] /p' "$TODO_PATH" | mdown
   esac
 }
