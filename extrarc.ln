@@ -142,10 +142,7 @@ export PATH="$PATH:$HOME/.bashers"
 source $HOME/.bashers/todo.sh
 
 # python executables
-local PYTHON_BASE=`python3 -c 'import site; print(site.USER_BASE)'`
-export PIP_PACK_DIR=`python3 -c 'import site; print(site.USER_SITE)'`
-export PATH="$HOME/anaconda3/bin:$PATH"
-export PATH="$PYTHON_BASE/bin:$PATH"
+export PIP_PACK_DIR=`python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'`
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 export MANPATH="$HOME/tools/dasht/man:$MANPATH"
