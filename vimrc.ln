@@ -283,6 +283,7 @@ endif
 
 " runners
 noremap <buffer> <leader>r :w<cr> :!%:p<cr>
+autocmd FileType rust noremap <buffer> <leader>r :RustRun<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
 nnoremap <leader>f :NERDTreeFind<cr><C-w>=
