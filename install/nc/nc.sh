@@ -54,7 +54,7 @@ function php_ini_update() {
 
 php_ini_update 'post_max_size' '1024M'
 php_ini_update 'upload_max_filesize' '1024M'
-php_ini_update 'memory_limit' '512M'
+php_ini_update 'memory_limit' '2048M'
 
 sudo systemctl reload apache2
 
