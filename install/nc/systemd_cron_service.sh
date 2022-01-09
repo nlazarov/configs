@@ -1,7 +1,6 @@
 #! /usr/bin/env zsh
 
-(
-cat <<SERVICE
+cat << SERVICE > nextcloudcron.service
 [Unit]
 Description=Nextcloud cron.php job
 
@@ -10,7 +9,6 @@ User=www-data
 ExecStart=/usr/bin/php -f ${1-/var/www/nextcloud}/cron.php --define apc.enable_cli=1
 KillMode=process
 SERVICE
-) > nextcloudcron.service
 
 sudo mv nextcloudcron.service /etc/systemd/system/
 sudo cp nextcloudcron.timer /etc/systemd/system/
