@@ -27,7 +27,7 @@ alias screen=gnome-screenshot
 alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
-alias gbrmfeat='git branch | ag -v "\smaster$|\srelease-" | xargs git branch -D'
+alias gbrmfeat='git branch | ag -v "\smaster$|\srelease-|`git current`" | xargs git branch -D'
 alias vgit='vim.gtk3 +Gitv'
 
 #npm
@@ -41,7 +41,7 @@ alias vtop='vtop --theme acid'
 alias youtube-audio='youtube-dl -x --audio-quality 0'
 
 # date
-alias day="date '+%Y-%m-%d'"
+alias today="date '+%Y-%m-%d'"
 
 # fix
 alias fixwifi='sudo systemctl restart NetworkManager'
