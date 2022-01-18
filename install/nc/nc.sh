@@ -12,7 +12,7 @@ sudo apt install apache2
 
 sudo a2enmod headers
 
-sudo apt install php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-smbclient php-imap php-gmp php-bcmath php-imagick php-apcu
+sudo apt install php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-smbclient php-imap php-gmp php-bcmath php-imagick php-apcu libmagickcore-6.q16-6-extra
 
 sudo apt install postgresql php-pgsql
 
