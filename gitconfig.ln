@@ -17,6 +17,7 @@
 [diff]
     tool = meld
 	  algorithm = patience
+    renameLimit = 10000
 
 [difftool]
     prompt = false
