@@ -5,7 +5,6 @@ eslint-plugin-jsx-a11y
 eslint-plugin-react
 eslint-plugin-prettier
 eslint-config-prettier
-gitopen
 js-beautify
 jshint
 live-server
