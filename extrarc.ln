@@ -130,9 +130,10 @@ function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
 export PATH="$HOME/.pyenv/bin:$PATH"
-which pyenv >/dev/null && eval "$(pyenv init --path)"
-which pyenv >/dev/null && eval "$(pyenv init -)"
-which pyenv >/dev/null && eval "$(pyenv virtualenv-init -)"
+if [ -n $(command -v pyenv) ]; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:$HOME/tools/dasht/bin"
