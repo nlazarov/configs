@@ -12,6 +12,7 @@ ZSH_THEME="nanotech"
 export DEFAULT_USER=`whoami`
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/hs/utils/aliases ] && . ~/hs/utils/aliases
 
 # zplug
 export ZPLUG_HOME=~/.zplug
@@ -39,6 +40,9 @@ zplug "plugins/jira", from:oh-my-zsh
 zplug "plugins/pip", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/vi-mode", from:oh-my-zsh
+
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
 
 if ! zplug check; then
   zplug install

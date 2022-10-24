@@ -13,6 +13,15 @@ function test-widget() {
     xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
+function day() {
+    date $1 '+%Y-%m-%d'
+}
+
+function mcd() {
+  mkdir $1
+  cd $1
+}
+
 function find_docker_container_name() {
   CONTAINER_NAME=$(docker ps --format '{{.Names}}' | grep $1)
   echo $CONTAINER_NAME
@@ -113,7 +122,8 @@ function hsswap() {
 # psql backup/restore
 hs_db_snapshots="$HOME/hs/db_backup"
 function hs_db_backup() {
-    pg_dump form > "$hs_db_snapshots/${1?'Define psql dump name'}.backup"
+    local dump_name="$hs_db_snapshots/${1?'Define psql dump name'}.backup"
+    pg_dump form > "$dump_name"
 }
 function hs_db_restore() {
     local dump_name="$hs_db_snapshots/${1?'Define psql dump name'}.backup"
@@ -129,11 +139,13 @@ function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${
 function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="$HOME/.pyenv/bin:$PATH"
 if [ -n $(command -v pyenv) ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:$HOME/tools/dasht/bin"

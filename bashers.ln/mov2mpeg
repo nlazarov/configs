@@ -1,0 +1,2 @@
+#! /usr/bin/env zsh
+ffmpeg -i "$1" -q:v 0 "$1:r".'mp4'

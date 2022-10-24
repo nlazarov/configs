@@ -14,9 +14,12 @@
 [format]
     pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
 
+[pager]
+    difftool = true
+
 [diff]
-    tool = meld
-	  algorithm = patience
+    tool = difftastic
+	  algorithm = histogram
     renameLimit = 10000
 
 [difftool]
@@ -25,8 +28,8 @@
 [difftool "meld"]
     cmd = meld \"$LOCAL\" \"$REMOTE\"
 
-[difftool "kdiff"]
-    cmd = kdiff3 \"$LOCAL\" \"$REMOTE\"
+[difftool "difftastic"]
+    cmd = difft \"$LOCAL\" \"$REMOTE\"
 
 [difftool "vim"]
     tool = vimdiff
@@ -75,7 +78,7 @@
     pick = cherry-pick
 
     # cherry-pick from ... to ...
-    cpf2 = "!f() { git checkout $2 && git pull --rebase && git cherry-pick $1 && git push && git checkout $1 ; }; f"
+    cpf2 = "!f() { git co $2 && git pl && git pick $1 && git push && git co $1 ; }; f"
 
     # cherry-pick from current to ....
     cp2 = "!f() { git cpf2 `git current` $1 ; }; f"
@@ -114,10 +117,12 @@
 
     product = "!f() { local cb=`git current`; git co product-metrics; git rh $cb; git pf; git co $cb; git prune; }; f"
     engineering = "!f() { local commit=`git rev-parse ${1-HEAD}`; local bhash=`echo $commit | cut -c 1-10`; git cb rc-$bhash $bhash; git pu; }; f"
+    qa-release = "!f() { local cb=`git current`; local cbq=$cb-qa; local vn=${1-33}; local relb=release-$vn.0.990; local capb=cap-qa-$vn; local prmsg=\"`gh pr view --json title --template {{.title}} | cat`\"; git cb $cbq; git squash `git log $relb.. | wc -l` \"$prmsg\"; git rbb $capb 1; git co $capb; git pick $cbq; git branch -D $cbq; git prune; }; f"
+    qa-merge = "!f() { local cb=`git current`; local vn=${1-33}; local capb=cap-qa-$vn; local prmsg=\"`gh pr view --json number,title --template '{{.title}} (#{{.number}})' | cat`\"; git co $capb; git merge $cb --squash; git c \"$prmsg\" --no-verify; }; f"
 
     qpl = log --pretty=\"%Cblue%h%Creset %Cgreen[%cr]%Creset %s\" origin/production..origin/master
     s = status
-    squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+    squash = "!f(){ local msg=\"${2-$(git log --format=%B --reverse HEAD..HEAD@{1})}\"; git reset --soft HEAD~${1} && git commit --edit --no-verify -m \"$msg\"; };f"
     subu = submodule update
     meld = "!meld $(git rev-parse --show-toplevel)"
     tracked = rev-parse --abbrev-ref --symbolic-full-name @{u}
@@ -128,6 +133,10 @@
     root = rev-parse --show-toplevel
 
     review = "!git dt -d \"origin/master...$1\"  #"
+
+    find-base = "!f(){ git rev-list --all --children | awk 'NF>2 {print $1}' >\"$TMPDIR/bases\"; git rev-list ${1-HEAD} | grep -m1 -Ff \"$TMPDIR/bases\"; };f"
+
+    find-base-branch = "!git branch --contains `git find-base` | grep -v ^* | xargs"
 
     #############################
     # public/private mirrors aliases

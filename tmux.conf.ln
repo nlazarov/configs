@@ -50,4 +50,6 @@ set -g status-interval 5
 set -g status-left-length 90
 set -g status-right-length 90
 
+set -g history-limit 10000
+
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'

@@ -27,7 +27,7 @@ alias screen=gnome-screenshot
 alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
-alias gbrmfeat='git branch | ag -v "\smaster$|\srelease-|`git current`" | xargs git branch -D'
+alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|`git current`" | xargs git branch -D'
 alias vgit='vim.gtk3 +Gitv'
 
 #npm
@@ -41,8 +41,8 @@ alias vtop='vtop --theme acid'
 alias youtube-audio='youtube-dl -x --audio-quality 0'
 
 # date
-alias today="date '+%Y-%m-%d'"
+alias today="date +%Y-%m-%d"
 
 # fix
 alias fixwifi='sudo systemctl restart NetworkManager'
-alias fix_pg_lock="rm /usr/local/var/postgresql@10/postmaster.pid"
+alias fix_pg_lock="sudo rm /usr/local/var/postgresql@10/postmaster.pid"

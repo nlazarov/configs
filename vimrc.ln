@@ -49,6 +49,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
+Plug 'chrisbra/csv.vim'
+
+Plug 'vim-test/vim-test'
 
 " TypeScirpt "
 Plug 'leafgarland/typescript-vim'
@@ -69,14 +72,18 @@ Plug 'mxw/vim-jsx'
 " Python
 " Plug 'vim-vdebug/vdebug'
 Plug 'puremourning/vimspector'
-
+Plug 'alfredodeza/pytest.vim'
 
 " Ruby
 Plug 'vim-ruby/vim-ruby'
 
 " diff
 Plug 'lambdalisue/vim-unified-diff'
-Plug 'lambdalisue/vim-improve-diff'
+" Plug 'lambdalisue/vim-improve-diff'
+
+" code-reviews
+Plug 'AndrewRadev/diffurcate.vim'
+" Plug 'AGhost-7/critiq.vim'
 
 " All plugin must be added in the plug scope (before next line)
 call plug#end()
@@ -169,6 +176,12 @@ nmap <leader>Q :q!<cr>
 "paste from outside buffer
 nnoremap <leader>p :set paste<CR>"+p:set nopaste<CR>
 vnoremap <leader>p <Esc>:set paste<CR>gv"+p:set nopaste<CR>
+nnoremap <leader>P :set paste<CR>"+P:set nopaste<CR>
+vnoremap <leader>P <Esc>:set paste<CR>gv"+P:set nopaste<CR>
+"paste from 0 register
+"Useful because `d` overwrites the <quote> register
+nnoremap <leader>0 "0p
+vnoremap <leader>0 "0p
 
 "copy to outside buffer
 nnoremap <leader>y "+yy
@@ -176,10 +189,6 @@ vnoremap <leader>y "+y
 
 "select all
 nnoremap <leader>a ggVG
-"paste from 0 register
-"Useful because `d` overwrites the <quote> register
-nnoremap <leader>P "0p
-vnoremap <leader>P "0p
 
 " open file in new split
 nnoremap <leader>nf <c-w>v gf
@@ -206,7 +215,7 @@ nnoremap <leader>dr :diffget //3<cr>diffupdate<cr>
 
 " recursively vimgrep for word under cursor or selection if you hit leader-star
 nmap <leader>* :execute 'Ack "' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '"'<CR>
-vmap <leader>* :<C-u>call <SID>VSetSearch('/')<CR>:execute 'Ack "' . @/ . '"'<CR>
+" vmap <leader>* :<C-u>call <SID>VSetSearch('/')<CR>:execute 'Ack "' . @/ . '"'<CR>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -270,7 +279,6 @@ nnoremap <Leader>6 :6b<CR>
 nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -278,11 +286,17 @@ if executable('ag')
   set grepformat=%f:%l:%c:%m
   command! -nargs=+ Grep :Silent grep <args>
 
-  let g:far#source='ag'
+  let g:far#source=has('nvim') ?  'agnvim' : 'ag'
 endif
 
+let g:far#file_mask_favorites = ['**/*.*', '**/*.tsx', '**/*.js', '**/*.css', '**/*.scss', '**/*.py']
+let g:far#ignore_files = [system('git rev-parse --show-toplevel | tr -d "\\n"').'/.vim/farignore']
+
+let NERDTreeWinSize = 40
+
+
 " runners
-noremap <buffer> <leader>r :w<cr> :!%:p<cr>
+noremap <buffer> <leader>r :w<cr> :!"%:p"<cr>
 autocmd FileType rust noremap <buffer> <leader>r :RustRun<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
@@ -290,7 +304,7 @@ nnoremap <leader>f :NERDTreeFind<cr><C-w>=
 nnoremap <leader>t :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Git<cr>
 nnoremap <leader>d :Gdiff<cr>
-nnoremap <leader>b :Gblame<cr>
+nnoremap <leader>b :Git blame<cr>
 nnoremap <leader>o :only<cr>
 
 nnoremap <leader>u :GitGutterUndoHunk<CR>
@@ -332,6 +346,8 @@ set wildignore+=**/site-packages/**
 
 " ctrlp settings
 let g:ctrlp_extensions = ['tag']
+let g:ctrlp_max_files = 0
+let g:ctrlp_working_path_mode = 'a'
 nnoremap <F4> :CtrlPTag<cr>
 
 set tags^=../.git/tags
@@ -418,7 +434,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 nnoremap <c-t> :CocList symbols<cr>
 
 nmap <silent> <leader>jd <Plug>(coc-definition)
-nmap <silent> <leader>nd :vsplit<CR> <Plug>(coc-definition)
+nmap <silent> <leader>nd :vsplit<CR> <c-w>l <Plug>(coc-definition)
 nmap <silent> <leader>jD <Plug>(coc-declaration)
 nmap <silent> <leader>ji <Plug>(coc-implementation)
 nmap <silent> <leader>ni :vsplit<CR> <Plug>(coc-implementation)
@@ -437,28 +453,21 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-sh', 'coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
 "coc snippets"
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" this mapping Enter key to <C-y> to chose the current highlight item
-" and close the selection list, same as other IDEs.
-" CONFLICT with some plugins like tpope/Endwise
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -494,8 +503,8 @@ augroup end
 nmap <leader>c  <Plug>(coc-fix-current)
 
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+" nmap <silent> <TAB> <Plug>(coc-range-select)
+" xmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
 
 " Use `:Format` to format current buffer
@@ -511,8 +520,6 @@ command! -nargs=0 LF :!$(npm bin)/eslint --fix %
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" coc hijacks <c-i> for other than forward jump; hence reset
-silent! unmap <c-i>
 
 " ALE config
 let g:ale_linters_explicit = 1
@@ -522,14 +529,16 @@ let g:ale_linters = {
 \ 'sh': ['shellcheck'],
 \ 'json': ['fixjson'],
 \ 'javascript': ['eslint', 'prettier'],
+\ 'javascript.jsx': ['eslint', 'prettier'],
 \ 'typescript': ['eslint', 'prettier'],
 \}
 
 let g:ale_fixers = {
-\ 'python': ['black', 'isort'],
+\ 'python': ['isort', 'black'],
 \ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
 \ 'javascript': ['prettier'],
+\ 'javascript.jsx': ['prettier'],
 \ 'typescript': ['prettier'],
 \ 'rust': ['rustfmt'],
 \}
@@ -557,3 +566,9 @@ let g:airline_section_warning = '%{airline#util#wrap(LintWarnings(),0)}'
 
 " vimspector / debugging
 let g:vimspector_enable_mappings = 'HUMAN'
+
+" csv support
+let g:csv_delim_test = ',;| '
+
+" coc hijacks <c-i> for other than forward jump; hence reset
+" silent! unmap <c-i>

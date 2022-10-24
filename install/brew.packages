@@ -11,4 +11,5 @@ rustup-init
 shellcheck
 tmux
 the_silver_searcher
+unum
 vim --with-python3
