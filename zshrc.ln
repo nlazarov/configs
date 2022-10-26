@@ -23,7 +23,7 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 export NVM_COMPLETION=true
 export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim' 'nvim' 'n' 'vo')
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
 zplug "lukechilds/zsh-nvm"
 zplug "lukechilds/zsh-better-npm-completion", defer:2
 
