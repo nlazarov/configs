@@ -1,5 +1,4 @@
 {
-  "suggest.echodocSupport": true,
   "suggest.maxCompleteItemCount": 20,
   "coc.preferences.formatOnSaveFiletypes": [
     "javascript",
@@ -8,24 +7,12 @@
     "json",
     "javascriptreact"
   ],
-  "eslint.enable": false,
-  "eslint.filetypes": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescript.tsx"
-  ],
-  "eslint.autoFixOnSave": true,
-  "prettier.jsxBracketSameLine": true,
-  "prettier.trailingComma": "es5",
-  "prettier.singleQuote": true,
-  "prettier.eslintIntegration": true,
-  "prettier.tslintIntegration": true,
-  "prettier.stylelintIntegration": true,
   "snippets.userSnippetsDirectory": "~/.dotfiles/cocSnips",
   "snippets.ultisnips.enable": true,
-  "snippets.ultisnips.directories": ["~/.dotfiles/UltiSnips"],
-  "snippets.ultisnips.usePythonx": false,
+  "snippets.ultisnips.directories": [
+    "~/.dotfiles/UltiSnips"
+  ],
+  "typescript.format.enabled": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
