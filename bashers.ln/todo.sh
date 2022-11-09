@@ -14,11 +14,23 @@ function todo() {
       sed -i -e "1s;^;$new_item\n;" "$TODO_PATH"
       ;;
 
+    ls | list)
+      if [ -z $2 ]; then;
+        sed -ne '/^\* \[ \] /p' "$TODO_PATH" | mdown
+      else
+        ag --no-numbers --literal "$2" "$TODO_PATH" | __parse_list
+      fi
+      ;;
+
     all)
       mdown "$TODO_PATH"
       ;;
 
     *)
-      sed -ne '/^\* \[ \] /p' "$TODO_PATH" | mdown
+      __parse_list < "$TODO_PATH"
   esac
+}
+
+function __parse_list() {
+  sed -ne '/^\* \[ \] /p' | mdown
 }
