@@ -185,3 +185,6 @@ export AWS_PROFILE=niko
 
 # set JAVA_HOME
 [[ -z $JAVA_HOME ]] && [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+
+# brew linux
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
