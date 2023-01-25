@@ -134,7 +134,7 @@
 
     review = "!git dt -d \"origin/master...$1\"  #"
 
-    find-base = "!f(){ git rev-list --all --children | awk 'NF>2 {print $1}' >\"$TMPDIR/bases\"; git rev-list ${1-HEAD} | grep -m1 -Ff \"$TMPDIR/bases\"; };f"
+    find-base = "!f(){ local tmp_f=$(mktemp); git rev-list --all --children | awk 'NF>2 {print $1}' >\"$tmp_f\"; git rev-list ${1-HEAD} | grep -m1 -Ff \"$tmp_f\"; };f"
 
     find-base-branch = "!git branch --contains `git find-base` | grep -v ^* | xargs"
 
