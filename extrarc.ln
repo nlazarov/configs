@@ -151,12 +151,14 @@ fi
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:$HOME/tools/dasht/bin"
 export PATH="$PATH:/snap/bin"
-export PATH="$PATH:$HOME/.bashers"
+export CUSTOM="$HOME/.custom"
+export PATH="$PATH:$CUSTOM/bashers"
 
-source $HOME/.bashers/todo.sh
+source $CUSTOM/bashers/todo.sh
 
 # python executables
 export PIP_PACK_DIR=`python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'`
+export POWERLINE_ROOT=$(pip show powerline-status | ag Location | cut -d' ' -f2)
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 export MANPATH="$HOME/tools/dasht/man:$MANPATH"

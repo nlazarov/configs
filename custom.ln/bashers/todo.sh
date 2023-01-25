@@ -18,7 +18,7 @@ function todo() {
       if [ -z $2 ]; then;
         sed -ne '/^\* \[ \] /p' "$TODO_PATH" | mdown
       else
-        ag --no-numbers --literal "$2" "$TODO_PATH" | __parse_list
+        ag --no-numbers --literal "$2" "$TODO_PATH" | __pending_list
       fi
       ;;
 
@@ -27,10 +27,10 @@ function todo() {
       ;;
 
     *)
-      __parse_list < "$TODO_PATH"
+      __pending_list < "$TODO_PATH"
   esac
 }
 
-function __parse_list() {
+function __pending_list() {
   sed -ne '/^\* \[ \] /p' | mdown
 }
