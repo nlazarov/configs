@@ -1,18 +1,14 @@
 {
+  "suggest.noselect": true,
   "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact"
-  ],
+  "[javascript][javascript.jsx][typescript][typescriptreact][javascriptreact]": {
+    "coc.preferences.formatOnSave": false
+  },
   "snippets.userSnippetsDirectory": "~/.dotfiles/cocSnips",
   "snippets.ultisnips.enable": true,
   "snippets.ultisnips.directories": [
     "~/.dotfiles/UltiSnips"
   ],
-  "typescript.format.enabled": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
