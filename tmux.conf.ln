@@ -5,7 +5,7 @@ set-option -g prefix C-a
 set-option -sg escape-time 10
 
 run-shell "powerline-daemon -q"
-source "$PIP_PACK_DIR/powerline/bindings/tmux/powerline.conf"
+source "$POWERLINE_ROOT/powerline/bindings/tmux/powerline.conf"
 
 # 0 is too far from ` ;)
 set -g base-index 1
@@ -15,6 +15,8 @@ bind-key C-a last-window
 
 bind-key -r < swap-window -t -
 bind-key -r > swap-window -t +
+
+set-option -g focus-events on
 
 setw -g mode-keys vi
 

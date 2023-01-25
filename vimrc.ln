@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+
 if has('nvim')
     call plug#begin(stdpath('data').'/plugged')
 else
@@ -344,6 +345,8 @@ set wildignore+=**/node_modules/**
 set wildignore+=**/bower_components/**
 set wildignore+=**/site-packages/**
 
+let g:python3_host_prog='/home/niko/.pyenv/versions/3.7.9/bin/python3.7'
+
 " ctrlp settings
 let g:ctrlp_extensions = ['tag']
 let g:ctrlp_max_files = 0
@@ -515,7 +518,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-command! -nargs=0 LF :!$(npm bin)/eslint --fix %
+command! -nargs=0 FL :ALEFix eslint
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -572,3 +575,5 @@ let g:csv_delim_test = ',;| '
 
 " coc hijacks <c-i> for other than forward jump; hence reset
 " silent! unmap <c-i>
+
+
