@@ -141,7 +141,7 @@ function mdown () { pandoc $1 | w3m -T text/html }
 
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
-if [ -n $(command -v pyenv) ]; then
+if [[ -n $(command -v pyenv) ]]; then
     export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
@@ -154,7 +154,7 @@ export PATH="$PATH:/snap/bin"
 export CUSTOM="$HOME/.custom"
 export PATH="$PATH:$CUSTOM/bashers"
 
-source $CUSTOM/bashers/todo.sh
+[[ -f "$CUSTOM/bashers/todo.sh" ]] && source $CUSTOM/bashers/todo.sh
 
 # python executables
 export PIP_PACK_DIR=`python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'`
@@ -187,4 +187,4 @@ export AWS_PROFILE=niko
 [[ -z $JAVA_HOME ]] && [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 
 # brew linux
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[[ -d /home/linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
