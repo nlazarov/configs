@@ -158,7 +158,7 @@ export PATH="$PATH:$CUSTOM/bashers"
 
 # python executables
 export PIP_PACK_DIR=`python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'`
-export POWERLINE_ROOT=$(pip show powerline-status | ag Location | cut -d' ' -f2)
+export POWERLINE_ROOT=$(pip show powerline-status 2>/dev/null | ag Location | cut -d' ' -f2)
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 export MANPATH="$HOME/tools/dasht/man:$MANPATH"
