@@ -203,6 +203,7 @@ nmap <leader>} ysiw}
 nmap <leader>{ ysiw{
 nmap <leader>' ysiw'
 nmap <leader>" ysiw"
+nmap <leader>` ysiw`
 nmap <leader>> ysiw>
 
 " diff merging
@@ -290,7 +291,7 @@ if executable('ag')
   let g:far#source=has('nvim') ?  'agnvim' : 'ag'
 endif
 
-let g:far#file_mask_favorites = ['**/*.*', '**/*.tsx', '**/*.js', '**/*.css', '**/*.scss', '**/*.py']
+let g:far#file_mask_favorites = ['*.tsx', '*.js', '*.css', '*.scss', '*.py']
 let g:far#ignore_files = [system('git rev-parse --show-toplevel | tr -d "\\n"').'/.vim/farignore']
 
 let NERDTreeWinSize = 40

@@ -15,6 +15,7 @@
     pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
 
 [pager]
+    branch = false
     difftool = true
 
 [diff]

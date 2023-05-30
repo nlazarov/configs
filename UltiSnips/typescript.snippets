@@ -16,6 +16,12 @@ it('$1', () => {
 });
 endsnippet
 
+snippet ita "jest test" b
+it('$1', async () => {
+	$0
+});
+endsnippet
+
 snippet ite "jest test each" b
 it.each([$1])('$2', (${3:expected}) => {
 	$0

@@ -23,8 +23,9 @@ source $ZPLUG_HOME/init.zsh
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 export NVM_COMPLETION=true
-export NVM_LAZY_LOAD=true
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
+export NVM_AUTOLOAD=true
+export NVM_LAZY=true
+export NVM_LAZY_CMD=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
 zplug "lukechilds/zsh-nvm"
 zplug "lukechilds/zsh-better-npm-completion", defer:2
 
@@ -125,6 +126,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+eval "$(direnv hook zsh)"
+
 set -o vi
 bindkey -v
 bindkey '^R' history-incremental-search-backward
@@ -132,6 +135,7 @@ bindkey -M vicmd e edit-command-line
 setopt extendedglob
 
 fpath+="$HOME/tools/dasht/etc/zsh/completions"
-
 [ -f ~/.extrarc ] && source ~/.extrarc
-[ -x "$(command -v gh)" ] && eval "$(gh completion --shell zsh)"
+fpath+="$CUSTOM/completion/git-completion.zsh"
+
+[[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"

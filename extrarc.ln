@@ -133,6 +133,15 @@ function hs_db_restore() {
     psql --single-transaction form < $dump_name
 }
 
+function grelease() {
+  [[ $(git root) != */hs/forms ]] && echo 'not in forms repo' >&2 && exit 1
+  git checkout $1
+  direnv reload
+  nvm use "$(jq -r .engines.node package.json)"
+  local prefix=$(hsenv prefix)
+  $HOME/hs/utils/release.sh --npm $([[ -z $prefix ]] && echo 'master' || echo ${prefix//_/})
+}
+
 function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
 
@@ -161,6 +170,7 @@ export PATH="$PATH:$CUSTOM/bashers"
 [[ -f "$CUSTOM/bashers/todo.sh" ]] && source $CUSTOM/bashers/todo.sh
 
 # python executables
+export PIP_REQUIRE_VIRTUALENV=true
 export PIP_PACK_DIR=`python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'`
 export POWERLINE_ROOT=$(pip show powerline-status 2>/dev/null | ag Location | cut -d' ' -f2)
 export POWERLINE_CONFIG_COMMAND=powerline-config
