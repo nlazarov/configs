@@ -346,8 +346,6 @@ set wildignore+=**/node_modules/**
 set wildignore+=**/bower_components/**
 set wildignore+=**/site-packages/**
 
-let g:python3_host_prog='/home/niko/.pyenv/versions/3.7.9/bin/python3.7'
-
 " ctrlp settings
 let g:ctrlp_extensions = ['tag']
 let g:ctrlp_max_files = 0
