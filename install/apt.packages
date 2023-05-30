@@ -1,5 +1,6 @@
 cmake
 chromium-browser
+direnv
 gawk
 gnome-tweaks
 keepassxc

@@ -52,8 +52,8 @@ sudo apt install postgresql php-pgsql
 
 sudo systemctl start postgresql.service
 
-sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' $(pg_conftool show hba_file --short)
-sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB;"
+sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' "$(pg_conftool show hba_file --short)"
+sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB; CREATE DATABASE nextcloud OWNER $USER;"
 createdb nextcloud
 
 pushd "$NC_ROOT" || exit
@@ -105,20 +105,23 @@ APACHE_CONFIG_DIR=$(php -i | ag 'php.ini' | awk -F' => ' '{print $2}' | head -n 
 
 # Configure nextcloud in apache2
 sudo cp ./root_redir_htaccess $APACHE_ROOT/.htaccess
-sudo cp ./php_apache2_conf-00-nc.ini $APACHE_CONFIG_DIR/conf.d/00-nc.ini
+sudo cp ./php_apache2_conf-00-nc.ini "$APACHE_CONFIG_DIR/conf.d/00-nc.ini"
 sudo cp ./apache2_sites_available_nextcloud.conf /etc/apache2/sites-available/nextcloud.conf
 sudo a2ensite nextcloud.conf
 sudo systemctl reload apache2
 
 function php_ini_update() {
-  sudo sed -i "/^$1/c\\
+  sudo sed -i "/^;\?$1/c\\
     $1 = $2
-    " $APACHE_CONFIG_DIR/php.ini
+    " "$APACHE_CONFIG_DIR/php.ini"
 }
 
 php_ini_update 'post_max_size' '1024M'
 php_ini_update 'upload_max_filesize' '1024M'
 php_ini_update 'memory_limit' '3072M'
+php_ini_update 'opcache.enable' '1'
+php_ini_update 'opcache.memory_consumption' '128'
+php_ini_update 'opcache.interned_strings_buffer' '32'
 
 sudo systemctl reload apache2
 
