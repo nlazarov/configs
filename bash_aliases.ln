@@ -3,8 +3,7 @@ alias live-home='live-server --port=4033 --host=0.0.0.0 --no-browser'
 alias x=exit
 alias back='cd "$OLDPWD"'
 alias dm='diffuse -m'
-alias vo='vim -O'
-alias n='nvim -O'
+alias n='vim -O'
 alias xclip='xclip -sel clip'
 alias start-ctrl-esc='sudo systemctl enable udevmon.service; sudo systemctl start udevmon.service'
 alias stop-ctrl-esc='sudo systemctl stop udevmon.service; sudo systemctl  disable udevmon.service'
@@ -27,7 +26,7 @@ alias screen=gnome-screenshot
 alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
-alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|`git current`" | xargs git branch -D'
+alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|`git current`" | xargs -I {} bash -c "[[ -z $(git branch --remote --list origin/{}) ]] && git branch -D {}"'
 alias vgit='vim.gtk3 +Gitv'
 
 #npm
@@ -46,3 +45,6 @@ alias today="date +%Y-%m-%d"
 # fix
 alias fixwifi='sudo systemctl restart NetworkManager'
 alias fix_pg_lock="sudo rm /usr/local/var/postgresql@10/postmaster.pid"
+
+# flatpak
+alias chromium='flatpak run org.chromium.Chromium'
