@@ -1,0 +1,8 @@
+[Unit]
+Description=Backup nextcloud data using restic
+
+[Service]
+User=niko
+ExecStart=restic -r /mnt/restic-backup -p /home/niko/.restic-passwd backup /mnt/speed/nextcloud/data
+[Unit]
+Description=Run nexcloud backup daily

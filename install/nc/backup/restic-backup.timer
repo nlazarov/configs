@@ -1,0 +1,7 @@
+[Timer]
+OnCalendar=daily
+AccuracySec=5h
+Unit=restic-backup.service
+
+[Install]
+WantedBy=timers.target
