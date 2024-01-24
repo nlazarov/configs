@@ -12,6 +12,8 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
+  "diagnostic.displayByAle": true,
   "tsserver.log": "verbose",
-  "tsserver.trace.server": "verbose"
+  "tsserver.trace.server": "verbose",
+  "snippets.ultisnips.pythonPrompt": false
 }
