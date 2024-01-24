@@ -303,6 +303,7 @@ let NERDTreeWinSize = 40
 " runners
 noremap <buffer> <leader>r :w<cr> :!"%:p"<cr>
 autocmd FileType rust noremap <buffer> <leader>r :RustRun<cr>
+autocmd FileType python noremap <buffer> <leader>r :!python "%:p"<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
 nnoremap <leader>f :NERDTreeFind<cr><C-w>=
@@ -388,6 +389,9 @@ endif
 
 highlight diffAdded guifg=#00bf00
 highlight diffRemoved guifg=#bf0000
+
+let g:loaded_ruby_provider = 0
+let g:loaded_perl_provider = 0
 
 " reactjs
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
@@ -575,7 +579,7 @@ let g:airline_section_warning = '%{airline#util#wrap(LintWarnings(),0)}'
 let g:vimspector_enable_mappings = 'HUMAN'
 
 " csv support
-let g:csv_delim_test = ',;| '
+let g:csv_default_delim = ','
 
 " coc hijacks <c-i> for other than forward jump; hence reset
 " silent! unmap <c-i>
