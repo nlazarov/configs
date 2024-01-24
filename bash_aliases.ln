@@ -17,17 +17,14 @@ alias dr='docker restart'
 alias drm='docker rm'
 alias drma='dps -aq | xargs docker rm'
 
-alias dyarn-modules='yarn install --modules-folder ../../node_modules'
 alias dtest='ddjango pytest --nomigrations'
-
-alias screen=gnome-screenshot
 
 #git
 alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
-alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|`git current`" | xargs -I {} bash -c "[[ -z $(git branch --remote --list origin/{}) ]] && git branch -D {}"'
-alias vgit='vim.gtk3 +Gitv'
+alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|`git current`" | xargs -I {} bash -c "[[ -z \$(git branch --remote --list origin/{}) ]] && git branch -D {}"'
+alias vgit='vim +Flog'
 
 #npm
 #run this when npm fails for no apparent reason
