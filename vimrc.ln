@@ -78,6 +78,9 @@ Plug 'alfredodeza/pytest.vim'
 " Ruby
 Plug 'vim-ruby/vim-ruby'
 
+" yaml
+Plug 'pedrohdz/vim-yaml-folds'
+
 " diff
 Plug 'lambdalisue/vim-unified-diff'
 " Plug 'lambdalisue/vim-improve-diff'
@@ -533,6 +536,7 @@ let g:ale_linters = {
 \ 'javascript': ['eslint', 'prettier'],
 \ 'javascript.jsx': ['eslint', 'prettier'],
 \ 'typescript': ['eslint', 'prettier'],
+\ 'yaml': ['yamllint'],
 \}
 
 let g:ale_fixers = {
@@ -543,6 +547,7 @@ let g:ale_fixers = {
 \ 'javascript.jsx': ['prettier'],
 \ 'typescript': ['prettier'],
 \ 'rust': ['rustfmt'],
+\ 'yaml': ['yamlfix'],
 \}
 let g:ale_fix_on_save = 1
 
