@@ -14,12 +14,24 @@ function todo() {
       sed -i -e "1s;^;$new_item\n;" "$TODO_PATH"
       ;;
 
-    ls | list)
+    ls-raw | list-raw)
       if [ -z "$2" ]; then
         __pending_list < "$TODO_PATH"
       else
         ag --no-numbers --no-color --literal "$2" "$TODO_PATH" | __pending_list
       fi
+      ;;
+
+    ls | list)
+      todo ls-raw "${@:2}" | mdown
+      ;;
+
+    today | now)
+      todo ls \#today
+      ;;
+
+    count)
+      todo ls-raw "${@:2}" | wc -l
       ;;
 
     done)
@@ -42,10 +54,14 @@ _done
       ;;
 
     *)
-      __pending_list < "$TODO_PATH"
+      __pending_list_md < "$TODO_PATH"
   esac
 }
 
 function __pending_list() {
-  sed -ne '/^1\. \[ \] /p' | mdown
+  sed -ne '/^1\. \[ \] /p'
+}
+
+function __pending_list_md() {
+  __pending_list | mdown
 }
