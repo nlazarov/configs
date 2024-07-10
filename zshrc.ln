@@ -136,7 +136,7 @@ bindkey -M vicmd e edit-command-line
 setopt extendedglob
 
 fpath+="$HOME/tools/dasht/etc/zsh/completions"
-[ -f ~/.extrarc ] && source ~/.extrarc
+[ -f $HOME/.extrarc ] && source $HOME/.extrarc
 fpath+="$CUSTOM/completion/git-completion.zsh"
 
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"

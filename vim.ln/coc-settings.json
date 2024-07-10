@@ -30,5 +30,6 @@
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "tsserver.log": "verbose",
-  "tsserver.trace.server": "verbose"
+  "tsserver.trace.server": "verbose",
+  "snippets.ultisnips.pythonPrompt": false
 }
