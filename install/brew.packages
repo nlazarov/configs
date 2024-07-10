@@ -1,15 +1,25 @@
 dasht
+difftastic
+direnv
 gh
 git
 htop
+karabiner-elements
 keepassxc
 meld
+most
 neovim
+nextcloud
 nvm
+pandoc
+pyenv
+pyenv-virtualenv
+pygments
 reattach-to-user-namespace
+rectangle
 rustup-init
+scroll-reverser
 shellcheck
 tmux
 the_silver_searcher
 unum
-vim --with-python3
