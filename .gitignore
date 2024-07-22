@@ -1,4 +1,6 @@
 bundle/
+config.home/gh/hosts.yml
+config.home/karabiner/automatic_backups/
 plugged/
 vim.ln/spell/
 vim.ln/backup/
