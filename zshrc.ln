@@ -140,3 +140,4 @@ fpath+="$HOME/tools/dasht/etc/zsh/completions"
 fpath+="$CUSTOM/completion/git-completion.zsh"
 
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
+[[ -f "$HOME/.hsrc" ]] && source '$HOME/.hsrc'

@@ -60,7 +60,7 @@ function dmigrate() {
 }
 
 function venv() {
-    source activate $1
+    pyenv activate $1
 }
 
 alias de_venv="source deactivate"
@@ -183,7 +183,7 @@ export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
 
 [[ -e $(which gh) ]] && eval "$(gh completion --shell ${SHELL##*/})"
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export BROWSER=vivaldi
 [ $(uname) = "Darwin" ] && export BROWSER=/Applications/Vivaldi.app/Contents/MacOS/Vivaldi
 
