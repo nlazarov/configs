@@ -71,3 +71,11 @@ snippet jsdoc
  * $0
  */
 endsnippet
+
+snippet expectaxe
+expect(await axe(${1:container})).toHaveNoViolations();
+endsnippet
+
+snippet expectsnap
+expect(${1:container}).toMatchSnapshot();
+endsnippet
