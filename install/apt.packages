@@ -10,6 +10,7 @@ network-manager-openvpn
 network-manager-openvpn-gnome
 openvpn
 pandoc
+python3-pygments
 silversearcher-ag
 tlp
 tlp-rdw
