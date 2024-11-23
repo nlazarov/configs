@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [ $1 == '--help' ]; then
+  echo 'split pdf tickets into groups'
+  echo 'example:'
+  echo 'tickets <tickets.pdf> [person1-person2] [person3] [person4-person5]'
+  echo 'will produce 3 groups with 2 tickets, 1 ticket and 2 tickets'
+  exit
+fi
+
+all=${1?'Please, provide tickets pdf'}
+shift
+tickets=${*}
+ticketn=1
+for ticket in $*; do
+  people=($(echo $ticket | sed 's/-/ /g'))
+  last=$(($ticketn+${#people[@]}-1))
+  pdfseparate -f $ticketn -l $last $all "$ticket-%d.pdf"
+  pdfunite $(ls $ticket-*.pdf) "$ticket.pdf"
+  rm -f $ticket-*.pdf
+  ticketn=$((last+1))
+done
