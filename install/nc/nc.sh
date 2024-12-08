@@ -46,7 +46,7 @@ sudo apt install apache2
 
 sudo a2enmod headers
 
-sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-smbclient php-imap php-gmp php-bcmath php-imagick php-apcu libmagickcore-6.q16-6-extra
+sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-smbclient php-imap php-gmp php-bcmath php-imagick php-apcu libmagickcore-6.q16-6-extra redis-server php-redis
 
 sudo apt install postgresql php-pgsql
 
@@ -85,6 +85,12 @@ nc_conf 'trusted_domains' "$NC_DOMAIN" 3
 nc_conf 'overwrite.cli.url' "https://$NC_DOMAIN/nextcloud"
 
 nc_conf 'memcache.local' '\OC\Memcache\APCu'
+
+nc_conf 'memcache.locking' '\OC\Memcache\Redis'
+nc_conf 'redis' 'host' '/var/run/redis/redis.sock'
+nc_conf 'redis' 'port' 0
+nc_conf 'redis' 'timeout' 0.0
+
 nc_conf 'enable_previews' 'true'
 
 nc_conf 'enabledPreviewProviders' 'OC\Preview\TXT' 0
@@ -98,6 +104,8 @@ nc_conf 'enabledPreviewProviders' 'OC\Preview\Movie' 7
 nc_conf 'enabledPreviewProviders' 'OC\Preview\MKV' 8
 nc_conf 'enabledPreviewProviders' 'OC\Preview\MP4' 9
 nc_conf 'enabledPreviewProviders' 'OC\Preview\AVI' 10
+
+nc_conf 'maintenance_window_start' 1
 
 popd || exit
 
