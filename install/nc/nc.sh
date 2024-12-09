@@ -65,6 +65,7 @@ sudo chown -R www-data:www-data "$NC_HOME"
 # sudo chmod 750 "$NC_HOME"/data
 
 sudo -u www-data mkdir -p "$NC_DATA"
+sudo usermod -aG redis www-data
 
 pushd "$NC_HOME" || exit
 sudo -u www-data php occ maintenance:install --database=pgsql --database-name="nextcloud" --database-port='' --database-user="$USER" --database-pass='' --database-host="/var/run/postgresql" --data-dir="$NC_DATA"
@@ -87,7 +88,7 @@ nc_conf 'overwrite.cli.url' "https://$NC_DOMAIN/nextcloud"
 nc_conf 'memcache.local' '\OC\Memcache\APCu'
 
 nc_conf 'memcache.locking' '\OC\Memcache\Redis'
-nc_conf 'redis' 'host' '/var/run/redis/redis.sock'
+nc_conf 'redis' 'host' '/run/redis/redis-server.sock'
 nc_conf 'redis' 'port' 0
 nc_conf 'redis' 'timeout' 0.0
 

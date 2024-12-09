@@ -25,3 +25,13 @@ Useful when migrating an existing instance
 ### --secret
 
 Useful when migrating an existing instance
+
+## Some follow-up setup
+
+### Redis
+Set redis to connect through the file socket
+
+Update the /etc/redis/redis.conf to
+* set `port 0`, to disable TCP connections
+* uncomment `unixsocket` and set to `/run/redis/redis-server.sock`
+* uncomment `unixsocketperm` and set to `770`
