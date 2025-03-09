@@ -127,7 +127,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-eval "$(direnv hook zsh)"
+[[ -x "$(command -v direnv)" ]] && eval "$(direnv hook zsh)"
 
 set -o vi
 bindkey -v
