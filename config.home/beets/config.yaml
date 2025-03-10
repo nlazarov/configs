@@ -5,3 +5,6 @@ statefile: ~/Music/.beets/state.pickle
 plugins: lyrics
 import:
   copy: no
+lyrics:
+  sources: lrclib genius tekstowo
+  synced: yes

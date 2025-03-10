@@ -5,3 +5,4 @@ plugged/
 vim.ln/spell/
 vim.ln/backup/
 vim.ln/autoload/plug.vim*
+gnupg.ln/sshcontrol

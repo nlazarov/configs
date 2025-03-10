@@ -44,6 +44,8 @@ Plug 'vim-scripts/wombat256.vim'
 Plug 'dikiaap/minimalist'
 Plug 'w0ng/vim-hybrid'
 Plug 'morhetz/gruvbox'
+Plug 'sainnhe/everforest'
+Plug 'Skullamortis/forest.nvim'
 
 Plug 'chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
@@ -55,7 +57,7 @@ Plug 'chrisbra/csv.vim'
 
 Plug 'vim-test/vim-test'
 
-" TypeScirpt "
+" TypeScript "
 Plug 'herringtondarkholme/yats.vim'
 
 Plug 'ntpeters/vim-better-whitespace'
@@ -301,6 +303,7 @@ let NERDTreeWinSize = 40
 
 " runners
 noremap <buffer> <leader>r :w<cr> :!"%:p"<cr>
+autocmd FileType lua noremap <buffer> <leader>r :!lua "%:p"<cr>
 autocmd FileType rust noremap <buffer> <leader>r :RustRun<cr>
 autocmd FileType python noremap <buffer> <leader>r :!python "%:p"<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
@@ -424,8 +427,10 @@ let g:dasht_filetype_docsets['javascript'] = ['js', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['typescript'] = ['TypeScript', 'JavaScript', 'React', 'chai', 'sinon']
 let g:dasht_filetype_docsets['python'] = ['python', 'django']
 
-colorscheme gruvbox
-let g:gruvbox_hls_cursor='green'
+" let g:gruvbox_hls_cursor='green'
+" colorscheme gruvbox
+let g:everforest_background = 'hard'
+colorscheme everforest
 
 "fugitive
 autocmd User fugitive

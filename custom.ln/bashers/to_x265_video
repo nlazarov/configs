@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+input=$1
+output="${1%.*}.mp4"
+if [[ $input = $output ]]; then;
+  output="${1%.*}-new.mp4"
+fi
+ffmpeg -y -vsync 0 -hwaccel cuda -hwaccel_output_format cuda -i "$input" -c:a copy -c:v hevc_nvenc -b:v 4M "$output"
