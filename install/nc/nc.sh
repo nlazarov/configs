@@ -4,6 +4,7 @@ NC_DOMAIN='lazarov.cloud'
 NC_ROOT=/var/www
 APACHE_ROOT="$NC_ROOT"/html
 NC_HOME="$NC_ROOT"/nextcloud
+NC_FILE='latest.tar.bz2'
 
 while [ $# -gt 0 ]; do
   case $1 in
@@ -34,6 +35,9 @@ while [ $# -gt 0 ]; do
       shift 2
       ;;
 
+    --nc-version)
+      NC_FILE="nextcloud-$2.tar.bz2"
+
     *)
       echo 'Initializing nextcloud instance'
   esac
@@ -46,18 +50,22 @@ sudo apt install apache2
 
 sudo a2enmod headers
 
-sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-smbclient php-imap php-gmp php-bcmath php-imagick php-apcu libmagickcore-6.q16-6-extra redis-server php-redis
+sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-imap php-gmp php-bcmath php-imagick php-apcu libmagickcore-6.q16-6-extra redis-server php-redis
 
 sudo apt install postgresql php-pgsql
 
 sudo systemctl start postgresql.service
 
 sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' "$(pg_conftool show hba_file --short)"
-sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB; CREATE DATABASE nextcloud OWNER $USER;"
+sudo systemctl reload postgresql.service
+sudo -u postgres psql -d template1 -c "CREATE USER $USER CREATEDB;"
+sudo -u postgres psql -d template1 -c "CREATE DATABASE nextcloud OWNER $USER;"
 createdb nextcloud
 
 pushd "$NC_ROOT" || exit
-sudo wget https://download.nextcloud.com/server/releases/latest.tar.bz2
+sudo wget "https://download.nextcloud.com/server/releases/$NC_FILE"
+sudo wget "https://download.nextcloud.com/server/releases/$NC_FILE.sha512"
+sha512sum $NC_FILE | sha512sum --status -c "$NC_FILE.sha512"
 sudo tar -xvf latest.tar.bz2
 popd || exit
 

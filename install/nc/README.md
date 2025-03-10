@@ -26,6 +26,11 @@ Useful when migrating an existing instance
 
 Useful when migrating an existing instance
 
+### --nc-version
+
+Define the version of nextcloud to install. Useful when restoring to a specific version.
+Format is XX.X.XX
+
 ## Some follow-up setup
 
 ### Redis
