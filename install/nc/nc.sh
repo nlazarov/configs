@@ -68,7 +68,7 @@ pushd "$NC_ROOT" || exit
 sudo wget "https://download.nextcloud.com/server/releases/$NC_FILE"
 sudo wget "https://download.nextcloud.com/server/releases/$NC_FILE.sha512"
 sha512sum $NC_FILE | sha512sum --status -c "$NC_FILE.sha512"
-sudo tar -xvf latest.tar.bz2
+sudo tar -xvf $NC_FILE
 popd || exit
 
 sudo chown -R www-data:www-data "$NC_HOME"
