@@ -37,6 +37,8 @@ while [ $# -gt 0 ]; do
 
     --nc-version)
       NC_FILE="nextcloud-$2.tar.bz2"
+      shift 2
+      ;;
 
     *)
       echo 'Initializing nextcloud instance'
