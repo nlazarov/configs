@@ -163,6 +163,7 @@ export PATH="$PATH:$HOME/tools/dasht/bin"
 export PATH="$PATH:/snap/bin"
 export CUSTOM="$HOME/.custom"
 export PATH="$PATH:$CUSTOM/bashers"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 
 # hsenv setup
 [[ -d '$HOME/.hsenv' ]] && export PATH="$HOME/.hsenv:$PATH"
@@ -198,7 +199,11 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 export AWS_PROFILE=niko
 
 # set JAVA_HOME
-[[ -z $JAVA_HOME ]] && [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
+[[ -z $JAVA_HOME ]] && [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 
 # brew linux
 [[ -d /home/linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# brew env
+[[ -n $(command -v brew) ]] && export LDFLAGS="-L$(brew --prefix)/lib"
+[[ -n $(command -v brew) ]] && export CPPFLAGS="-I$(brew --prefix)/include"
