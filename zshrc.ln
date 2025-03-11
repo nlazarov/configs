@@ -14,6 +14,7 @@ export DEFAULT_USER=`whoami`
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/hs/utils/aliases ] && . ~/hs/utils/aliases
+[ -f ~/hs/utils/make_me_admin.sh ] && . ~/hs/utils/make_me_admin.sh
 
 # zplug
 export ZPLUG_HOME=~/.zplug
@@ -140,4 +141,4 @@ fpath+="$HOME/tools/dasht/etc/zsh/completions"
 fpath+="$CUSTOM/completion/git-completion.zsh"
 
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
-[[ -f "$HOME/.hsrc" ]] && source '$HOME/.hsrc'
+[[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
