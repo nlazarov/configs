@@ -6,7 +6,7 @@ endsnippet
 
 snippet "desc(r)?(i)?(b)?(e)?" "describe test section" br
 describe('$1', () => {
-	$0
+	${0:`!p snip.rv = snip.v.text`}
 });
 endsnippet
 
@@ -72,10 +72,23 @@ snippet jsdoc
  */
 endsnippet
 
+snippet itaxe
+it('${1:is accessible}', async () => {
+	const { container } = render(${2:<Component />});
+	expect(await axe(container)).toHaveNoViolations();
+});
+endsnippet
+
 snippet expectaxe
 expect(await axe(${1:container})).toHaveNoViolations();
 endsnippet
 
 snippet expectsnap
 expect(${1:container}).toMatchSnapshot();
+endsnippet
+
+snippet mock-width
+jest.mock('shui/utils/withDimensions', () => ({
+  useWidth: jest.fn(() => ({ width: 100 })),
+}));$0
 endsnippet
