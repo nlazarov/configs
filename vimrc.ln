@@ -16,15 +16,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'int3/vim-extradite'
-Plug 'junegunn/gv.vim'
 Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/vim-diff-enhanced'
+Plug 'fei6409/log-highlight.nvim'
+
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-eunuch'
+
 Plug 'tomtom/tcomment_vim'
 Plug 'embear/vim-localvimrc'
 Plug 'lambdalisue/suda.vim'
@@ -54,8 +56,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'chrisbra/csv.vim'
-
-Plug 'vim-test/vim-test'
+Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 
 " TypeScript "
 Plug 'herringtondarkholme/yats.vim'
@@ -89,6 +90,9 @@ Plug 'lambdalisue/vim-unified-diff'
 " code-reviews
 Plug 'AndrewRadev/diffurcate.vim'
 " Plug 'AGhost-7/critiq.vim'
+
+" AI assist
+Plug 'github/copilot.vim'
 
 " All plugin must be added in the plug scope (before next line)
 call plug#end()
@@ -582,6 +586,11 @@ let g:airline_section_warning = '%{airline#util#wrap(LintWarnings(),0)}'
 
 " vimspector / debugging
 let g:vimspector_enable_mappings = 'HUMAN'
+" for normal mode - the word under the cursor
+nmap <Leader>i <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>i <Plug>VimspectorBalloonEval
+map <S-F10> <Plug>VimspectorStepInto
 
 " csv support
 let g:csv_default_delim = ','
@@ -589,4 +598,7 @@ let g:csv_default_delim = ','
 " coc hijacks <c-i> for other than forward jump; hence reset
 " silent! unmap <c-i>
 
+" copilot
+imap <silent><script><expr> <C-M> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
