@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
 
-yt-dlp -x --audio-format mp3 --audio-quality 320K -o '%(artist)s/%(album)s/%(playlist_index)02d - %(title)s.%(ext)s' $*
+yt-dlp -x --audio-format mp3 --audio-quality 320K -o '%(artist)s/%(album)s/%(playlist_index)02d - %(title)s.%(ext)s' --embed-metadata $*
