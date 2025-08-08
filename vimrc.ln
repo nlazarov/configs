@@ -540,7 +540,7 @@ command! -nargs=0 FL :ALEFix eslint
 " ALE config
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-\ 'python': ['pycodestyle', 'pylint', 'mypy'],
+\ 'python': ['pylint', 'mypy', 'ruff'],
 \ 'scss': ['stylelint'],
 \ 'sh': ['shellcheck'],
 \ 'json': ['fixjson'],
@@ -552,7 +552,7 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\ 'python': ['isort', 'black'],
+\ 'python': ['ruff'],
 \ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
 \ 'javascript': ['prettier'],
@@ -600,5 +600,7 @@ let g:csv_default_delim = ','
 
 " copilot
 imap <silent><script><expr> <C-M> copilot#Accept("\<CR>")
+imap <C-L> <Plug>(copilot-accept-word)
+imap <C-K> <Plug>(copilot-dismiss)
 let g:copilot_no_tab_map = v:true
 
