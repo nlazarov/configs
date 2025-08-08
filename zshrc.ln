@@ -143,3 +143,4 @@ fpath+="$CUSTOM/completion/git-completion.zsh"
 
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
 [[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
+[[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
