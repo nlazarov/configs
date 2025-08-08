@@ -4,6 +4,13 @@ export const ${1:ComponentName}: React.FC<${2:Props}> = (${3:props}) => ${4:{
 }}
 endsnippet
 
+snippet newTestUtil "New test utility function" b
+export const new$1 = (extra?: Partial<${1:TestUtil}>): $1 => ({
+	$0,
+	...extra,
+});
+endsnippet
+
 snippet "desc(r)?(i)?(b)?(e)?" "describe test section" br
 describe('$1', () => {
 	${0:`!p snip.rv = snip.v.text`}
