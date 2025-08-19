@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+prompt="$1"
+curl -s -X POST https://api.lumo.proton.me/v1/generate \
+     -H "Authorization: Bearer $LUMO_API_TOKEN" \
+     -d "{\"prompt\": \"$prompt\", \"max_tokens\": 200}"
