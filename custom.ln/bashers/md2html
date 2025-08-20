@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+local in=$1
+local out="$in:r".o.md
+local html="$in:r".html
+mmdc -i "$in" -o "$out"
+pandoc "$out" > "$html"
