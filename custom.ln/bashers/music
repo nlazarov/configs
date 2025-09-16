@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+if [[ -n $(command -v jellyfin-tui) ]]; then
+  jellyfin-tui $@
+  exit
+fi
+
+if [[ -d "$HOME"/sc/jellyfin-tui  ]]; then
+  tmux has-session -t music > /dev/null 2>&1 || (
+    tmux new-session -c "$HOME"/sc/jellyfin-tui -d -s music 'target/release/jellyfin-tui'
+  )
+  tmux attach -t music
+else
+  echo "jellyfin-tui not found in $HOME/sc/jellyfin-tui"
+fi
