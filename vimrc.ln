@@ -56,7 +56,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'chrisbra/csv.vim'
-Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 
 " TypeScript "
 Plug 'herringtondarkholme/yats.vim'
