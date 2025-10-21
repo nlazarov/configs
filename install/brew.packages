@@ -17,6 +17,7 @@ pyenv-virtualenv
 pygments
 reattach-to-user-namespace
 rectangle
+ripgrep
 rustup-init
 scroll-reverser
 shellcheck

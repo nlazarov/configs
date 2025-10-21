@@ -9,4 +9,6 @@ js-beautify
 jshint
 live-server
 neovim
+tree-sitter
+tree-sitter-cli
 vimdebug
