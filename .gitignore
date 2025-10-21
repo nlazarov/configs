@@ -8,3 +8,4 @@ vim.ln/autoload/plug.vim*
 gnupg.ln/sshcontrol
 gnupg.ln/random_seed
 gnupg.ln/pubring.kbx
+gnupg.ln/trustdb.gpg
