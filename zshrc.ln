@@ -15,7 +15,6 @@ export DEFAULT_USER=`whoami`
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/hs/utils/aliases ] && . ~/hs/utils/aliases
-[ -f ~/hs/utils/make_me_admin.sh ] && . ~/hs/utils/make_me_admin.sh
 
 # zplug
 export ZPLUG_HOME=~/.zplug
@@ -137,9 +136,10 @@ bindkey '^R' history-incremental-search-backward
 bindkey -M vicmd e edit-command-line
 setopt extendedglob
 
-fpath+="$HOME/tools/dasht/etc/zsh/completions"
 [ -f $HOME/.extrarc ] && source $HOME/.extrarc
 fpath+="$CUSTOM/completion/git-completion.zsh"
+fpath+="$HOME/tools/dasht/etc/zsh/completions"
+[ -d $HOMEBREW_PREFIX ] && fpath+="$HOMEBREW_PREFIX/share/zsh/site-functions"
 
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
 [[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
