@@ -304,6 +304,9 @@ let g:far#ignore_files = [system('git rev-parse --show-toplevel | tr -d "\\n"').
 let NERDTreeWinSize = 40
 
 
+" python support
+let g:python3_host_prog = '/Users/niko/.pyenv/versions/nvim/bin/python3'
+
 " runners
 noremap <buffer> <leader>r :w<cr> :!"%:p"<cr>
 autocmd FileType lua noremap <buffer> <leader>r :!lua "%:p"<cr>
@@ -551,7 +554,6 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
-\ 'python': ['ruff'],
 \ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
 \ 'javascript': ['prettier'],
@@ -562,6 +564,10 @@ let g:ale_fixers = {
 \ 'yaml': ['yamlfix'],
 \}
 let g:ale_fix_on_save = 1
+
+" special case for ruff fixer, which does not work correctly
+" fallback to command line, should be fast enough
+autocmd BufWritePost *.py silent execute "!ruff check --fix % && ruff format %"
 
 let g:airline#extensions#ale#enabled = 1
 
