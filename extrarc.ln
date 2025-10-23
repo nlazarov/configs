@@ -157,6 +157,11 @@ function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${
 function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
+# postgres
+export PGDIR=$(psql -qtAX -c 'show data_directory')
+export PATH="$PGDIR/bin:$PATH"
+alias fix_pg_lock='sudo rm $PGDIR/postmaster.pid'
+
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYENV_ROOT="$HOME/.pyenv"
 
@@ -186,8 +191,6 @@ export POWERLINE_ROOT=$(pip show powerline-status 2>/dev/null | ag Location | cu
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
 export MANPATH="$HOME/tools/dasht/man:$MANPATH"
-
-export PATH="/usr/local/opt/postgresql@10/bin:$PATH"
 
 [[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
 

@@ -1,4 +1,3 @@
-alias live-kendo='live-server --port=25546 --host=0.0.0.0 --no-browser --watch="src/,dist/,playground/local/"'
 alias live-home='live-server --port=4033 --host=0.0.0.0 --no-browser'
 alias x=exit
 alias back='cd "$OLDPWD"'
@@ -41,7 +40,6 @@ alias today="date +%Y-%m-%d"
 
 # fix
 alias fixwifi='sudo systemctl restart NetworkManager'
-alias fix_pg_lock="sudo rm /usr/local/var/postgresql@10/postmaster.pid"
 
 # flatpak
 alias chromium='flatpak run org.chromium.Chromium'
