@@ -56,6 +56,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'mileszs/ack.vim'
 Plug 'brooth/far.vim'
 Plug 'chrisbra/csv.vim'
+Plug 'vim-test/vim-test'
 
 " TypeScript "
 Plug 'herringtondarkholme/yats.vim'
@@ -322,11 +323,6 @@ nnoremap <leader>b :Git blame<cr>
 nnoremap <leader>o :only<cr>
 
 nnoremap <leader>u :GitGutterUndoHunk<CR>
-
-nmap <leader>gv :Gitv --all<cr>
-nmap <leader>gV :Gitv! --all<cr>
-vmap <leader>gV :Gitv! --all<cr>
-
 
 
 command! Vimrc :tabe ~/.vimrc
