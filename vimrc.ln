@@ -360,7 +360,7 @@ let g:ctrlp_max_files = 0
 let g:ctrlp_working_path_mode = 'a'
 nnoremap <F4> :CtrlPTag<cr>
 
-set tags^=../.git/tags
+set tags^=./.git/tags;
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
