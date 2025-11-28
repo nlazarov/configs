@@ -227,7 +227,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
-autocmd BufWritePost * silent execute "! [[ -e ".gitroot."/.git/hooks/ctags ]] && ".gitroot."/.git/hooks/ctags 2>/dev/null &"
+autocmd BufWritePost * silent execute "! [[ -f ".gitroot."/.git/hooks/ctags ]] && ".gitroot."/.git/hooks/ctags 2>/dev/null &"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
@@ -468,9 +468,3 @@ let g:csv_default_delim = ','
 
 " coc hijacks <c-i> for other than forward jump; hence reset
 " silent! unmap <c-i>
-
-" copilot
-" imap <c-b> copilot#Accept("\<CR>")
-" imap <C-L> <Plug>(copilot-accept-word)
-" imap <C-Q> <Plug>(copilot-dismiss)
-" let g:copilot_no_tab_map = v:true

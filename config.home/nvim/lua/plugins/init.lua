@@ -82,6 +82,7 @@ return {
     }
 end
 },
+'christoomey/vim-tmux-navigator',
 'mileszs/ack.vim',
 'brooth/far.vim',
 'chrisbra/csv.vim',
