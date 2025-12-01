@@ -20,6 +20,7 @@ Plug 'rbong/vim-flog'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'fei6409/log-highlight.nvim'
+Plug 'comatory/gh-co.nvim'
 
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-repeat'
@@ -93,6 +94,8 @@ Plug 'AndrewRadev/diffurcate.vim'
 
 " AI assist
 Plug 'github/copilot.vim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim'
 
 " All plugin must be added in the plug scope (before next line)
 call plug#end()
@@ -175,6 +178,10 @@ let g:mapleader = " "
 
 let maplocalleader = "\\"
 let g:maplocalleader = "\\"
+
+lua << EOF
+require("CopilotChat").setup()
+EOF
 
 " easier write
 nmap <leader>w :w!<cr>
