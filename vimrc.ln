@@ -284,7 +284,7 @@ if executable('ag')
   let g:far#source=has('nvim') ?  'agnvim' : 'ag'
 endif
 
-let gitroot = system('git rev-parse --show-toplevel | tr -d "\\n"')
+let gitroot = system('git rev-parse --show-toplevel 2>/dev/null | tr -d "\\n"')
 
 let g:far#file_mask_favorites = ['*.tsx', '*.js', '*.css', '*.scss', '*.py']
 let g:far#ignore_files = [gitroot.'/.vim/farignore']
