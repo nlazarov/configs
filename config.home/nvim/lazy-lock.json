@@ -52,7 +52,7 @@
   "vim-sass-lint": { "branch": "master", "commit": "b9ff33141294c7af143f12687e9b1cf9a3a54e0f" },
   "vim-startify": { "branch": "master", "commit": "4e089dffdad46f3f5593f34362d530e8fe823dcf" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
-  "vim-test": { "branch": "master", "commit": "bbdc7f5d6280a047c3b1a951614454555a566356" },
+  "vim-test": { "branch": "master", "commit": "1eeb12774a0f251571700ccf68da27789b2f0852" },
   "vim-unified-diff": { "branch": "master", "commit": "bc463025b8c4f504539a0956fdebabc3b43448e4" },
   "vim-unimpaired": { "branch": "master", "commit": "db65482581a28e4ccf355be297f1864a4e66985c" },
   "vim-yaml-folds": { "branch": "master", "commit": "890ccd8e5370808d569e96dbb06cbeca2cf5993a" },
