@@ -44,7 +44,18 @@ return {
 'chiel92/vim-autoformat',
 'terryma/vim-multiple-cursors',
 
-'christoomey/vim-tmux-navigator',
+{ 'alexghergh/nvim-tmux-navigation', config = function()
+    require'nvim-tmux-navigation'.setup {
+        disable_when_zoomed = true, -- defaults to false
+        keybindings = {
+            left = "<C-h>",
+            down = "<C-j>",
+            up = "<C-k>",
+            right = "<C-l>",
+        }
+    }
+end
+},
 'mileszs/ack.vim',
 'brooth/far.vim',
 'chrisbra/csv.vim',
