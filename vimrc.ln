@@ -1,114 +1,7 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
-" if has('nvim')
-"     call plug#begin(stdpath('data').'/plugged')
-" else
-"     call plug#begin('~/.vim/plugged')
-" endif
-"
-" Plug 'tpope/vim-fugitive'
-" Plug 'scrooloose/nerdtree'
-" Plug 'xuyuanp/nerdtree-git-plugin'
-" Plug 'kien/ctrlp.vim'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"
-" Plug 'int3/vim-extradite'
-" Plug 'rbong/vim-flog'
-" Plug 'airblade/vim-gitgutter'
-" Plug 'chrisbra/vim-diff-enhanced'
-" Plug 'fei6409/log-highlight.nvim'
-" Plug 'comatory/gh-co.nvim'
-"
-" Plug 'tpope/vim-rhubarb'
-" Plug 'tpope/vim-repeat'
-" Plug 'tpope/vim-surround'
-" Plug 'tpope/vim-unimpaired'
-" Plug 'tpope/vim-eunuch'
-"
-" Plug 'tomtom/tcomment_vim'
-" Plug 'embear/vim-localvimrc'
-" Plug 'lambdalisue/suda.vim'
-"
-" Plug 'dense-analysis/ale'
-" Plug 'gcorne/vim-sass-lint'
-"
-" Plug 'mhinz/vim-startify'
-" Plug 'sunaku/vim-dasht'
-"
-" Plug 'bling/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'rakr/vim-one'
-" Plug 'YorickPeterse/happy_hacking.vim'
-" Plug 'jansenfuller/crayon'
-" Plug 'vim-scripts/wombat256.vim'
-" Plug 'dikiaap/minimalist'
-" Plug 'w0ng/vim-hybrid'
-" Plug 'morhetz/gruvbox'
-" Plug 'sainnhe/everforest'
-" Plug 'Skullamortis/forest.nvim'
-"
-" Plug 'chiel92/vim-autoformat'
-" Plug 'terryma/vim-multiple-cursors'
-"
-" Plug 'christoomey/vim-tmux-navigator'
-" Plug 'mileszs/ack.vim'
-" Plug 'brooth/far.vim'
-" Plug 'chrisbra/csv.vim'
-" Plug 'vim-test/vim-test'
-"
-" " TypeScript "
-" Plug 'herringtondarkholme/yats.vim'
-"
-" Plug 'ntpeters/vim-better-whitespace'
-" Plug 'jiangmiao/auto-pairs'
-" Plug 'mattn/emmet-vim'
-" Plug 'stephenway/postcss.vim'
-"
-" Plug 'SirVer/ultisnips'
-"
-" " ReactJS
-" Plug 'pangloss/vim-javascript'
-" Plug 'mxw/vim-jsx'
-"
-" " Python
-" " Plug 'vim-vdebug/vdebug'
-" Plug 'puremourning/vimspector'
-" Plug 'alfredodeza/pytest.vim'
-"
-" " Ruby
-" Plug 'vim-ruby/vim-ruby'
-"
-" " yaml
-" Plug 'pedrohdz/vim-yaml-folds'
-"
-" " diff
-" Plug 'lambdalisue/vim-unified-diff'
-" " Plug 'lambdalisue/vim-improve-diff'
-"
-" " code-reviews
-" Plug 'AndrewRadev/diffurcate.vim'
-" " Plug 'AGhost-7/critiq.vim'
-"
-" " AI assist
-" Plug 'github/copilot.vim'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'CopilotC-Nvim/CopilotChat.nvim'
-"
-" " All plugin must be added in the plug scope (before next line)
-" call plug#end()
+filetype on
 filetype plugin indent on    " required
-"
-" Brief help
-" :PluginStatus     - check status of plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginUpgrade    - upgrade vim-plug
-" :PlugDiff         - examine changes from the previous update and the pending changes
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vim-plug for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 let g:airline_theme='badwolf'
 set background=dark
@@ -117,7 +10,6 @@ set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=ucs-bom,utf8,prc
 set autoindent
-filetype on
 
 set mouse=a
 
@@ -468,7 +360,7 @@ endfunction
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ <SID>s:check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
@@ -588,7 +480,7 @@ let g:csv_default_delim = ','
 " silent! unmap <c-i>
 
 " copilot
-imap <silent><script><expr> <C-M> copilot#Accept("\<CR>")
-imap <C-L> <Plug>(copilot-accept-word)
-imap <C-Q> <Plug>(copilot-dismiss)
-let g:copilot_no_tab_map = v:true
+" imap <c-b> copilot#Accept("\<CR>")
+" imap <C-L> <Plug>(copilot-accept-word)
+" imap <C-Q> <Plug>(copilot-dismiss)
+" let g:copilot_no_tab_map = v:true

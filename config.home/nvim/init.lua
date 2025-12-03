@@ -7,3 +7,7 @@ require("config/lazy")
 
 local vimrc = vim.fn.stdpath('config') .. '/legacy.vim'
 vim.cmd.source(vimrc)
+
+vim.api.nvim_create_user_command('Nconf', function ()
+  vim.cmd.tabe(vim.fn.stdpath('config'))
+end, {})
