@@ -66,7 +66,6 @@ end
 
 'ntpeters/vim-better-whitespace',
 'jiangmiao/auto-pairs',
-'mattn/emmet-vim',
 'stephenway/postcss.vim',
 
 -- snippets
@@ -93,7 +92,16 @@ end
 'AndrewRadev/diffurcate.vim',
 
 -- AI assist
-'github/copilot.vim',
+{ 'github/copilot.vim', config = function()
+  vim.keymap.set('i', '<C-m>', 'copilot#Accept("\\<CR>")', {
+    expr = true,
+    replace_keycodes = false
+  })
+  vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
+  vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
+  vim.g.copilot_no_tab_map = true
+end
+},
 'nvim-lua/plenary.nvim',
 'CopilotC-Nvim/CopilotChat.nvim',
 }
