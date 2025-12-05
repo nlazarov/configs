@@ -7,7 +7,12 @@ return {
 { 'nvim-treesitter/nvim-treesitter', branch = 'master', lazy = false, build = ':TSUpdate' },
 
 'int3/vim-extradite',
-'rbong/vim-flog',
+{
+  'rbong/vim-flog',
+  lazy = true,
+  cmd = { 'Flog', 'Flogsplit', 'Floggit' },
+  dependencies = { 'tpope/vim-fugitive' }
+},
 'airblade/vim-gitgutter',
 'chrisbra/vim-diff-enhanced',
 'fei6409/log-highlight.nvim',
@@ -43,6 +48,27 @@ return {
 
 'chiel92/vim-autoformat',
 'terryma/vim-multiple-cursors',
+{ 'nvim-telescope/telescope.nvim', tag = 'v0.2.0',
+  dependencies = { 'nvim-lua/plenary.nvim' }
+},
+{
+  "folke/which-key.nvim",
+  event = "VeryLazy",
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  },
+  keys = {
+    {
+      "<leader>?",
+      function()
+        require("which-key").show({ global = false })
+      end,
+      desc = "Buffer Local Keymaps (which-key)",
+    },
+  },
+},
 
 { 'alexghergh/nvim-tmux-navigation', config = function()
     require'nvim-tmux-navigation'.setup {
@@ -64,7 +90,10 @@ end
 -- TypeScript
 'herringtondarkholme/yats.vim',
 
-'ntpeters/vim-better-whitespace',
+{ 'ntpeters/vim-better-whitespace', init = function()
+  vim.g.better_whitespace_operator = 'cs'
+end
+},
 'jiangmiao/auto-pairs',
 'stephenway/postcss.vim',
 
