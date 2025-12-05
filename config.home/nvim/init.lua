@@ -4,6 +4,7 @@ vim.g.mapleader = " " -- Leader is the space key
 vim.g.maplocalleader = "\\"
 
 require("config/lazy")
+require("config/telescope")
 
 local vimrc = vim.fn.stdpath('config') .. '/legacy.vim'
 vim.cmd.source(vimrc)

@@ -27,6 +27,7 @@
   "pytest.vim": { "branch": "master", "commit": "6303575b5b4379326ae692767684b1c6b34c59b1" },
   "suda.vim": { "branch": "master", "commit": "c492741b4679b3cdd4d9e34138209784e061d916" },
   "tcomment_vim": { "branch": "master", "commit": "48ab639a461d9b8344f7fee06cb69b4374863b13" },
+  "telescope.nvim": { "branch": "master", "commit": "e69b434b968a33815e2f02a5c7bd7b8dd4c7d4b2" },
   "ultisnips": { "branch": "master", "commit": "b22a86f9dcc5257624bff3c72d8b902eac468aad" },
   "vim-airline": { "branch": "master", "commit": "499ae85357db811108ba1c52aa161fb09c462572" },
   "vim-airline-themes": { "branch": "master", "commit": "77aab8c6cf7179ddb8a05741da7e358a86b2c3ab" },
@@ -38,7 +39,7 @@
   "vim-extradite": { "branch": "master", "commit": "73dab6a94d9dd3cb6189b458bfdf38493280b332" },
   "vim-flog": { "branch": "master", "commit": "665b16ac8915f746bc43c9572b4581a5e9047216" },
   "vim-fugitive": { "branch": "master", "commit": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4" },
-  "vim-gitgutter": { "branch": "main", "commit": "23f4fa532b1edcca87ec62d060f8ea39b02e363a" },
+  "vim-gitgutter": { "branch": "main", "commit": "2e7e88b975d3111cc08b67cca6fad7806ac13104" },
   "vim-hybrid": { "branch": "master", "commit": "cc58baabeabc7b83768e25b852bf89c34756bf90" },
   "vim-javascript": { "branch": "master", "commit": "b26c9edb3563e02f5c0b20580f7cf9743e95b157" },
   "vim-jsx": { "branch": "master", "commit": "8879e0d9c5ba0e04ecbede1c89f63b7a0efa24af" },
@@ -56,6 +57,7 @@
   "vim-unimpaired": { "branch": "master", "commit": "db65482581a28e4ccf355be297f1864a4e66985c" },
   "vim-yaml-folds": { "branch": "master", "commit": "890ccd8e5370808d569e96dbb06cbeca2cf5993a" },
   "vimspector": { "branch": "master", "commit": "97984cafcf5e15befa05ec134d644e5e4f1c07f3" },
+  "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "wombat256.vim": { "branch": "master", "commit": "8734ba45dcf5e38c4d2686b35c94f9fcb30427e2" },
   "yats.vim": { "branch": "master", "commit": "9507e827a1bfa9d136ca8f6539814a9597c13b29" }
 }

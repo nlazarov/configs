@@ -118,9 +118,20 @@ nnoremap <leader>dl :diffget //2<cr>diffupdate<cr>
 nnoremap <leader>dr :diffget //3<cr>diffupdate<cr>
 
 
+" makes * and # work on visual mode too.
+function! VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = substitute(escape(@s, a:cmdtype.'\ '), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+
+xnoremap * :<C-u>call VSetSearch('/')<CR>/\V<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call VSetSearch('?')<CR>?\V<C-R>=@/<CR><CR>
+
 " recursively vimgrep for word under cursor or selection if you hit leader-star
-nmap <leader>* :execute 'Ack "' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '"'<CR>
-" vmap <leader>* :<C-u>call <SID>VSetSearch('/')<CR>:execute 'Ack "' . @/ . '"'<CR>
+nmap <leader>* :execute 'Telescope live_grep default_text=' . substitute(expand(expand("<cword>"), '\'), '\n', '\\n', 'g')<CR>
+vmap <leader>* :<C-u>call VSetSearch('/')<CR>:execute 'Telescope live_grep default_text=' . @/<CR>
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -192,8 +203,8 @@ autocmd FileType rust noremap <buffer> <leader>r :RustRun<cr>
 autocmd FileType python noremap <buffer> <leader>r :!python "%:p"<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
-nnoremap <leader>f :NERDTreeFind<cr><C-w>=
-nnoremap <leader>t :NERDTreeToggle<cr><C-w>=
+nnoremap <leader>t :NERDTreeFind<cr><C-w>=
+nnoremap <leader>z :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Git<cr>
 nnoremap <leader>d :Gdiff<cr>
 nnoremap <leader>b :Git blame<cr>
@@ -254,12 +265,6 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
-
-"emmet settings"
-let g:user_emmet_install_global = 1
-autocmd FileType html,css,javascript EmmetInstall
-
-let g:javascript_plugin_flow=1
 
 " enable patience diff
 " started In Diff-Mode set diffexpr (plugin not loaded yet)
