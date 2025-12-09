@@ -306,7 +306,7 @@ if executable('ag')
   let g:far#source=has('nvim') ?  'agnvim' : 'ag'
 endif
 
-let gitroot = system('git rev-parse --show-toplevel | tr -d "\\n"')
+let gitroot = system('git rev-parse --show-toplevel 2>/dev/null | tr -d "\\n"')
 
 let g:far#file_mask_favorites = ['*.tsx', '*.js', '*.css', '*.scss', '*.py']
 let g:far#ignore_files = [gitroot.'/.vim/farignore']
@@ -316,7 +316,7 @@ let NERDTreeIgnore = ['__pycache__']
 
 
 " python support
-let g:python3_host_prog = '/Users/niko/.pyenv/versions/nvim/bin/python3'
+let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
 
 " runners
 noremap <buffer> <leader>r :w<cr> :!"%:p"<cr>
@@ -349,7 +349,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
-autocmd BufWritePost * silent execute "! [ -e ".gitroot."/.git/hooks/ctags ] && ".gitroot."/.git/hooks/ctags 2>/dev/null &"
+autocmd BufWritePost * silent execute "! [[ -e ".gitroot."/.git/hooks/ctags ]] && ".gitroot."/.git/hooks/ctags 2>/dev/null &"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
