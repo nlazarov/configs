@@ -158,7 +158,7 @@ function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () { pandoc $1 | w3m -T text/html }
 
 # postgres
-export PGDIR=$(psql -qtAX -c 'show data_directory')
+[[ -n $(command -v psql) ]] && export PGDIR=$(psql -qtAX -c 'show data_directory')
 export PATH="$PGDIR/bin:$PATH"
 alias fix_pg_lock='sudo rm $PGDIR/postmaster.pid'
 
