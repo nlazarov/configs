@@ -98,6 +98,9 @@ end
 'jiangmiao/auto-pairs',
 'stephenway/postcss.vim',
 
+-- debugging
+'mfussenegger/nvim-dap',
+
 -- snippets
 'SirVer/ultisnips',
 
@@ -122,15 +125,17 @@ end
 'AndrewRadev/diffurcate.vim',
 
 -- AI assist
-{ 'github/copilot.vim', config = function()
-  vim.keymap.set('i', '<C-m>', 'copilot#Accept("\\<CR>")', {
-    expr = true,
-    replace_keycodes = false
-  })
-  vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
-  vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
-  vim.g.copilot_no_tab_map = true
-end
+{ 'github/copilot.vim',
+  init = function()
+    vim.keymap.set('i', '<C-M>', 'copilot#Accept("\\<CR>")', {
+      expr = true,
+      script = true,
+      replace_keycodes = false
+    })
+    vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
+    vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
+    vim.g.copilot_no_tab_map = true
+  end
 },
 'nvim-lua/plenary.nvim',
 'CopilotC-Nvim/CopilotChat.nvim',

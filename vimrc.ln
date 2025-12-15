@@ -203,7 +203,7 @@ autocmd FileType rust noremap <buffer> <leader>r :RustRun<cr>
 autocmd FileType python noremap <buffer> <leader>r :!python "%:p"<cr>
 noremap <buffer> <leader>m :w<cr> :make<cr><cr>
 
-nnoremap <leader>t :NERDTreeFind<cr><C-w>=
+nnoremap <leader>f :NERDTreeFind<cr><C-w>=
 nnoremap <leader>z :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Git<cr>
 nnoremap <leader>d :Gdiff<cr>
