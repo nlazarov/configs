@@ -9,6 +9,12 @@ require("config/telescope")
 local vimrc = vim.fn.stdpath('config') .. '/legacy.vim'
 vim.cmd.source(vimrc)
 
+vim.keymap.set('n', '<localleader>a', ':call feedkeys("\\<C-a>", "x")<CR>', {
+  desc = "Simulate <C-a> without messing up tmux",
+  noremap = true,
+  silent = true,
+})
+
 vim.api.nvim_create_user_command('Nconf', function ()
   vim.cmd.tabe(vim.fn.stdpath('config'))
 end, {})

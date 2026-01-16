@@ -8,7 +8,8 @@ require('telescope').setup{
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
       }
-    }
+    },
+    wrap_results = true
   },
   pickers = {
     -- Default configuration for builtin pickers goes here:
