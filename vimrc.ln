@@ -208,9 +208,9 @@ nnoremap <leader>z :NERDTreeToggle<cr><C-w>=
 nnoremap <leader>s :Git<cr>
 nnoremap <leader>d :Gdiff<cr>
 nnoremap <leader>b :Git blame<cr>
-nnoremap <leader>o :only<cr>
-
 nnoremap <leader>u :GitGutterUndoHunk<CR>
+nnoremap <leader>; :only<cr>
+
 
 
 command! Vimrc :tabe ~/.vimrc
@@ -284,32 +284,6 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " localvimrc
 let g:localvimrc_persistent = 1
-
-""" dasht
-" search related docsets
-nnoremap <Leader>H :Dasht<Space>
-
-" search ALL the docsets
-nnoremap <Leader><Leader>H :Dasht!<Space>
-
-" word expand search related docsets
-nnoremap <silent> <Leader>h :call Dasht([expand('<cword>'), expand('<cWORD>')])<Return>
-
-" word expand search ALL the docsets
-nnoremap <silent> <Leader><Leader>h :call Dasht([expand('<cword>'), expand('<cWORD>')], '!')<Return>
-
-" search selection in related docsets
-vnoremap <silent> <Leader>h y:<C-U>call Dasht(getreg(0))<Return>
-
-" search selection in ALL the docsets
-vnoremap <silent> <Leader><Leader>h y:<C-U>call Dasht(getreg(0), '!')<Return>
-
-let g:dasht_filetype_docsets = {}
-let g:dasht_filetype_docsets['less'] = ['css']
-let g:dasht_filetype_docsets['scss'] = ['css']
-let g:dasht_filetype_docsets['javascript'] = ['js', 'React', 'chai', 'sinon']
-let g:dasht_filetype_docsets['typescript'] = ['TypeScript', 'JavaScript', 'React', 'chai', 'sinon']
-let g:dasht_filetype_docsets['python'] = ['python', 'django']
 
 " let g:gruvbox_hls_cursor='green'
 " colorscheme gruvbox
