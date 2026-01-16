@@ -155,6 +155,9 @@
 [branch]
     autosetuprebase = always
 
+[rebase]
+    updateRefs = true
+
 [push]
     default = tracking
 
