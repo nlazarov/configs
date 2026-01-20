@@ -44,3 +44,7 @@ alias fixwifi='sudo systemctl restart NetworkManager'
 # flatpak
 alias chromium='flatpak run org.chromium.Chromium'
 alias wezterm='flatpak run org.wezfurlong.wezterm'
+
+alias kernel="uname -r | sed 's/[1-9]\+[0-9]*\.[0-9]\+\.[0-9]\+-//' | sed 's/[1-9]\+[0-9]*\.[0-9]*\-rc[0-9]\+-//'"
+alias showip='ip -4 addr show scope global | grep inet | awk "{print $2}" | cut -d"/" -f1 | sed "s/    inet //g" | paste -s -d, -'
+
