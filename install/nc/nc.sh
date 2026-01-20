@@ -52,7 +52,9 @@ sudo apt install apache2
 
 sudo a2enmod headers
 
-sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-imap php-gmp php-bcmath php-imagick php-apcu libmagickcore-6.q16-6-extra redis-server php-redis
+sudo apt install cifs-utils bzip2 lbzip2
+
+sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbstring php-bz2 php-intl php-gmp php-bcmath php-imagick php-apcu libmagickcore-7.q16hdri-10-extra redis-server php-redis php-cli
 
 sudo apt install postgresql php-pgsql
 
