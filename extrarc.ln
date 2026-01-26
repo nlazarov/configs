@@ -155,7 +155,13 @@ function url () { xdg-open $1 1>/dev/null 2>&1 }
 function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
 
 function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
-function mdown () { pandoc $1 | w3m -T text/html }
+function mdown () {
+  if [[ -n $(command -v glow) ]]; then
+    glow $1
+  else
+    pandoc $1 | w3m -T text/html
+  fi
+}
 
 # postgres
 [[ -n $(command -v psql) ]] && export PGDIR=$(psql -qtAX -c 'show data_directory')

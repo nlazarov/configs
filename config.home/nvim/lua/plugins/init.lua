@@ -48,7 +48,7 @@ return {
   'chiel92/vim-autoformat',
   'terryma/vim-multiple-cursors',
   { 'nvim-telescope/telescope.nvim', tag = 'v0.2.0',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
   {
     "folke/which-key.nvim",
@@ -149,27 +149,27 @@ return {
     },
     keys = {
       {
-        "<leader>oi",
+        "<leader>gi",
         "<CMD>Octo issue list<CR>",
         desc = "List GitHub Issues",
       },
       {
-        "<leader>op",
+        "<leader>gp",
         "<CMD>Octo pr list<CR>",
         desc = "List GitHub PullRequests",
       },
       {
-        "<leader>od",
+        "<leader>gd",
         "<CMD>Octo discussion list<CR>",
         desc = "List GitHub Discussions",
       },
       {
-        "<leader>on",
+        "<leader>gn",
         "<CMD>Octo notification list<CR>",
         desc = "List GitHub Notifications",
       },
       {
-        "<leader>os",
+        "<leader>gs",
         function()
           require("octo.utils").create_base_search_command { include_current_repo = true }
         end,
@@ -193,7 +193,7 @@ return {
     end,
     keys = {
       {
-        "<leader>h",
+        "<leader>ta",
         "<CMD>ApidocsSearch<CR>",
         desc = "Search API Documentation",
       },
