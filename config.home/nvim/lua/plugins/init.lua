@@ -47,6 +47,7 @@ return {
 
   'chiel92/vim-autoformat',
   'terryma/vim-multiple-cursors',
+  'nvim-lua/plenary.nvim',
   { 'nvim-telescope/telescope.nvim', tag = 'v0.2.0',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
@@ -97,6 +98,27 @@ return {
   'jiangmiao/auto-pairs',
   'stephenway/postcss.vim',
 
+  --docs
+  {
+    'emmanueltouzery/apidocs.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter', 'nvim-telescope/telescope.nvim'
+    },
+    cmd = { 'ApidocsSearch', 'ApidocsInstall', 'ApidocsOpen', 'ApidocsSelect', 'ApidocsUninstall' },
+    config = function()
+      require('apidocs').setup{}
+    end,
+    keys = {
+      {
+        "<leader>ta",
+        "<CMD>ApidocsSearch<CR>",
+        desc = "Search API Documentation",
+      },
+    },
+
+  },
+
+
   -- debugging
   'mfussenegger/nvim-dap',
 
@@ -122,22 +144,6 @@ return {
 
   -- code-reviews
   'AndrewRadev/diffurcate.vim',
-
-  -- AI assist
-  { 'github/copilot.vim',
-    init = function()
-      vim.keymap.set('i', '<C-M>', 'copilot#Accept("\\<CR>")', {
-        expr = true,
-        script = true,
-        replace_keycodes = false
-      })
-      vim.keymap.set('i', '<C-f>', '<Plug>(copilot-accept-word)')
-      vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
-      vim.g.copilot_no_tab_map = true
-    end
-  },
-  'nvim-lua/plenary.nvim',
-  'CopilotC-Nvim/CopilotChat.nvim',
   {
     "pwntester/octo.nvim",
     cmd = "Octo",
@@ -182,22 +188,19 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
   },
-  {
-    'emmanueltouzery/apidocs.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter', 'nvim-telescope/telescope.nvim'
-    },
-    cmd = { 'ApidocsSearch', 'ApidocsInstall', 'ApidocsOpen', 'ApidocsSelect', 'ApidocsUninstall' },
-    config = function()
-      require('apidocs').setup{}
-    end,
-    keys = {
-      {
-        "<leader>ta",
-        "<CMD>ApidocsSearch<CR>",
-        desc = "Search API Documentation",
-      },
-    },
 
+  -- AI assist
+  { 'github/copilot.vim',
+    init = function()
+      vim.keymap.set('i', '<C-M>', 'copilot#Accept("\\<CR>")', {
+        expr = true,
+        script = true,
+        replace_keycodes = false
+      })
+      vim.keymap.set('i', '<C-f>', '<Plug>(copilot-accept-word)')
+      vim.keymap.set('i', '<C-Q>', '<Plug>(copilot-dismiss)')
+      vim.g.copilot_no_tab_map = true
+    end
   },
+  'CopilotC-Nvim/CopilotChat.nvim',
 }
