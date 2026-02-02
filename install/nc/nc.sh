@@ -58,6 +58,8 @@ sudo apt install ffmpeg php php-gd php-sqlite3 php-curl php-zip php-xml php-mbst
 
 sudo apt install postgresql php-pgsql
 
+sudo apt install cifs-utils bzip2 lbzip2
+
 sudo systemctl start postgresql.service
 
 sudo sed -i '/^local\s\+all\s\+all\s\+peer$/s/peer/trust/g' "$(pg_conftool show hba_file --short)"
