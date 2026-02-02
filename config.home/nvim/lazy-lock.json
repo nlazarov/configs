@@ -1,5 +1,5 @@
 {
-  "CopilotChat.nvim": { "branch": "main", "commit": "6933b82e0b6dac53274cd8bff8fcd986a2070d77" },
+  "CopilotChat.nvim": { "branch": "main", "commit": "4d5dc1c3a68841c7cba088db351f38954f9a11d0" },
   "ack.vim": { "branch": "master", "commit": "36e40f9ec91bdbf6f1adf408522a73a6925c3042" },
   "ale": { "branch": "master", "commit": "6d9962946172fda4f25f9f5773b601aa4b2bedaf" },
   "apidocs.nvim": { "branch": "main", "commit": "40356c6948a651181f7c9ce91f6fb4048dc388ef" },
