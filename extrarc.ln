@@ -156,8 +156,8 @@ function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${
 
 function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
 function mdown () {
-  if [[ -n $(command -v glow) ]]; then
-    glow $1
+  if [[ -n $(command -v "$HOME"/.cargo/bin/mdt) ]]; then
+    "$HOME"/.cargo/bin/mdt $1
   else
     pandoc $1 | w3m -T text/html
   fi
