@@ -2,7 +2,7 @@ directory: ~/Music/Library
 ignore: beets/
 library: ~/Music/.beets/library.db
 statefile: ~/Music/.beets/state.pickle
-plugins: lyrics
+plugins: lyrics musicbrainz fromfilename
 import:
   copy: no
 lyrics:
