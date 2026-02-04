@@ -9,51 +9,44 @@ export ZSH_CUSTOM="$HOME/.custom/zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-export ZSH_THEME="nanotech"
 
 export DEFAULT_USER=`whoami`
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/hs/utils/aliases ] && . ~/hs/utils/aliases
 
-# zplug
-export ZPLUG_HOME=~/.zplug
-[ ! -d $ZPLUG_HOME ] && git clone git@github.com:zplug/zplug $ZPLUG_HOME
-source $ZPLUG_HOME/init.zsh
-
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+##########################################
+######          Antigen             ######
+##########################################
+source /usr/share/zsh-antigen/antigen.zsh
+antigen use oh-my-zsh
 
 export NVM_COMPLETION=true
 export NVM_AUTOLOAD=true
 export NVM_LAZY=true
 export NVM_LAZY_CMD=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
-zplug "lukechilds/zsh-nvm"
-zplug "lukechilds/zsh-better-npm-completion", defer:2
+antigen bundle "lukechilds/zsh-nvm"
+antigen bundle "lukechilds/zsh-better-npm-completion"
 
-zplug "plugins/aliases", from:oh-my-zsh
-zplug "plugins/brew", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
-zplug "plugins/emoji", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/history", from:oh-my-zsh
-zplug "plugins/jira", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/vi-mode", from:oh-my-zsh
+antigen bundle aliases
+antigen bundle brew
+antigen bundle colored-man-pages
+antigen bundle command-not-found
+antigen bundle common-aliases
+antigen bundle docker
+antigen bundle docker-compose
+antigen bundle emoji
+antigen bundle git
+antigen bundle history
+antigen bundle jira
+antigen bundle pip
+antigen bundle tmux
+antigen bundle vi-mode
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+antigen theme nanotech
 
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-autosuggestions"
-
-if ! zplug check; then
-  zplug install
-fi
-
-zplug load
-# zplug end
+antigen apply
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -97,7 +90,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -130,7 +123,7 @@ source $ZSH/oh-my-zsh.sh
 
 [[ -x "$(command -v direnv)" ]] && eval "$(direnv hook zsh)"
 
-set -o vi
+# set -o vi
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 bindkey -M vicmd e edit-command-line
@@ -138,7 +131,6 @@ setopt extendedglob
 
 [ -f $HOME/.extrarc ] && source $HOME/.extrarc
 fpath+="$CUSTOM/completion/git-completion.zsh"
-fpath+="$HOME/tools/dasht/etc/zsh/completions"
 [ -d $HOMEBREW_PREFIX ] && fpath+="$HOMEBREW_PREFIX/share/zsh/site-functions"
 
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
