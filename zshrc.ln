@@ -20,17 +20,24 @@ export DEFAULT_USER=`whoami`
 ######          Antigen             ######
 ##########################################
 
-ZSH_COMPDUMP="$HOME/.cache/zsh/zcompcache"
+export ANTIGEN_CACHE_DIR="${HOME}/.cache/antigen"
+mkdir -p "$ANTIGEN_CACHE_DIR"
 
-# Create the parent directory if it doesn't exist
-[[ -d $ZSH_COMPDUMP ]] || mkdir -p $ZSH_COMPDUMP
+# Full path to the compiled zwc file
+export ANTIGEN_CACHE_FILE="${ANTIGEN_CACHE_DIR}/antigen"
+export ANTIGEN_CACHE=$ANTIGEN_CACHE_FILE
 
-_comp_files=($ZSH_COMPDUMP/zcompdump(Nm-20))
-if (( $#_comp_files )); then
-    autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
-else
-    autoload -Uz compinit -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
-fi
+# ZSH_COMPDUMP="$HOME/.cache/zsh/zcompcache"
+#
+# # Create the parent directory if it doesn't exist
+# [[ -d $ZSH_COMPDUMP ]] || mkdir -p $ZSH_COMPDUMP
+#
+# _comp_files=($ZSH_COMPDUMP/zcompdump(Nm-20))
+# if (( $#_comp_files )); then
+#     autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
+# else
+#     autoload -Uz compinit -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
+# fi
 
 if [[ -f /opt/homebrew/share/antigen/antigen.zsh ]]; then
   source /opt/homebrew/share/antigen/antigen.zsh
@@ -41,6 +48,7 @@ else
   return
 fi
 
+ANTIGEN_LOG=~/labs/antigen/antigen.log
 if [[ -n $(command -v antigen) ]]; then
   antigen use oh-my-zsh
 
@@ -67,6 +75,8 @@ if [[ -n $(command -v antigen) ]]; then
   antigen bundle vi-mode
   antigen bundle zsh-users/zsh-syntax-highlighting
   antigen bundle zsh-users/zsh-autosuggestions
+  antigen bundle $ZSH_CUSTOM
+  antigen theme nanotech-eu
 
   antigen apply
 fi
@@ -113,7 +123,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 

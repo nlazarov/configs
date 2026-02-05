@@ -31,7 +31,7 @@ function todo() {
       ;;
 
     count)
-      todo ls-raw "${@:2}" | wc -l
+todo ls-raw "${@:2}" | wc -l
       ;;
 
     done)
