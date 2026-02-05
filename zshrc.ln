@@ -3,6 +3,7 @@
 
 [[ -f "$HOME/.ownrc" ]] && source "$HOME/.ownrc"
 # Path to your oh-my-zsh installation.
+export ZSH_THEME="nanotech"
 export ZSH=~/.oh-my-zsh
 
 export ZSH_CUSTOM="$HOME/.custom/zsh"
@@ -18,35 +19,57 @@ export DEFAULT_USER=`whoami`
 ##########################################
 ######          Antigen             ######
 ##########################################
-source /usr/share/zsh-antigen/antigen.zsh
-antigen use oh-my-zsh
 
-export NVM_COMPLETION=true
-export NVM_AUTOLOAD=true
-export NVM_LAZY=true
-export NVM_LAZY_CMD=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
-antigen bundle "lukechilds/zsh-nvm"
-antigen bundle "lukechilds/zsh-better-npm-completion"
+ZSH_COMPDUMP="$HOME/.cache/zsh/zcompcache"
 
-antigen bundle aliases
-antigen bundle brew
-antigen bundle colored-man-pages
-antigen bundle command-not-found
-antigen bundle common-aliases
-antigen bundle docker
-antigen bundle docker-compose
-antigen bundle emoji
-antigen bundle git
-antigen bundle history
-antigen bundle jira
-antigen bundle pip
-antigen bundle tmux
-antigen bundle vi-mode
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-antigen theme nanotech
+# Create the parent directory if it doesn't exist
+[[ -d $ZSH_COMPDUMP ]] || mkdir -p $ZSH_COMPDUMP
 
-antigen apply
+_comp_files=($ZSH_COMPDUMP/zcompdump(Nm-20))
+if (( $#_comp_files )); then
+    autoload -Uz compinit -C -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
+else
+    autoload -Uz compinit -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
+fi
+
+if [[ -f /opt/homebrew/share/antigen/antigen.zsh ]]; then
+  source /opt/homebrew/share/antigen/antigen.zsh
+elif [[ -f /usr/share/zsh-antigen/antigen.zsh ]]; then
+  source /usr/share/zsh-antigen/antigen.zsh
+else
+  echo "Antigen not found at /usr/share/zsh-antigen/antigen.zsh. Please install Antigen and ensure it is located at that path."
+  return
+fi
+
+if [[ -n $(command -v antigen) ]]; then
+  antigen use oh-my-zsh
+
+  export NVM_COMPLETION=true
+  export NVM_AUTOLOAD=true
+  export NVM_LAZY=true
+  export NVM_LAZY_CMD=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
+  antigen bundle "lukechilds/zsh-nvm"
+  antigen bundle "lukechilds/zsh-better-npm-completion"
+
+  antigen bundle aliases
+  antigen bundle brew
+  antigen bundle colored-man-pages
+  antigen bundle command-not-found
+  antigen bundle common-aliases
+  antigen bundle docker
+  antigen bundle docker-compose
+  antigen bundle emoji
+  antigen bundle git
+  antigen bundle history
+  antigen bundle jira
+  antigen bundle pip
+  antigen bundle tmux
+  antigen bundle vi-mode
+  antigen bundle zsh-users/zsh-syntax-highlighting
+  antigen bundle zsh-users/zsh-autosuggestions
+
+  antigen apply
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -90,7 +113,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
