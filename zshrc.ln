@@ -3,7 +3,6 @@
 
 [[ -f "$HOME/.ownrc" ]] && source "$HOME/.ownrc"
 # Path to your oh-my-zsh installation.
-export ZSH_THEME="nanotech"
 export ZSH=~/.oh-my-zsh
 
 export ZSH_CUSTOM="$HOME/.custom/zsh"
