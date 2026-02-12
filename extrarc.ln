@@ -177,7 +177,6 @@ fi
 
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$PATH:$HOME/tools/dasht/bin"
 export PATH="$PATH:/snap/bin"
 export CUSTOM="$HOME/.custom"
 export PATH="$PATH:$CUSTOM/bashers"
@@ -200,8 +199,6 @@ export POWERLINE_ROOT=$PIP_PACK_DIR
 
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
-export MANPATH="$HOME/tools/dasht/man:$MANPATH"
-
 [[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
 
 [[ -e $(which gh) ]] && eval "$(gh completion --shell ${SHELL##*/})"
@@ -209,9 +206,6 @@ export MANPATH="$HOME/tools/dasht/man:$MANPATH"
 export EDITOR='nvim'
 export BROWSER=vivaldi
 [ $(uname) = "Darwin" ] && export BROWSER=/Applications/Vivaldi.app/Contents/MacOS/Vivaldi
-
-export JIRA_URL='https://hyperscience.atlassian.net'
-export JIRA_DEFAULT_ACTION='dashboard'
 
 # deno
 export DENO_INSTALL="$HOME/.deno"
