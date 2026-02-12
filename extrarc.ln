@@ -13,10 +13,6 @@ function test-widget() {
     xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
 }
 
-function day() {
-    date $1 '+%Y-%m-%d'
-}
-
 function mcd() {
   mkdir $1
   cd $1
@@ -176,6 +172,8 @@ if [[ -n $(command -v pyenv) ]]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
+[[ -n $(command -v mise) ]] && eval "$(mise activate ${SHELL##*/})"
 
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

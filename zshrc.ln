@@ -51,11 +51,6 @@ ANTIGEN_LOG=~/labs/antigen/antigen.log
 if [[ -n $(command -v antigen) ]]; then
   antigen use oh-my-zsh
 
-  export NVM_COMPLETION=true
-  export NVM_AUTOLOAD=true
-  export NVM_LAZY=true
-  export NVM_LAZY_CMD=('vim' 'nvim' 'n' 'vo' 'npm' 'node')
-  antigen bundle "lukechilds/zsh-nvm"
   antigen bundle "lukechilds/zsh-better-npm-completion"
 
   antigen bundle aliases
@@ -68,7 +63,6 @@ if [[ -n $(command -v antigen) ]]; then
   antigen bundle emoji
   antigen bundle git
   antigen bundle history
-  antigen bundle jira
   antigen bundle pip
   antigen bundle tmux
   antigen bundle vi-mode
