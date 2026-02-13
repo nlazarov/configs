@@ -12,7 +12,7 @@ export ZSH_CUSTOM="$HOME/.custom/zsh"
 
 export DEFAULT_USER=`whoami`
 
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
 [ -f ~/hs/utils/aliases ] && . ~/hs/utils/aliases
 
 ##########################################

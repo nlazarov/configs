@@ -1,180 +1,18 @@
 set -o vi
 stty -ixon
 
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
+export PATH="$PATH:$HOME/.cargo/bin"
 
-function diffuse-rev() {
-    diffuse -s -D -r $1 -r $2 `git diff --name-only $1...$2`
-}
-
-function test-widget() {
-    xvfb-run gulp tests --tests="tests/$1/**" --browser="$2"
-}
-
-function mcd() {
-  mkdir $1
-  cd $1
-}
-
-function find_docker_container_name() {
-  CONTAINER_NAME=$(docker ps --format '{{.Names}}' | grep $1)
-  echo $CONTAINER_NAME
-}
-function dbash() {
-    docker exec -it `find_docker_container_name $1` bash -c "stty cols 200 && ./entrypoint.sh bash"
-}
-
-function drun() {
-    docker exec -it `find_docker_container_name $1` bash -c "stty cols 200 && ./entrypoint.sh bash -c '$2'"
-}
-
-function dsql() {
-    docker exec -u postgres -it forms_db_1 bash -c 'stty cols 200 && psql'
-
-}
-
-function dnpm() {
-    drun frontend "cd /var/www/forms/ui && npm $*"
-}
-
-function ddjango() {
-    drun django "cd /var/www/forms/forms && $*"
-}
-
-function dmanage() {
-    ddjango ./manage.py $*
-}
-
-function dshell() {
-    ddjango ./manage.py shell_plus
-}
-
-function dmigrate() {
-    ddjango ./manage.py migrate $*
-}
-
-function venv() {
-    pyenv activate $1
-}
-
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-alias de_venv="source deactivate"
-
-function dlogs() {
-    APP=${1:-app}
-
-    docker-compose  -p $APP \
-                    -f ~/hs/dev/docker-compose.infra.dev.yml \
-                    -f ~/hs/dev/docker-compose.forms.dev.yml \
-                    logs -f
-}
-
-snapshotswd="$HOME/hs/snapshots"
-hsdevwd="~/hs/dev"
-alias hssnapshots='ls $snapshotswd'
-
-function snapshotwd() {
-  echo "$snapshotswd/${1?'Define snapshot, please!'}"
-}
-
-function hsclean() {
-    local snapshot=$(snapshotwd $1)
-
-    sudo rm -rf $snapshot
-}
-
-function hsbackup() {
-    if [[ "$1" == "-f" ]]; then
-      hsclean $2
-      shift
-    fi
-
-    local snapshot=$(snapshotwd $1)
-
-    mkdir -p "$snapshot"
-    sudo mv -i ~/hs/dev/postgres_forms/ "$snapshot/postgres_forms"
-    sudo mv -i ~/hs/dev/venv/ "$snapshot/venv"
-
-    sudo chown -R `whoami`:`groups | cut -d' ' -f1` "$snapshot/postgres_forms" "$snapshot/venv"
-}
-
-function hsrestore() {
-    local snapshot=$(snapshotwd $1)
-
-    sudo cp -rf "$snapshot"/* ~/hs/dev/
-}
-
-function hsreset() {
-    sudo rm -rf ~/hs/dev/{postgres_forms,venv}
-}
-
-
-function hsswap() {
-    hsbackup $*
-    hsrestore $@[-1]
-}
-
-# psql backup/restore
-hs_db_snapshots="$HOME/hs/db_backup"
-function hs_db_backup() {
-    local dump_name="$hs_db_snapshots/${1?'Define psql dump name'}.backup"
-    pg_dump form > "$dump_name"
-}
-function hs_db_restore() {
-    local dump_name="$hs_db_snapshots/${1?'Define psql dump name'}.backup"
-    ! [ -f "$dump_name" ] && echo 'Dump does not exist' && return 1
-    dropdb form
-    createdb form
-    psql --single-transaction form < $dump_name
-}
-
-function grelease() {
-  [[ $(git root) != */hs/forms ]] && echo 'not in forms repo' >&2 && exit 1
-  git checkout $1
-  direnv reload
-  nvm use "$(jq -r .engines.node package.json)"
-  local prefix=$(hsenv prefix)
-  $HOME/hs/utils/release.sh --npm $([[ -z $prefix ]] && echo 'master' || echo ${prefix//_/})
-}
-
-function url () { xdg-open $1 1>/dev/null 2>&1 }
-function circle () { url https://circleci.com/gh/hyperscience/forms/${1+tree/}${1} }
-
-function mdown_lynx () { pandoc $1 | lynx -force_html -stdin }
-function mdown () {
-  if [[ -n $(command -v "$HOME"/.cargo/bin/mdt) ]]; then
-    "$HOME"/.cargo/bin/mdt $1
-  else
-    pandoc $1 | w3m -T text/html
-  fi
-}
+# mise support
+[[ -n $(command -v mise) ]] && eval "$(mise activate ${SHELL##*/})"
+export VIRTUAL_ENV=$HOME/.venvs/global
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+venv
 
 # postgres
 [[ -n $(command -v psql) ]] && export PGDIR=$(psql -qtAX -c 'show data_directory')
 export PATH="$PGDIR/bin:$PATH"
 alias fix_pg_lock='sudo rm $PGDIR/postmaster.pid'
-
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-export PYENV_ROOT="$HOME/.pyenv"
-
-[[ -d "$PYENV_ROOT" ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-if [[ -n $(command -v pyenv) ]]; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
-[[ -n $(command -v mise) ]] && eval "$(mise activate ${SHELL##*/})"
-
 
 export PATH="$HOME/.local/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$PATH:/snap/bin"
@@ -223,3 +61,4 @@ export AWS_PROFILE=niko
 # brew env
 [[ -n $(command -v brew) ]] && export LDFLAGS="-L$(brew --prefix)/lib"
 [[ -n $(command -v brew) ]] && export CPPFLAGS="-I$(brew --prefix)/include"
+

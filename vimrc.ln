@@ -194,7 +194,7 @@ let NERDTreeIgnore = ['__pycache__']
 
 
 " python support
-let g:python3_host_prog = '~/.pyenv/versions/nvim/bin/python3'
+let g:python3_host_prog = '~/.venvs/global/bin/python3'
 
 " runners
 noremap <buffer> <leader>r :w<cr> :!"%:p"<cr>
