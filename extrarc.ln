@@ -5,7 +5,7 @@ export PATH="$PATH:$HOME/.cargo/bin"
 
 # mise support
 [[ -n $(command -v mise) ]] && eval "$(mise activate ${SHELL##*/})"
-export VIRTUAL_ENV=$HOME/.venvs/global
+[[ -z $VIRTUAL_ENV ]] && export VIRTUAL_ENV=$HOME/.venvs/global
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 venv
 
