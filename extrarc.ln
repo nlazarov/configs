@@ -3,11 +3,13 @@ stty -ixon
 
 export PATH="$PATH:$HOME/.cargo/bin"
 
+## python support
+export PIP_REQUIRE_VIRTUALENV=true
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+[[ -z $VIRTUAL_ENV ]] && export VIRTUAL_ENV=$HOME/.venvs/global
 # mise support
 [[ -n $(command -v mise) ]] && eval "$(mise activate ${SHELL##*/})"
-[[ -z $VIRTUAL_ENV ]] && export VIRTUAL_ENV=$HOME/.venvs/global
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-venv
+export PIP_PACK_DIR=$(python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')
 
 # postgres
 [[ -n $(command -v psql) ]] && export PGDIR=$(psql -qtAX -c 'show data_directory')
@@ -24,10 +26,6 @@ export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 [[ -d '$HOME/.hsenv' ]] && export PATH="$HOME/.hsenv:$PATH"
 
 [[ -f "$CUSTOM/bashers/todo.sh" ]] && source $CUSTOM/bashers/todo.sh
-
-# python executables
-export PIP_REQUIRE_VIRTUALENV=true
-export PIP_PACK_DIR=`python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])'`
 
 #######################################
 ##  potential speedup of zsh startup ##
