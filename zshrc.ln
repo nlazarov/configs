@@ -47,7 +47,7 @@ else
   return
 fi
 
-ANTIGEN_LOG=~/labs/antigen/antigen.log
+# ANTIGEN_LOG=~/labs/antigen/antigen.log
 if [[ -n $(command -v antigen) ]]; then
   antigen use oh-my-zsh
 
@@ -162,3 +162,11 @@ fpath+="$CUSTOM/completion/git-completion.zsh"
 [[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
 [[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
 [[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
+
+# pnpm
+export PNPM_HOME="/home/niko/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
