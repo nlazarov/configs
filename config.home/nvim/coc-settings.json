@@ -16,4 +16,5 @@
   "tsserver.log": "verbose",
   "tsserver.trace.server": "verbose",
   "snippets.ultisnips.pythonPrompt": false
+
 }

@@ -8,3 +8,8 @@ jsconfig.json
 .tern-project
 .vimspector.json
 .direnv
+
+# copilot
+copilot-instructions.md
+AGENTS.md
+*.instructions.md
