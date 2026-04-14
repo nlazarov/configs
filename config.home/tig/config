@@ -1,0 +1,4 @@
+set editor-line-number = yes
+set ignore-case = smart-case
+set tab-size = 2
+set wrap-lines = yes
