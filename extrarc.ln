@@ -56,7 +56,9 @@ export AWS_PROFILE=niko
 # brew linux
 [[ -d /home/linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# brew env
-[[ -n $(command -v brew) ]] && export LDFLAGS="-L$(brew --prefix)/lib"
-[[ -n $(command -v brew) ]] && export CPPFLAGS="-I$(brew --prefix)/include"
-
+if [[ -n $(command -v brew) ]] then;
+  local prfx=$(brew --prefix)
+  export LDFLAGS="-L$prfx/lib"
+  export LIBRARY_PATH="$LIBRARY_PATH${LIBRARY_PATH+:}$prfx/lib"
+  export CPPFLAGS="-I$prfx/include"
+fi
