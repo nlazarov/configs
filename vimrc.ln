@@ -407,7 +407,7 @@ let g:ale_fix_on_save = 1
 
 " special case for ruff fixer, which does not work correctly
 " fallback to command line, should be fast enough
-autocmd BufWritePost *.py silent execute "!ruff check --fix % && ruff format %"
+autocmd BufWritePost *.py silent execute "!ruff check --fix %; ruff format %"
 
 let g:airline#extensions#ale#enabled = 1
 
