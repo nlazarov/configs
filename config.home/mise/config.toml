@@ -2,6 +2,7 @@
 node = "lts"
 pnpm = "latest"
 python = "latest"
+usage = "latest"
 
 [env]
 _.python.venv = { path = "{{env.HOME}}/.venvs/global", create = true }
