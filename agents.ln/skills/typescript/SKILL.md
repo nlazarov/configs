@@ -1,6 +1,5 @@
 ---
-description: Expert in TypeScript development with best practices for type safety and clean code
-inspired by Mindrally/skills/typescript
+description: Expert in TypeScript development with best practices for type safety and clean code inspired by Mindrally/skills/typescript
 ---
 # TypeScript
 

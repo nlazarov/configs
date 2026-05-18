@@ -1,6 +1,7 @@
 ---
 description: Set of software development principles and best practices for writing clean code
-thank you uncle Bob
+metadata:
+  inspiration: uncle Bob's Clean Code principles
 ---
 
 # Clean Code Principles
