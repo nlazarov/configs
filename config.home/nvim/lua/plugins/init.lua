@@ -170,6 +170,11 @@ return {
         desc = "List GitHub Discussions",
       },
       {
+        "<leader>gm",
+        "<CMD>Octo search review-requested:@me is:pr is:open<CR>",
+        desc = "List PR Waiting My Review",
+      },
+      {
         "<leader>gn",
         "<CMD>Octo notification list<CR>",
         desc = "List GitHub Notifications",
