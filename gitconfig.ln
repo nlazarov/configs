@@ -7,6 +7,10 @@
     whitespace = cr-at-eol
     excludesfile = ~/.gitignore
     ignorecase = false
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
 
 [color]
     ui = true
@@ -30,16 +34,13 @@
     cmd = meld \"$LOCAL\" \"$REMOTE\"
 
 [difftool "difftastic"]
-    cmd = difft \"$LOCAL\" \"$REMOTE\"
+  cmd = difft --display side-by-side-show-both \"$LOCAL\" \"$REMOTE\"
 
 [difftool "vim"]
     tool = vimdiff
 
 [difftool "nvim"]
     cmd = nvim -d -O \"$LOCAL\" \"$REMOTE\"
-
-[difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 
 [merge]
     tool = nvim
@@ -51,10 +52,6 @@
     cmd = meld '$BASE $LOCAL $REMOTE $MERGED'
     trustExitCode = false
 
-[mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
-
 [mergetool "vim"]
     cmd = vimdiff
     trustExitCode = true
@@ -65,6 +62,11 @@
 
 [ff]
     tool = meld
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+    side-by-side = true
 
 [github]
     user = nlazarov
