@@ -1,7 +1,32 @@
+snippet html "HTML boilerplate" b
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>$0</title>
+<head>
+<body>
+</body>
+</html>
+endsnippet
+
 snippet t "A simple html tag" b
 <${1:dev}>
 	Hello world
 </${1/(\w+).*/$1/}>
+endsnippet
+
+snippet css "A simple CSS snippet" b
+<style type="text/css">
+	$0
+</style>
+endsnippet
+
+snippet js "A simple JavaScript snippet" b
+<script type="text/javascript">
+	$0
+</script>
 endsnippet
 
 snippet todo "This is a TODO reminder" b

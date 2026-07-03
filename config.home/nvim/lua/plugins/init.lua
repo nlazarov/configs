@@ -171,7 +171,7 @@ return {
       },
       {
         "<leader>gm",
-        "<CMD>Octo search review-requested:@me is:pr is:open<CR>",
+        "<CMD>Octo search review-requested:@me is:pr is:open review:required<CR>",
         desc = "List PR Waiting My Review",
       },
       {
@@ -207,5 +207,19 @@ return {
       vim.g.copilot_no_tab_map = true
     end
   },
-  'CopilotC-Nvim/CopilotChat.nvim',
+  { 'CopilotC-Nvim/CopilotChat.nvim',
+    opts = {
+      model = 'claude-opus-4-8',
+      mappings = {
+        reset = {
+          normal = '<C-r>',
+          insert = '<C-r>',
+        },
+      },
+      trusted_tools = { 'file', 'glob', 'grep' },
+    },
+    init = function()
+      vim.keymap.set('n', '<leader>cc', '<CMD>CopilotChat<CR>', { desc = "Open Copilot Chat" })
+    end,
+  },
 }
