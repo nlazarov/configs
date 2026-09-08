@@ -324,7 +324,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-sh', 'coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-sh', 'coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-oxc', 'coc-pyright', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag',  'coc-tsserver', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 

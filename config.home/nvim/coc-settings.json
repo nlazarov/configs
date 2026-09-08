@@ -15,6 +15,9 @@
   "diagnostic.displayByAle": true,
   "tsserver.log": "verbose",
   "tsserver.trace.server": "verbose",
-  "snippets.ultisnips.pythonPrompt": false
+  "snippets.ultisnips.pythonPrompt": false,
+  "json.schemaDownload.trustedDomains": {
+    "https://www.schemastore.org": true
+  }
 
 }

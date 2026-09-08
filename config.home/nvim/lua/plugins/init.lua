@@ -4,7 +4,7 @@ return {
   'xuyuanp/nerdtree-git-plugin',
   'kien/ctrlp.vim',
   { 'neoclide/coc.nvim', branch = 'release', },
-  { 'nvim-treesitter/nvim-treesitter', branch = 'master', lazy = false, build = ':TSUpdate' },
+  { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
 
   'int3/vim-extradite',
   {
@@ -48,8 +48,22 @@ return {
   'chiel92/vim-autoformat',
   'terryma/vim-multiple-cursors',
   'nvim-lua/plenary.nvim',
-  { 'nvim-telescope/telescope.nvim', tag = 'v0.2.0',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+  {
+    'nvim-telescope/telescope.nvim', tag = 'v0.2.2',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      { "nvim-telescope/telescope-ui-select.nvim" },
+    },
+    config = function()
+      require("telescope").setup({
+        extensions = {
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown({}),
+          },
+        },
+      })
+      require("telescope").load_extension("ui-select")
+    end,
   },
   {
     "folke/which-key.nvim",
@@ -155,14 +169,9 @@ return {
     },
     keys = {
       {
-        "<leader>gi",
-        "<CMD>Octo issue list<CR>",
-        desc = "List GitHub Issues",
-      },
-      {
-        "<leader>gp",
-        "<CMD>Octo pr list<CR>",
-        desc = "List GitHub PullRequests",
+        "<leader>gb",
+        "<CMD>Octo pr browser<CR>",
+        desc = "Open PR in browser",
       },
       {
         "<leader>gd",
@@ -170,14 +179,29 @@ return {
         desc = "List GitHub Discussions",
       },
       {
+        "<leader>gi",
+        "<CMD>Octo issue list<CR>",
+        desc = "List GitHub Issues",
+      },
+      {
         "<leader>gm",
         "<CMD>Octo search review-requested:@me is:pr is:open review:required<CR>",
         desc = "List PR Waiting My Review",
       },
       {
+        "<leader>gM",
+        "<CMD>Octo search review-requested:@me is:pr is:open<CR>",
+        desc = "List open PR for @me",
+      },
+      {
         "<leader>gn",
         "<CMD>Octo notification list<CR>",
         desc = "List GitHub Notifications",
+      },
+      {
+        "<leader>gp",
+        "<CMD>Octo pr list<CR>",
+        desc = "List GitHub PullRequests",
       },
       {
         "<leader>gs",
@@ -192,6 +216,33 @@ return {
       "nvim-telescope/telescope.nvim",
       "nvim-tree/nvim-web-devicons",
     },
+  },
+
+  -- testing code review plugins
+  { "gh-tui-tools/gh-review.nvim" }, -- still not sure if I like this one, seems to early to tell
+  {
+    "0xKitsune/pr.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = function()
+      require("pr").setup()
+    end,
+  },
+
+  {
+    "ldelossa/gh.nvim",
+    dependencies = {
+      {
+      "ldelossa/litee.nvim",
+      config = function()
+        require("litee.lib").setup()
+      end,
+      },
+    },
+    config = function()
+      require("litee.gh").setup()
+    end,
   },
 
   -- AI assist

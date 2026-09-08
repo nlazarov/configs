@@ -13,3 +13,7 @@ jsconfig.json
 copilot-instructions.md
 AGENTS.md
 *.instructions.md
+
+# yolo-jail
+.yolo
+yolo-jail.jsonc

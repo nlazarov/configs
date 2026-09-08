@@ -22,7 +22,7 @@ alias dtest='ddjango pytest --nomigrations'
 alias g=git
 alias go=gitopen
 alias grbom='git rebase origin/master'
-alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|`git current`" | xargs -I {} bash -c "[[ -z \$(git branch --remote --list origin/{}) ]] && git branch -D {}"'
+alias gbrmfeat='git branch | ag -v "master$|release-\d+.\d+.990|experiments?$|`git current`" | xargs -I {} bash -c "[[ -z \$(git branch --remote --list origin/{}) ]] && git branch -D {}"'
 alias vgit='vim +Flog'
 
 #npm
