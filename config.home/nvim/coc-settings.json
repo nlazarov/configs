@@ -17,7 +17,8 @@
   "tsserver.trace.server": "verbose",
   "snippets.ultisnips.pythonPrompt": false,
   "json.schemaDownload.trustedDomains": {
-    "https://www.schemastore.org": true
+    "https://www.schemastore.org": true,
+    "https://raw.githubusercontent.com": true
   }
 
 }

@@ -64,8 +64,8 @@ set directory=~/.vim/backup,.
 let mapleader = " " " Leader is the space key
 let g:mapleader = " "
 
-let maplocalleader = "\\"
-let g:maplocalleader = "\\"
+let maplocalleader = ","
+let g:maplocalleader = ","
 
 lua << EOF
 require("CopilotChat").setup()
@@ -374,7 +374,9 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-command! -nargs=0 FL :ALEFix eslint
+
+" fix lint
+command! -nargs=0 FL :silent execute "!oxlint --fix ".expand('%:p')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -386,10 +388,10 @@ let g:ale_linters = {
 \ 'scss': ['stylelint'],
 \ 'sh': ['shellcheck'],
 \ 'json': ['fixjson'],
-\ 'javascript': ['eslint'],
-\ 'javascript.jsx': ['eslint'],
-\ 'typescript': ['eslint'],
-\ 'typescript.tsx': ['eslint'],
+\ 'javascript': ['oxlint'],
+\ 'javascript.jsx': ['oxlint'],
+\ 'typescript': ['oxlint'],
+\ 'typescript.tsx': ['oxlint'],
 \ 'yaml': ['yamllint'],
 \}
 
@@ -408,6 +410,8 @@ let g:ale_fix_on_save = 1
 " special case for ruff fixer, which does not work correctly
 " fallback to command line, should be fast enough
 autocmd BufWritePost *.py silent execute "!ruff check --fix %; ruff format %"
+" special case for oxfmt fixer, which does not work out-of-the-box with ALE
+autocmd BufWritePost *.tsx silent execute "! [[ -n $(command -v oxfmt) ]] && oxfmt ".expand('%:p')." 2>/dev/null;"
 
 let g:airline#extensions#ale#enabled = 1
 

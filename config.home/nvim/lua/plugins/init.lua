@@ -109,7 +109,14 @@ return {
     vim.g.better_whitespace_operator = 'cs'
   end
   },
-  'jiangmiao/auto-pairs',
+  { 'jiangmiao/auto-pairs', config = function()
+    -- auto-pairs can't wrap mdnotes' Lua <CR> mapping; init pairs without the <CR> wrapper in markdown
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'markdown',
+      callback = function() vim.fn.AutoPairsInit() end,
+    })
+  end
+  },
   'stephenway/postcss.vim',
 
   --docs
@@ -149,6 +156,13 @@ return {
 
   -- Ruby
   'vim-ruby/vim-ruby',
+
+  -- markdown
+  {
+    "ymic9963/mdnotes.nvim",
+    opts = {},
+  },
+
 
   -- yaml
   'pedrohdz/vim-yaml-folds',
@@ -210,7 +224,30 @@ return {
         end,
         desc = "Search GitHub",
       },
+      {
+        "<localleader>n",
+        ":call feedkeys('<localleader><space>]u', 'x')<CR>",
+        desc = "toggle viewed and move next",
+      }
     },
+    config = function()
+      require("octo").setup({
+        pull_requests = {
+          order_by = {
+            field = "UPDATED_AT",
+            direction = "DESC",
+          },
+        },
+        mappings = {
+          pull_request = {
+            approve_pr = { lhs = "<localleader>qa", desc = "Approve PR" },
+          },
+          submit_win = {
+            approve_review = { lhs = "<localleader>a", desc = "approve review", mode = "n" },
+          },
+        },
+      })
+    end,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",

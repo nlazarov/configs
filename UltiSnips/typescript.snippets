@@ -99,3 +99,20 @@ jest.mock('shui/utils/withDimensions', () => ({
   useWidth: jest.fn(() => ({ width: 100 })),
 }));$0
 endsnippet
+
+snippet timeoutBeforeEach
+beforeEach(() => {
+  const AT_MS = 5;
+  const BLOCK_MS = 1100;
+
+  setTimeout(() => {
+    const end = Date.now() + BLOCK_MS;
+
+    while (Date.now() < end) {}
+    // eslint-disable-next-line no-console
+    process.stderr.write(
+      \`[block] ${expect.getState().currentTestName} blocked ${BLOCK_MS}ms\n\`
+    );
+  }, AT_MS);
+});
+endsnippet
