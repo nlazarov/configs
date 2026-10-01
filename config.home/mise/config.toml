@@ -1,4 +1,6 @@
 [tools]
+bat = "latest"
+delta = "latest"
 gh = "latest"
 node = "lts"
 pnpm = "latest"
