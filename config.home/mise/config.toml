@@ -1,4 +1,5 @@
 [tools]
+gh = "latest"
 node = "lts"
 pnpm = "latest"
 python = "latest"

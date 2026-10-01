@@ -55,4 +55,8 @@ set -g status-right-length 90
 
 set -g history-limit 10000
 
+# enable images
+set -g allow-passthrough on
+set -g input-buffer-size 4194304
+
 if-shell 'test "$(uname)" = "Darwin"' 'source ~/.tmux-osx.conf'
