@@ -6,6 +6,8 @@ node = "lts"
 pnpm = "latest"
 python = "latest"
 usage = "latest"
+uv = "latest"
+yazi = "latest"
 
 [env]
 _.python.venv = { path = "{{env.HOME}}/.venvs/global", create = true }

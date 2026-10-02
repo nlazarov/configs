@@ -198,14 +198,19 @@ return {
         desc = "List GitHub Issues",
       },
       {
-        "<leader>gm",
+        "<leader>gr",
         "<CMD>Octo search review-requested:@me is:pr is:open review:required<CR>",
         desc = "List PR Waiting My Review",
       },
       {
-        "<leader>gM",
+        "<leader>gR",
         "<CMD>Octo search review-requested:@me is:pr is:open<CR>",
         desc = "List open PR for @me",
+      },
+      {
+        "<leader>gm",
+        "<CMD>Octo search author:@me is:pr is:open<CR>",
+        desc = "List open PRs authored by @me",
       },
       {
         "<leader>gn",
