@@ -2,7 +2,6 @@ return {
   'tpope/vim-fugitive',
   'scrooloose/nerdtree',
   'xuyuanp/nerdtree-git-plugin',
-  'kien/ctrlp.vim',
   { 'neoclide/coc.nvim', branch = 'release', },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
 
@@ -64,6 +63,12 @@ return {
       })
       require("telescope").load_extension("ui-select")
     end,
+  },
+  {
+		'folke/snacks.nvim',
+    priority = 1000,
+    lazy = false,
+    opts = {},
   },
   {
     "folke/which-key.nvim",
@@ -162,7 +167,15 @@ return {
     "ymic9963/mdnotes.nvim",
     opts = {},
   },
-
+  {
+    'brianhuster/live-preview.nvim',
+    dependencies = {
+      -- You can choose one of the following pickers
+      'nvim-telescope/telescope.nvim',
+      'ibhagwan/fzf-lua',
+      'echasnovski/mini.pick',
+    },
+  },
 
   -- yaml
   'pedrohdz/vim-yaml-folds',
