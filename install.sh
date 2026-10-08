@@ -38,3 +38,7 @@ ln -s "$DOTFILES/vim.ln/autoload" "$NVIM_SHARE_SITE/autoload"
 
 [ ! -e ~/.fonts ] && git clone git@github.com:powerline/fonts ~/.fonts
 cd ~/.fonts && ./install.sh
+
+./install/nerd-fonts-get.sh
+./nerd-fonts-install.sh install SourceCodePro
+rm nerd-fonts-install.sh
