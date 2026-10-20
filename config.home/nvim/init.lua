@@ -3,6 +3,7 @@
 vim.g.mapleader = " " -- Leader is the space key
 vim.g.maplocalleader = ","
 
+require("config/formatting")
 require("config/lazy")
 require("config/lsp")
 require("config/telescope")
