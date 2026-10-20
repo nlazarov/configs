@@ -1,2 +1,16 @@
 #!/bin/sh
 .git/hooks/ctags >/dev/null 2>&1 &
+
+prev_head="$1"
+is_branch="$3"
+
+if [[ "$prev_head" == "0000000000000000000000000000000000000000" ]] && [[ "$is_branch" == "1" ]]; then
+  # this is a worktree checkout
+  root=$(git worktree list --porcelain | awk 'NR==1 {print $2}')
+  cp -a \
+    "$root"/.envrc \
+    "$root"/.vimspector.json \
+    "$root"/*.instructions.md \
+    "$root"/.vim \
+    . 2>/dev/null
+fi
