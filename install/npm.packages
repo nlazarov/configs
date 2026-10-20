@@ -12,4 +12,5 @@ live-server
 neovim
 tree-sitter
 tree-sitter-cli
+typescript-language-server
 vimdebug

@@ -19,6 +19,7 @@ nmap
 nvm
 pandoc
 pygments
+pyright
 reattach-to-user-namespace
 rectangle
 ripgrep

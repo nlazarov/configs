@@ -4,6 +4,7 @@ vim.g.mapleader = " " -- Leader is the space key
 vim.g.maplocalleader = ","
 
 require("config/lazy")
+require("config/lsp")
 require("config/telescope")
 
 local vimrc = vim.fn.stdpath('config') .. '/legacy.vim'
@@ -18,3 +19,11 @@ vim.keymap.set('n', '<localleader>a', ':call feedkeys("\\<C-a>", "x")<CR>', {
 vim.api.nvim_create_user_command('Nconf', function ()
   vim.cmd.tabe(vim.fn.stdpath('config'))
 end, {})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'octo',
+  callback = function()
+    vim.keymap.set("i", "@", "@<C-x><C-o>", { silent = true, buffer = true })
+    vim.keymap.set("i", "#", "#<C-x><C-o>", { silent = true, buffer = true })
+  end,
+})

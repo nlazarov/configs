@@ -217,8 +217,8 @@ return {
       },
       {
         "<leader>gR",
-        "<CMD>Octo search review-requested:@me is:pr is:open<CR>",
-        desc = "List open PR for @me",
+        "<CMD>Octo search is:pr is:open -review:approved reviewed-by:@me<CR>",
+        desc = "List open PR reviewed by @me",
       },
       {
         "<leader>gm",
@@ -259,9 +259,13 @@ return {
         mappings = {
           pull_request = {
             approve_pr = { lhs = "<localleader>qa", desc = "Approve PR" },
+            copy_sha = { lhs = "<localleader>ys", desc = "copy commit SHA to system clipboard" },
           },
           submit_win = {
             approve_review = { lhs = "<localleader>a", desc = "approve review", mode = "n" },
+          },
+          review_diff = {
+            copy_sha = { lhs = "<localleader>ys", desc = "copy commit SHA to system clipboard" },
           },
         },
       })
@@ -328,4 +332,7 @@ return {
       vim.keymap.set('n', '<leader>cc', '<CMD>CopilotChat<CR>', { desc = "Open Copilot Chat" })
     end,
   },
+
+  -- lsp
+  { 'neovim/nvim-lspconfig', },
 }
