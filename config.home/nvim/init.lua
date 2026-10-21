@@ -17,6 +17,8 @@ vim.keymap.set('n', '<localleader>a', ':call feedkeys("\\<C-a>", "x")<CR>', {
   silent = true,
 })
 
+vim.keymap.set('n', 'Y', vim.lsp.buf.hover, { desc = "Show hover information", noremap = true, silent = true })
+
 vim.api.nvim_create_user_command('Nconf', function ()
   vim.cmd.tabe(vim.fn.stdpath('config'))
 end, {})
