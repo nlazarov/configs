@@ -64,47 +64,6 @@ function mcd() {
   cd $1
 }
 
-function find_docker_container_name() {
-  CONTAINER_NAME=$(docker ps --format '{{.Names}}' | grep $1)
-  echo $CONTAINER_NAME
-}
-function dbash() {
-    docker exec -it `find_docker_container_name $1` bash -c "stty cols 200 && ./entrypoint.sh bash"
-}
-
-function drun() {
-    docker exec -it `find_docker_container_name $1` bash -c "stty cols 200 && ./entrypoint.sh bash -c '$2'"
-}
-
-function dsql() {
-    docker exec -u postgres -it forms_db_1 bash -c 'stty cols 200 && psql'
-
-}
-
-function dnpm() {
-    drun frontend "cd /var/www/forms/ui && npm $*"
-}
-
-function ddjango() {
-    drun django "cd /var/www/forms/forms && $*"
-}
-
-function dmanage() {
-    ddjango ./manage.py $*
-}
-
-function dshell() {
-    ddjango ./manage.py shell_plus
-}
-
-function dmigrate() {
-    ddjango ./manage.py migrate $*
-}
-
-function venv() {
-  source $VIRTUAL_ENV/bin/activate
-}
-
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	yazi "$@" --cwd-file="$tmp"
@@ -209,4 +168,12 @@ function mdown () {
   else
     pandoc $1 | w3m -T text/html
   fi
+}
+
+function rgf () {
+  c=${#@}
+  first=${@:1:$((c - 1))}
+  last=${@:${c}}
+
+  rg --files $first | rg $last
 }
