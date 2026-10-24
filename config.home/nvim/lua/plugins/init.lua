@@ -350,14 +350,60 @@ return {
       },
     },
   },
-  { -- optional cmp completion source for require statements and module annotations
+
+  -- optional cmp completion source for require statements and module annotations
+  {
     "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, {
-        name = "lazydev",
-        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+    config = function()
+      local cmp = require('cmp')
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            vim.fn["UltiSnips#Anon"](args.body)
+          end,
+        },
+        completion = {
+          completeopt = 'menu,menuone,noinsert,noselect',
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-Space>'] = cmp.mapping.complete(),
+        }),
+        sources = cmp.config.sources({
+          { name = "lazydev", group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions
+          { name = "nvim_lsp" },
+          { name = "ultisnips" },
+          { name = "buffer" },
+          { name = "path" },
+        }),
+
+      })
+
+      cmp.setup.filetype({ "typescript", "typescript.tsx", "typescriptreact", "javascript", "javascript.jsx" }, {
+        sources = cmp.config.sources({
+          { name = "nvim_lsp", priority = 100 },    -- Primary, highest priority
+          { name = "path", priority = 80 },         -- File paths
+          { name = "buffer", priority = 50 },       -- Buffer text (lowest)
+        }),
+        -- Faster sorting (important!)
+        sorting = {
+          priority_weight = 2,
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            -- Reorder: frequency/locality over alphabetical
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
+        },
       })
     end,
   },
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
 }

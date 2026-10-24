@@ -324,7 +324,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-sh', 'coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-oxc', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-oxc', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
@@ -416,14 +416,16 @@ let g:airline#extensions#ale#enabled = 1
 function! LintWarnings() abort
   let l:coc_info = get(b:, 'coc_diagnostic_info', {})
   let l:counts = ale#statusline#Count(bufnr(''))
-  let l:total = l:counts.warning + l:counts.style_warning + get(l:coc_info, 'warning', 0)
+  let l:lsp_counts = luaeval("#vim.diagnostic.count(vim.api.nvim_get_current_buf(), {severity = vim.diagnostic.severity.WARN})")
+  let l:total = l:counts.warning + l:counts.style_warning + get(l:coc_info, 'warning', 0) + l:lsp_counts
   return l:total == 0 ? '' : printf('W:%d', l:total)
 endf
 
 function! LintErrors() abort
   let l:coc_info = get(b:, 'coc_diagnostic_info', {})
   let l:counts = ale#statusline#Count(bufnr(''))
-  let l:total = l:counts.error + l:counts.style_error + get(l:coc_info, 'error', 0)
+  let l:lsp_counts = luaeval("#vim.diagnostic.count(vim.api.nvim_get_current_buf(), {severity = vim.diagnostic.severity.ERROR})")
+  let l:total = l:counts.error + l:counts.style_error + get(l:coc_info, 'error', 0) + l:lsp_counts
   return l:total == 0 ? '' : printf('E:%d', l:total)
 endf
 

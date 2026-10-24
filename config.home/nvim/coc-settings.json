@@ -13,8 +13,7 @@
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "diagnostic.displayByAle": true,
-  "tsserver.log": "verbose",
-  "tsserver.trace.server": "verbose",
+  "tsserver.enable": false,
   "snippets.ultisnips.pythonPrompt": false,
   "json.schemaDownload.trustedDomains": {
     "https://www.schemastore.org": true,
