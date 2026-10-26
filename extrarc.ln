@@ -46,10 +46,10 @@ export POWERLINE_CONFIG_COMMAND=powerline-config
 if [[ $SHELL_NAME == zsh ]]; then
   # antigen stubs out `compdef` and defers `compinit` to the first prompt, so
   # eval-ing completion scripts here is a no-op. Instead, cache them as
-  # autoloadable `_<cmd>` files in $fpath, regenerated when the binary changes.
-  ZSH_COMPLETIONS_DIR="$CUSTOM/completion"
+  # autoloadable `_<cmd>` files in $ZSH_COMPLETIONS_DIR (added to fpath in
+  # .zshrc before antigen), regenerated when the binary changes.
+  : ${ZSH_COMPLETIONS_DIR:=$CUSTOM/completion}
   mkdir -p "$ZSH_COMPLETIONS_DIR"
-  fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
 
   _cache_completion() {
     local cmd=$1 bin=$(command -v $1) file="$ZSH_COMPLETIONS_DIR/_$1"
@@ -57,6 +57,8 @@ if [[ $SHELL_NAME == zsh ]]; then
     [[ -n $bin ]] || return 0
     [[ -s $file && $file -nt $bin ]] && return 0
     eval "$@" >| "$file"
+    # drop the compdump (and its compiled .zwc) so compinit picks up the change
+    [[ -n $ANTIGEN_COMPDUMP ]] && rm -f "$ANTIGEN_COMPDUMP" "$ANTIGEN_COMPDUMP.zwc"
   }
   # pnpm's script only registers `_pnpm_completion`; call it so the first TAB completes too
   _cache_completion pnpm 'pnpm completion zsh; echo "_pnpm_completion \"\$@\""'
@@ -84,7 +86,7 @@ export AWS_PROFILE=niko
 # brew linux
 [[ -d /home/linuxbrew ]] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-if [[ -n $(command -v brew) ]] then;
+if [[ -n $(command -v brew) ]]; then
   local prfx=$(brew --prefix)
   export LDFLAGS="-L$prfx/lib"
   export LIBRARY_PATH="$LIBRARY_PATH${LIBRARY_PATH+:}$prfx/lib"

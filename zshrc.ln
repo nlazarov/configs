@@ -38,6 +38,13 @@ export ANTIGEN_CACHE=$ANTIGEN_CACHE_FILE
 #     autoload -Uz compinit -d "$ZSH_COMPDUMP/.zcompdump-${ZSH_VERSION}"
 # fi
 
+# fpath must be complete before antigen: `antigen apply` runs compinit and
+# zcompiles the dump, and a later fpath change leaves that .zwc stale.
+export ANTIGEN_COMPDUMP="$HOME/.antigen/.zcompdump"
+export ZSH_COMPLETIONS_DIR="$HOME/.custom/completion"
+fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
+[[ -n $HOMEBREW_PREFIX && -d $HOMEBREW_PREFIX/share/zsh/site-functions ]] && fpath+=("$HOMEBREW_PREFIX/share/zsh/site-functions")
+
 if [[ -f /opt/homebrew/share/antigen/antigen.zsh ]]; then
   source /opt/homebrew/share/antigen/antigen.zsh
 elif [[ -f /usr/share/zsh-antigen/antigen.zsh ]]; then
@@ -162,8 +169,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-[ -d $HOMEBREW_PREFIX ] && fpath+="$HOMEBREW_PREFIX/share/zsh/site-functions"
 
 [ -f $HOME/.extrarc ] && source $HOME/.extrarc
 [[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
