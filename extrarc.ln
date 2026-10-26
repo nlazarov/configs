@@ -3,12 +3,19 @@ stty -ixon
 
 export PATH="$PATH:$HOME/.cargo/bin"
 
+# the running shell, not the login one ($SHELL), since bash sources this too
+if [[ -n $ZSH_VERSION ]]; then SHELL_NAME=zsh
+elif [[ -n $BASH_VERSION ]]; then SHELL_NAME=bash
+else SHELL_NAME="${SHELL##*/}"
+fi
+
 ## python support
 export PIP_REQUIRE_VIRTUALENV=true
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 [[ -z $VIRTUAL_ENV ]] && export VIRTUAL_ENV=$HOME/.venvs/global
+
 # mise support
-[[ -n $(command -v mise) ]] && eval "$(mise activate ${SHELL##*/})"
+[[ -n $(command -v mise) ]] && eval "$(mise activate $SHELL_NAME)"
 export PIP_PACK_DIR=$(python3 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')
 
 # postgres
@@ -35,9 +42,30 @@ export POWERLINE_ROOT=$PIP_PACK_DIR
 
 export POWERLINE_CONFIG_COMMAND=powerline-config
 
-[[ -e $(which pipenv) ]] && eval "$(pipenv --completion)"
+## completions
+if [[ $SHELL_NAME == zsh ]]; then
+  # antigen stubs out `compdef` and defers `compinit` to the first prompt, so
+  # eval-ing completion scripts here is a no-op. Instead, cache them as
+  # autoloadable `_<cmd>` files in $fpath, regenerated when the binary changes.
+  ZSH_COMPLETIONS_DIR="$CUSTOM/completion"
+  mkdir -p "$ZSH_COMPLETIONS_DIR"
+  fpath=("$ZSH_COMPLETIONS_DIR" $fpath)
 
-[[ -e $(which gh) ]] && eval "$(gh completion --shell ${SHELL##*/})"
+  _cache_completion() {
+    local cmd=$1 bin=$(command -v $1) file="$ZSH_COMPLETIONS_DIR/_$1"
+    shift
+    [[ -n $bin ]] || return 0
+    [[ -s $file && $file -nt $bin ]] && return 0
+    eval "$@" >| "$file"
+  }
+  # pnpm's script only registers `_pnpm_completion`; call it so the first TAB completes too
+  _cache_completion pnpm 'pnpm completion zsh; echo "_pnpm_completion \"\$@\""'
+  _cache_completion gh 'gh completion --shell zsh'
+  unfunction _cache_completion
+else
+  [[ -e $(command -v pnpm) ]] && eval "$(pnpm completion $SHELL_NAME)"
+  [[ -e $(command -v gh) ]] && eval "$(gh completion --shell $SHELL_NAME)"
+fi
 
 export EDITOR='nvim'
 export BROWSER=vivaldi

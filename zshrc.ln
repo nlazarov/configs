@@ -155,18 +155,16 @@ bindkey '^R' history-incremental-search-backward
 bindkey -M vicmd e edit-command-line
 setopt extendedglob
 
-[ -f $HOME/.extrarc ] && source $HOME/.extrarc
-fpath+="$CUSTOM/completion/git-completion.zsh"
-[ -d $HOMEBREW_PREFIX ] && fpath+="$HOMEBREW_PREFIX/share/zsh/site-functions"
-
-[[ -x "$(command -v gh)" ]] && eval "$(gh completion --shell zsh)"
-[[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
-[[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
-
 # pnpm
-export PNPM_HOME="/home/niko/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+[ -d $HOMEBREW_PREFIX ] && fpath+="$HOMEBREW_PREFIX/share/zsh/site-functions"
+
+[ -f $HOME/.extrarc ] && source $HOME/.extrarc
+[[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
+[[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
