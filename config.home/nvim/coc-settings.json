@@ -18,6 +18,7 @@
   "json.schemaDownload.trustedDomains": {
     "https://www.schemastore.org": true,
     "https://raw.githubusercontent.com": true
-  }
+  },
+  "nix.enableLanguageServer": true
 
 }
