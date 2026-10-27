@@ -1,9 +1,15 @@
-vim.lsp.config('tsc', {
-  cmd = { vim.env.HOME..'/.local/share/mise/installs/node/lts/bin/tsc', '--lsp', '--stdio' },
-  filetypes = {  'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
-  root_dir = vim.fs.dirname(vim.fs.find({'tsconfig.json', 'package.json'}, { upward = true })[1]),
-  capabilities = require('cmp_nvim_lsp').default_capabilities(),
-})
+local tscCmd = vim.fn.system({ 'which', 'tsc' }):gsub('\n$', '')
+
+if #tscCmd > 0 then
+  vim.lsp.config('tsc', {
+    cmd = { tscCmd, '--lsp', '--stdio' },
+    filetypes = {  'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
+    root_dir = vim.fs.dirname(vim.fs.find({'tsconfig.json', 'package.json'}, { upward = true })[1]),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+  })
+else
+  vim.notify('tsc not installed for the user', vim.log.levels.ERROR)
+end
 
 
 vim.lsp.config('lua_ls', {
