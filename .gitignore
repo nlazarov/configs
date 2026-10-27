@@ -9,3 +9,4 @@ gnupg.ln/sshcontrol
 gnupg.ln/random_seed
 gnupg.ln/pubring.kbx
 gnupg.ln/trustdb.gpg
+lazy-lock.json
