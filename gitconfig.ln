@@ -130,8 +130,6 @@
     meld = "!meld $(git rev-parse --show-toplevel)"
     tracked = rev-parse --abbrev-ref --symbolic-full-name @{u}
 
-    ctags = "!.git/hooks/ctags"
-
     jshint = "!eslint `git diff --name-only | grep '\\.js$' | tr '\n' ' '`"
     root = rev-parse --show-toplevel
 

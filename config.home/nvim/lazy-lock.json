@@ -18,7 +18,7 @@
   "forest.nvim": { "branch": "main", "commit": "bac501d971512e73cc80e5895c849290e0c297bf" },
   "fzf-lua": { "branch": "main", "commit": "5b88d6f0af7fcb41d4a8bb340bf70d7e3824ee9d" },
   "gh-co.nvim": { "branch": "master", "commit": "73fb5c730af0b2d2b46e46005cb42fcbf47ddfc2" },
-  "gh-review.nvim": { "branch": "main", "commit": "fb6dfda9d78ead4ba87bb3b2c970c12dfed5cc77" },
+  "gh-review.nvim": { "branch": "main", "commit": "697b9b5315be53a48af375a488d977c344eead04" },
   "gh.nvim": { "branch": "main", "commit": "6f367b2ab8f9d4a0a23df2b703a3f91137618387" },
   "gruvbox": { "branch": "master", "commit": "ef8864bb42bf244f0295d1c5a403b27e3d139695" },
   "happy_hacking.vim": { "branch": "main", "commit": "e2e73d9cac5ff7acfc37bd090f1d709eac94c9a9" },
