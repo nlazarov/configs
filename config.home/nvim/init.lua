@@ -17,7 +17,7 @@ vim.keymap.set('n', '<localleader>a', ':call feedkeys("\\<C-a>", "x")<CR>', {
   silent = true,
 })
 
-vim.keymap.set("n", "<localleader>v", function()
+vim.keymap.set("n", "<localleader>z", function()
   require("user.reload").reload()
 end, { desc = "Reload config" })
 
