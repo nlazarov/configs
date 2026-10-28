@@ -61,12 +61,14 @@ if [[ $SHELL_NAME == zsh ]]; then
     [[ -n $ANTIGEN_COMPDUMP ]] && rm -f "$ANTIGEN_COMPDUMP" "$ANTIGEN_COMPDUMP.zwc"
   }
   # pnpm's script only registers `_pnpm_completion`; call it so the first TAB completes too
-  _cache_completion pnpm 'pnpm completion zsh; echo "_pnpm_completion \"\$@\""'
-  _cache_completion gh 'gh completion --shell zsh'
+  [[ -n $(command -v gh) ]] && _cache_completion gh 'gh completion --shell zsh'
+  [[ -n $(command -v mise) ]] && _cache_completion mise 'mise completion zsh'
+  [[ -n $(command -v pnpm) ]] && _cache_completion pnpm 'pnpm completion zsh; echo "_pnpm_completion \"\$@\""'
   unfunction _cache_completion
 else
-  [[ -e $(command -v pnpm) ]] && eval "$(pnpm completion $SHELL_NAME)"
-  [[ -e $(command -v gh) ]] && eval "$(gh completion --shell $SHELL_NAME)"
+  [[ -n $(command -v gh) ]] && eval "$(gh completion --shell $SHELL_NAME)"
+  [[ -n $(command -v mise) ]] && eval "$(mise completion $SHELL_NAME)"
+  [[ -n $(command -v pnpm) ]] && eval "$(pnpm completion $SHELL_NAME)"
 fi
 
 export EDITOR='nvim'
