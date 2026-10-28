@@ -177,3 +177,8 @@ function rgf () {
 
   rg --files $first | rg $last
 }
+
+function nf () {
+  # don't put quotes
+  n $(rgf $@)
+}
