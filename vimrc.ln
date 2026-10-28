@@ -318,7 +318,7 @@ vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 nmap <silent> <leader>je :CocDiagnostics<CR>
 nmap <silent> [D <Plug>(ale_first)
 nmap <silent> [d <Plug>(coc-diagnostic-prev) <Plug>(ale_previous)
-nmap <silent> ]d <Plug>(coc-diagnostic-next) <Plug>(ale_next)
+nmap <silent> ]d <Plug>(coc-diagnostic-next) <Plug>(ale_next) :lua vim.diagnostic.goto_next()<CR>
 nmap <silent> ]D <Plug>(ale_last)
 nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
