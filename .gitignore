@@ -1,6 +1,7 @@
 bundle/
 config.home/gh/hosts.yml
 config.home/karabiner/automatic_backups/
+config.home/nvim/lazy-lock.json
 plugged/
 vim.ln/spell/
 vim.ln/backup/
@@ -9,4 +10,3 @@ gnupg.ln/sshcontrol
 gnupg.ln/random_seed
 gnupg.ln/pubring.kbx
 gnupg.ln/trustdb.gpg
-lazy-lock.json

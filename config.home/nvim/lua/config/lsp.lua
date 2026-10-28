@@ -1,14 +1,15 @@
-local tscCmd = vim.fn.system({ 'which', 'tsc' }):gsub('\n$', '')
+local tscLoc = vim.env.HOME .. '/.local/share/pnpm/bin/tsc'
+local tscExists = vim.fn.executable(tscLoc) == 1
 
-if #tscCmd > 0 then
+if tscExists then
   vim.lsp.config('tsc', {
-    cmd = { tscCmd, '--lsp', '--stdio' },
+    cmd = { tscLoc, '--lsp', '--stdio' },
     filetypes = {  'javascript', 'javascript.jsx', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
     root_dir = vim.fs.dirname(vim.fs.find({'tsconfig.json', 'package.json'}, { upward = true })[1]),
     capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
 else
-  vim.notify('tsc not installed for the user', vim.log.levels.ERROR)
+  vim.notify('tsc not installed for the user with pnpm i -g typescipt', vim.log.levels.ERROR)
 end
 
 
