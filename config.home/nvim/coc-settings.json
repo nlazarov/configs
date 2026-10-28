@@ -1,6 +1,5 @@
 {
-  "suggest.noselect": true,
-  "suggest.maxCompleteItemCount": 20,
+  "suggest.noselect": false,
   "[javascript][javascript.jsx][typescript][typescriptreact][javascriptreact]": {
     "coc.preferences.formatOnSave": false
   },
@@ -9,12 +8,12 @@
   "snippets.ultisnips.directories": [
     "~/.dotfiles/UltiSnips"
   ],
+  "snippets.ultisnips.pythonPrompt": false,
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
   "diagnostic.displayByAle": true,
   "tsserver.enable": false,
-  "snippets.ultisnips.pythonPrompt": false,
   "json.schemaDownload.trustedDomains": {
     "https://www.schemastore.org": true,
     "https://raw.githubusercontent.com": true
