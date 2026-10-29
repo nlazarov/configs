@@ -28,10 +28,44 @@ vim.api.nvim_create_user_command('Nconf', function ()
   vim.cmd.tabe(vim.fn.stdpath('config'))
 end, {})
 
+vim.keymap.set('n', 'K', function ()
+  if vim.tbl_contains({'vim', 'help'}, vim.bo.filetype) then
+    vim.cmd.help(vim.fn.expand('<cword>'))
+    return
+  end
+
+  local clients = vim.lsp.get_clients({ bufnr = 0, method = 'textDocument/hover' })
+  if #clients > 0 then
+    vim.lsp.buf.hover()
+  else
+    vim.notify("No language server attached for filetype=".. vim.bo.ft, vim.log.levels.INFO, { timeout = 2000 })
+  end
+end, { desc = "Show hover information", noremap = true, silent = true })
+
+local function doHighlight()
+  local clients = vim.lsp.get_clients({ bufnr = 0, method = 'textDocument/documentHighlight' })
+  if #clients > 0 then
+    vim.lsp.buf.document_highlight()
+  else
+    vim.cmd.call('CocActionAsync("highlight")')
+  end
+end
+
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+  callback = function () doHighlight() end
+})
+
+vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+  callback = function ()
+    if #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
+      vim.lsp.buf.clear_references()
+    end
+  end
+})
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
   callback = function()
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "Show hover information", noremap = true, silent = true })
     vim.keymap.set('n', '<leader>tt', ":Telescope lsp_dynamic_workspace_symbols<CR>", { desc = "Search workspace symbols", noremap = true, silent = true })
     vim.keymap.set('n', '<leader>td', ":Telescope lsp_document_symbols<CR>", { desc = "Search document symbols", noremap = true, silent = true })
   end

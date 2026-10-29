@@ -2,7 +2,13 @@ return {
   'tpope/vim-fugitive',
   'scrooloose/nerdtree',
   'xuyuanp/nerdtree-git-plugin',
-  { 'neoclide/coc.nvim', branch = 'release', },
+  {
+    'neoclide/coc.nvim',
+    branch = 'release',
+    setup = function()
+      vim.cmd('CocDisable')
+    end
+  },
   { 'nvim-treesitter/nvim-treesitter', branch = 'main', lazy = false, build = ':TSUpdate' },
 
   'int3/vim-extradite',
@@ -370,12 +376,12 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ['<C-Space>'] = cmp.mapping.complete(),
-          ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
-          ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i'}),
+          ['<Down>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i'}),
+          ['<Up>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i'}),
           ['<C-n>'] = cmp.mapping({
             c = function()
                 if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                    cmp.select_next_item()
                 else
                     vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
                 end
@@ -383,7 +389,7 @@ return {
             i = function(fallback)
                 print("C-n pressed")
                 if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                    cmp.select_next_item()
                 else
                     fallback()
                 end
@@ -392,14 +398,14 @@ return {
           ['<C-p>'] = cmp.mapping({
               c = function()
                   if cmp.visible() then
-                      cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                      cmp.select_prev_item()
                   else
                       vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
                   end
               end,
               i = function(fallback)
                   if cmp.visible() then
-                      cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+                      cmp.select_prev_item()
                   else
                       fallback()
                   end
@@ -419,6 +425,7 @@ return {
       cmp.setup.filetype({ "typescript", "typescript.tsx", "typescriptreact", "javascript", "javascript.jsx" }, {
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 100 },    -- Primary, highest priority
+          { name = "ultisnips", priority = 90 },     -- Snippets
           { name = "path", priority = 80 },         -- File paths
           { name = "buffer", priority = 50 },       -- Buffer text (lowest)
         }),

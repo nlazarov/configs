@@ -25,12 +25,20 @@ vim.lsp.config('lua_ls', {
       telemetry = { enable = false },
     },
   },
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
+})
+
+vim.lsp.config('vimls', {
+  cmd = { 'vim-language-server', '--stdio' },
+  init_options = { isNeovim = true, isVim = false, diagnostics = true },
+  capabilities = require('cmp_nvim_lsp').default_capabilities(),
 })
 
 vim.lsp.enable('lua_ls')
 vim.lsp.enable('oxlint')
 vim.lsp.enable('pyright')
 vim.lsp.enable('tsc')
+vim.lsp.enable('vimls')
 
 vim.diagnostic.config({
   virtual_text = true,

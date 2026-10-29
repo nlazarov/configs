@@ -6,7 +6,7 @@ gh = "latest"
 lua-language-server = "latest"
 neovim = "latest"
 node = "lts"
-pnpm = { version = "latest", postinstall = "pnpm i -g neovim typescript oxlint oxfmt", when = "always" }
+pnpm = { version = "latest", postinstall = "pnpm i -g neovim typescript oxlint oxfmt vim-language-server", when = "always" }
 "pypi:powerline-status" = "latest"
 "pypi:pyright" = "latest"
 python = "latest"
