@@ -175,7 +175,16 @@ function rgf () {
   first=${@:1:$((c - 1))}
   last=${@:${c}}
 
-  rg --files $first | rg $last
+  if [[ -d "$last" ]] then
+    # get the options for rg
+    opts=${@:1:$((c - 2))}
+    # if last param is a folder, then the prev param is the pattern
+    pattern=${@[$((c - 1))]}
+    rg --files $opts $last | rg $pattern
+  else
+    rg --files $first | rg $last
+  fi
+
 }
 
 function nf () {
