@@ -28,7 +28,7 @@ vim.api.nvim_create_user_command('Nconf', function ()
   vim.cmd.tabe(vim.fn.stdpath('config'))
 end, {})
 
-vim.keymap.set('n', 'K', function ()
+local function doHover()
   if vim.tbl_contains({'vim', 'help'}, vim.bo.filetype) then
     vim.cmd.help(vim.fn.expand('<cword>'))
     return
@@ -40,7 +40,10 @@ vim.keymap.set('n', 'K', function ()
   else
     vim.notify("No language server attached for filetype=".. vim.bo.ft, vim.log.levels.INFO, { timeout = 2000 })
   end
-end, { desc = "Show hover information", noremap = true, silent = true })
+end
+
+vim.keymap.set('n', 'K', doHover, { desc = "Show hover information", noremap = true, silent = true })
+vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { desc = "Go to definition", noremap = true, silent = true })
 
 local function doHighlight()
   local clients = vim.lsp.get_clients({ bufnr = 0, method = 'textDocument/documentHighlight' })
