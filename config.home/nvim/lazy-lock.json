@@ -16,7 +16,7 @@
   "everforest": { "branch": "master", "commit": "85a86eb62409e3ec88713bff3d1b9d7374e112e4" },
   "far.vim": { "branch": "master", "commit": "796d60857ae4dcdae78c64bae69902503cca31f4" },
   "forest.nvim": { "branch": "main", "commit": "bac501d971512e73cc80e5895c849290e0c297bf" },
-  "fzf-lua": { "branch": "main", "commit": "d648fe1c6fb62a27fda0247313e94ae536843e9b" },
+  "fzf-lua": { "branch": "main", "commit": "22f0bbd3140a8a3b34fec75e5a640513ca6d4ce3" },
   "gh-co.nvim": { "branch": "master", "commit": "73fb5c730af0b2d2b46e46005cb42fcbf47ddfc2" },
   "gh-review.nvim": { "branch": "main", "commit": "a8f7913cbe9bf9310c2f8eace85b9747f7f84325" },
   "gh.nvim": { "branch": "main", "commit": "6f367b2ab8f9d4a0a23df2b703a3f91137618387" },
