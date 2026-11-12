@@ -171,9 +171,15 @@ return {
   -- markdown
   {
     "ymic9963/mdnotes.nvim",
-    opts = {
-      auto_list_renumber = false,
-    },
+    config = function ()
+      require('mdnotes').setup({
+        autocmds = {
+          ordered_list_renumber = false,
+        },
+        default_keymaps = true,
+        parser = 'patterns',
+      })
+    end,
   },
   {
     'brianhuster/live-preview.nvim',
@@ -227,6 +233,11 @@ return {
         "<leader>gR",
         "<CMD>Octo search is:pr is:open -review:approved reviewed-by:@me<CR>",
         desc = "List open PR reviewed by @me",
+      },
+      {
+        "<leader>ga",
+        "<CMD>Octo search review-requested:@me is:pr is:open review:approved<CR>",
+        desc = "List approved open PR reviewed by @me",
       },
       {
         "<leader>gm",
