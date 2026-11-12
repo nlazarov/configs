@@ -1,4 +1,5 @@
 [tools]
+adr-tools = "latest"
 bat = "latest"
 delta = "latest"
 fzf = "latest"
