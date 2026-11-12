@@ -12,6 +12,24 @@ else
   vim.notify('tsc not installed for the user with pnpm i -g typescipt', vim.log.levels.ERROR)
 end
 
+vim.lsp.config('oxlint', {
+  cmd = { 'oxlint', '--lsp' },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
+  },
+  root_dir = vim.fs.dirname(vim.fs.find({
+    '.oxlintrc.json',
+    '.oxlintrc.jsonc',
+    'oxlint.config.ts',
+    'oxlint.config.mts'
+  }, { upward = true })[1]),
+})
+
 
 vim.lsp.config('lua_ls', {
   settings = {
