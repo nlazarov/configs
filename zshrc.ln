@@ -179,3 +179,9 @@ esac
 [ -f $HOME/.extrarc ] && source $HOME/.extrarc
 [[ -f "$HOME/.hsrc" ]] && source "$HOME/.hsrc"
 [[ -f "$HOME/.secrets" ]] && source "$HOME/.secrets"
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix

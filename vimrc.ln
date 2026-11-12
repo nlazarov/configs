@@ -73,6 +73,7 @@ EOF
 
 " easier write
 nmap <leader>w :w!<cr>
+nmap <leader>в :w!<cr>
 " easier quit
 nmap <leader>q :q<cr>
 nmap <leader>Q :q!<cr>
@@ -149,7 +150,7 @@ vnoremap <silent> # :<C-U>
 nnoremap k gk
 nnoremap j gj
 
-nnoremap <Leader>e :e%<CR>
+nnoremap <Leader>e :lua vim.diagnostic.reset()<CR> :e%<CR>
 
 nnoremap <leader>x :nohlsearch<CR>
 
@@ -227,7 +228,7 @@ autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 autocmd FileType javascript setlocal suffixesadd+=.es6 tabstop=2 shiftwidth=2 ts=2 filetype=javascript.jsx
 autocmd BufRead,BufNewFile *.es6 set filetype=javascript
-autocmd BufWritePost * silent execute "! [[ -f ".gitroot."/.git/hooks/ctags ]] && ".gitroot."/.git/hooks/ctags 2>/dev/null &"
+" autocmd BufWritePost * silent execute "! [[ -f ".gitroot."/.git/hooks/ctags ]] && ".gitroot."/.git/hooks/ctags 2>/dev/null &"
 
 autocmd FileType typescript setlocal suffixesadd+=.js tabstop=2 shiftwidth=2 ts=2
 autocmd BufRead,BufNewFile *.tsx set filetype=typescript.tsx syntax=typescript
@@ -315,16 +316,16 @@ vmap <silent> <leader>jj y:!jira <c-r>0<cr>
 nmap <silent> <leader>.  <Plug>(coc-codeaction)
 vmap <silent> <leader>.  <Plug>(coc-codeaction-selected)
 
-nmap <silent> <leader>je :CocDiagnostics<CR>
+nmap <silent> <leader>je :lua vim.diagnostic.setloclist()<CR>
 nmap <silent> [D <Plug>(ale_first)
-nmap <silent> [d <Plug>(coc-diagnostic-prev) <Plug>(ale_previous)
-nmap <silent> ]d <Plug>(coc-diagnostic-next) <Plug>(ale_next) :lua vim.diagnostic.goto_next()<CR>
+nmap <silent> [d <Plug>(coc-diagnostic-prev) <Plug>(ale_previous) :lua vim.diagnostic.jump({ count = -1, float = true })<CR>
+nmap <silent> ]d <Plug>(coc-diagnostic-next) <Plug>(ale_next) :lua vim.diagnostic.jump({ count = 1, float = true })<CR>
 nmap <silent> ]D <Plug>(ale_last)
 nmap <silent> [g <Plug>(coc-diagnostic-prev-error) <Plug>(ale_previous_error)
 nmap <silent> ]g <Plug>(coc-diagnostic-next-error) <Plug>(ale_next_error)
 
 "coc extensions
-let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-oxc', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag', 'coc-ultisnips']
+let g:coc_global_extensions=['coc-css', 'coc-dictionary', 'coc-highlight', 'coc-html', 'coc-json', 'coc-rust-analyzer', 'coc-snippets', 'coc-tag', 'coc-ultisnips']
 
 autocmd FileType python let b:coc_root_patterns=['.pylintrc']
 
@@ -374,20 +375,11 @@ let g:ale_linters = {
 \ 'scss': ['stylelint'],
 \ 'sh': ['shellcheck'],
 \ 'json': ['fixjson'],
-\ 'javascript': ['oxlint'],
-\ 'javascript.jsx': ['oxlint'],
-\ 'typescript': ['oxlint'],
-\ 'typescript.tsx': ['oxlint'],
 \ 'yaml': ['yamllint'],
 \}
 
 let g:ale_fixers = {
-\ 'scss': ['stylelint'],
 \ 'json': ['fixjson'],
-\ 'javascript': ['prettier'],
-\ 'javascript.jsx': ['prettier'],
-\ 'typescript': ['prettier'],
-\ 'typescript.tsx': ['prettier'],
 \ 'rust': ['rustfmt'],
 \ 'yaml': ['yamlfix'],
 \}
