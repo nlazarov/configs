@@ -44,6 +44,10 @@ end
 
 vim.keymap.set('n', 'K', doHover, { desc = "Show hover information", noremap = true, silent = true })
 vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { desc = "Go to definition", noremap = true, silent = true })
+vim.keymap.set('n', 'grv', function ()
+  vim.cmd('vsplit');
+  vim.lsp.buf.definition()
+end , { desc = "Go to definition in split", noremap = true, silent = true })
 
 local function doHighlight()
   local clients = vim.lsp.get_clients({ bufnr = 0, method = 'textDocument/documentHighlight' })
