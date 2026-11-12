@@ -12,8 +12,15 @@ else
   vim.notify('tsc not installed for the user with pnpm i -g typescipt', vim.log.levels.ERROR)
 end
 
+local function root_dir_finder(patterns)
+  return function (bufnr, on_dir)
+    local root = vim.fs.root(bufnr, patterns)
+    if root then on_dir(root) end
+  end
+end
+
+-- cmd is left to nvim-lspconfig, which prefers <root>/node_modules/.bin/oxlint
 vim.lsp.config('oxlint', {
-  cmd = { 'oxlint', '--lsp' },
   filetypes = {
     'javascript',
     'javascriptreact',
@@ -22,12 +29,21 @@ vim.lsp.config('oxlint', {
     'typescriptreact',
     'typescript.tsx',
   },
-  root_dir = vim.fs.dirname(vim.fs.find({
+  root_dir = root_dir_finder({
     '.oxlintrc.json',
     '.oxlintrc.jsonc',
     'oxlint.config.ts',
-    'oxlint.config.mts'
-  }, { upward = true })[1]),
+    'oxlint.config.mts',
+  }),
+})
+
+vim.lsp.config('oxfmt', {
+  root_dir = root_dir_finder({
+    '.oxfmtrc.json',
+    '.oxfmtrc.jsonc',
+    'oxfmt.config.ts',
+    'oxfmt.config.mts',
+  }),
 })
 
 
@@ -53,6 +69,7 @@ vim.lsp.config('vimls', {
 })
 
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('oxfmt')
 vim.lsp.enable('oxlint')
 vim.lsp.enable('pyright')
 vim.lsp.enable('tsc')
