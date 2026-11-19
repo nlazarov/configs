@@ -79,9 +79,6 @@ export BROWSER=vivaldi
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-# aws
-export AWS_PROFILE=niko
-
 # set JAVA_HOME
 [[ -z $JAVA_HOME ]] && [[ -e /usr/libexec/java_home ]] && export JAVA_HOME="$(/usr/libexec/java_home)"
 

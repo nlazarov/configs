@@ -1,1 +1,15 @@
 [ -e "$HOME"/.cargo/env ] && source "$HOME/.cargo/env"
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+export PNPM_BIN="$PNPM_HOME/bin"
+case ":$PATH:" in
+  *":$PNPM_BIN:"*) ;;
+  *) export PATH="$PNPM_BIN:$PATH" ;;
+esac
+# pnpm end

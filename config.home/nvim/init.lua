@@ -71,7 +71,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx', 'python' },
   callback = function()
     vim.keymap.set('n', '<leader>tt', ":Telescope lsp_dynamic_workspace_symbols<CR>", { desc = "Search workspace symbols", noremap = true, silent = true })
     vim.keymap.set('n', '<leader>td', ":Telescope lsp_document_symbols<CR>", { desc = "Search document symbols", noremap = true, silent = true })
